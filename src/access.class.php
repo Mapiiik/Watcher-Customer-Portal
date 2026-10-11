@@ -116,32 +116,32 @@ class Session
 		// Access granted
 		if($this->access === A_GRANTED)
 		{
-			return ACCESS_GRANTED;
+			return __('Access granted');
 		}
 		// Access denied
 		if($this->access === A_DENIED)
 		{
-			return ACCESS_DENIED;
+			return __('Access denied');
 		}
 		// Access locked
 		if($this->access === A_LOCKED)
 		{
-			return ACCESS_LOCKED;
+			return __('Account locked');
 		}
 		// Bad IP
 		if($this->access === A_BAD_IP)
 		{
-			return ACCESS_BAD_IP;
+			return __('Your IP address has changed') . '<br />' . __('Security error');
 		}
 		// Too many failed attempts
 		if($this->access === A_BLOCKED)
 		{
-			return ACCESS_BLOCKED;
+			return __('Too many failed attempts, please try again in a while');
 		}
 		// The CRM did not answer
 		if($this->access === A_ERROR)
 		{
-			return ERR_SYSTEM;
+			return __('System error!');
 		}
 		return false;
 	}
@@ -155,7 +155,7 @@ class Session
 			<body class="center">
 			<table class="center">
 			  <tr><td>
-				<a rel="toppage" href="<?php echo PREFIX; ?>/index.php" title="<?php echo ERR_NOT_LOGGED; ?>"><?php echo ERR_NOT_LOGGED; ?></a>
+				<a rel="toppage" href="<?php echo PREFIX; ?>/index.php" title="<?php echo __('You are not signed in, please sign in'); ?>"><?php echo __('You are not signed in, please sign in'); ?></a>
 			  </td></tr>
 			</table>
 			<div class="fred">
@@ -179,7 +179,7 @@ class Session
 			$this->logout();
 			$this->accessCheck();
 		}
-		echo "<div class='fred'>" . ERR_SYSTEM . "</div>
+		echo "<div class='fred'>" . __('System error!') . "</div>
 </body>
 </html>";
 		exit();

@@ -37,16 +37,15 @@ $month = date("m");
     <br />
     <h1><strong><?php echo htmlspecialchars($profile['heading']); ?></strong></h1>
     <div class="menu">
-        <a rel="rightpage" href='introduction.php' title="<?php echo INTRODUCTION_PAGE; ?>"><?php echo INTRODUCTION_PAGE; ?></a><br />
-        <a rel="rightpage" href='reports/customer-data.php' title="<?php echo CUSTOMER_DATA; ?>"><?php echo CUSTOMER_DATA; ?></a><br />
-          <a rel="rightpage" href='reports/global.traffic.php/<?php echo $year?>/<?php echo $month; ?>/' title="<?php echo TRAFFIC_LIST; ?>"><?php echo TRAFFIC_LIST; ?></a><br />
-          <a rel="rightpage" href='reports/invoices.php' title="<?php echo INVOICES_LIST; ?>"><?php echo INVOICES_LIST; ?></a><br />
-          <a rel="rightpage" href='administration/password.php' title="<?php echo SET_PASSWORD; ?>"><?php echo SET_PASSWORD; ?></a><br />
+        <a rel="rightpage" href='introduction.php' title="<?php echo __('Home page'); ?>"><?php echo __('Home page'); ?></a><br />
+        <a rel="rightpage" href='reports/customer-data.php' title="<?php echo __('Customer data'); ?>"><?php echo __('Customer data'); ?></a><br />
+          <a rel="rightpage" href='reports/invoices.php' title="<?php echo __('Invoices'); ?>"><?php echo __('Invoices'); ?></a><br />
+          <a rel="rightpage" href='administration/password.php' title="<?php echo __('Change password'); ?>"><?php echo __('Change password'); ?></a><br />
     </div>
     <div>
         <p>
-            <?php echo LOGGED . ": <strong>" . htmlspecialchars((string)$session->login) . "</strong>";?><br />
-            <a rel="toppage" href='index.php?logout=yes' title="<?php echo LOGOUT; ?>"><?php echo LOGOUT; ?></a>
+            <?php echo __('Signed in') . ": <strong>" . htmlspecialchars((string)$session->login) . "</strong>";?><br />
+            <a rel="toppage" href='index.php?logout=yes' title="<?php echo __('Sign out'); ?>"><?php echo __('Sign out'); ?></a>
         </p>
     </div>
 </div>

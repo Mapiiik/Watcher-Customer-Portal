@@ -48,7 +48,7 @@ jobs:
 
       - name: Lint
         run: |
-          find src public profiles tests -name '*.php' -print0 | xargs -0 -n1 php -l > lint.txt
+          find bin src public profiles tests -name '*.php' -print0 | xargs -0 -n1 php -l > lint.txt
           ! grep -v '^No syntax errors' lint.txt
 
       - name: Undefined constants

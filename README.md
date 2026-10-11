@@ -28,10 +28,10 @@ portal uses `profiles/default`, which is neutral and takes the operator's name f
 
 | File | What it is |
 |---|---|
-| `profile.php` | an array with what differs from `profiles/default/profile.php`: language (`cs`, `hr`), page name, heading, logos, colours, the name of a downloaded invoice |
+| `profile.php` | an array with what differs from `profiles/default/profile.php`: page name, heading, logos, colours, icons (favicon, home screen icon), the name of a downloaded invoice |
 | `consent.php` | what the customer is told about the consents on the customer data page |
 | `introduction.php` | the page after signing in |
-| `assets/` | the logos and `colors.css` the profile names, served by `branding.php` |
+| `assets/` | the logos, icons and `colors.css` the profile names, served by `branding.php` |
 
 `colors.css` sets the two brand colours:
 
@@ -43,6 +43,15 @@ portal uses `profiles/default`, which is neutral and takes the operator's name f
 ```
 
 A file the profile leaves out is taken from `profiles/default`.
+
+## Languages
+
+The texts in the code are English and go through `__()`, translated as in Watcher CRM from
+`resources/locales/<locale>/default.po` (`cs_CZ` and `hr_HR` so far). `APP_DEFAULT_LOCALE` picks
+the language, and with `CURRENCY` also how dates and amounts are written. After changing texts in
+the code, `php bin/extract-texts.php` brings `default.pot` and the catalogues up to date and lists
+what is left to translate, in Poedit or any editor of `.po` files. A new language is a new
+`resources/locales/<locale>/default.po`.
 
 ## Running it
 

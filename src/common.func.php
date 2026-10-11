@@ -25,40 +25,30 @@ function formatName ($customer, $with_company = true)
 	return $name;
 }
 
+// A date as the locale writes it, or what was given when it is no date
 function formatDate ($date)
 {
-	if (is_string($date))
-	{
-		return date("d.m.Y", strtotime($date));
-	}
-	else
-	{
-		return $date;
-	}
+	$time = is_string($date) && $date !== '' ? strtotime($date) : false;
+	if ($time === false) return $date;
+
+	return (new IntlDateFormatter(LOCALE, IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE))->format($time);
 }
 
+// A date and time as the locale writes them, from text or a timestamp
 function formatDateTime ($date)
 {
-	if (is_string($date))
-	{
-		return date("d.m.Y H:i", strtotime($date));
-	}
-	else if (is_integer($date))
-        {
-                return date("d.m.Y H:i", $date);
-        }
-        else
-	{
-		return $date;
-	}
+	$time = is_integer($date) ? $date : (is_string($date) && $date !== '' ? strtotime($date) : false);
+	if ($time === false) return $date;
+
+	return (new IntlDateFormatter(LOCALE, IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT))->format($time);
 }
 
+// An amount in the operator's currency, as the locale writes it
 function formatPrice ($price, $red = false)
 {
-	if ($red)
-		return "<span class=\"red\">" . number_format($price, 2, ',', ' ') . "</span> Kč";
-	else
-		return number_format($price, 2, ',', ' ') . " Kč";
+	$text = (new NumberFormatter(LOCALE, NumberFormatter::CURRENCY))->formatCurrency((float)$price, CURRENCY);
+
+	return $red ? '<span class="red">' . $text . '</span>' : $text;
 }
 
 // The address of a file in the profile's assets/
@@ -74,6 +64,21 @@ function profileImage ($image)
 
 	$width = empty($image['width']) ? '' : ' width="' . (int)$image['width'] . '"';
 	return '<img src="' . htmlspecialchars(brandingUrl($image['file'])) . '" alt="Logo"' . $width . ' />';
+}
+
+// The links to the icons of the profile, for the head of a page
+function profileIcons ($icons)
+{
+	$links = '';
+	foreach (is_array($icons) ? $icons : [] as $icon)
+	{
+		if (empty($icon['file'])) continue;
+
+		$type = strtolower(pathinfo($icon['file'], PATHINFO_EXTENSION)) === 'png' ? ' type="image/png"' : '';
+		$sizes = empty($icon['sizes']) ? '' : ' sizes="' . htmlspecialchars($icon['sizes']) . '"';
+		$links .= "\t" . '<link rel="' . htmlspecialchars($icon['rel'] ?? 'icon') . '" href="' . htmlspecialchars(brandingUrl($icon['file'])) . '"' . $type . $sizes . ' />' . "\n";
+	}
+	return $links;
 }
 
 ?>

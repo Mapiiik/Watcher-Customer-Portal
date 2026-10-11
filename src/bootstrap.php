@@ -48,13 +48,29 @@ define('PREFIX', '');
 date_default_timezone_set(portalSetting('TIMEZONE', 'Europe/Prague'));
 define('DEBUG', portalFlag('PORTAL_DEBUG', false));
 
+// the language and formats of the pages, as in Watcher CRM: texts are English in the code and
+// translated from resources/locales/<locale>/default.po
+define('LOCALE', portalSetting('APP_DEFAULT_LOCALE', 'en_US'));
+define('LANGUAGE', strtolower(substr(LOCALE, 0, 2)));
+define('CURRENCY', strtoupper(portalSetting('CURRENCY', 'EUR')));
+$translator = new \Gettext\Translator();
+foreach ([LOCALE, LANGUAGE] as $catalogue) {
+    $file = ROOT_DIR . '/resources/locales/' . basename($catalogue) . '/default.po';
+    if (is_file($file)) {
+        $translator->addTranslations((new \Gettext\Generator\ArrayGenerator())->generateArray((new \Gettext\Loader\PoLoader())->loadFile($file)));
+        break;
+    }
+}
+\Gettext\TranslatorFunctions::register($translator);
+unset($translator, $catalogue, $file);
+
 // the operator the portal is for
 define('OPERATOR_NAME', portalSetting('OPERATOR_NAME'));
 define('OPERATOR_WEBSITE', portalSetting('OPERATOR_WEBSITE', ''));
 define('PRIVACY_POLICY_URL', portalSetting('PRIVACY_POLICY_URL', ''));
 
-// the operator's look, language and texts: the profile the deployment mounts at /app/profile,
-// with what it leaves out taken from profiles/default
+// the operator's look and texts: the profile the deployment mounts at /app/profile, with what it
+// leaves out taken from profiles/default
 define('DEFAULT_PROFILE_DIR', ROOT_DIR . '/profiles/default');
 define('PROFILE_DIR', is_file(ROOT_DIR . '/profile/profile.php') ? ROOT_DIR . '/profile' : DEFAULT_PROFILE_DIR);
 $profile = require DEFAULT_PROFILE_DIR . '/profile.php';
@@ -62,7 +78,6 @@ if (PROFILE_DIR !== DEFAULT_PROFILE_DIR) {
     $profile = array_replace($profile, require PROFILE_DIR . '/profile.php');
 }
 
-define('LANGUAGE', $profile['language']);
 define('HTML_PAGE_NAME', $profile['page_name']);
 
 // Watcher CRM, which the portal asks about the customers signed in to it
@@ -81,17 +96,15 @@ define('MAIL_FROM', portalSetting('MAIL_FROM'));
 define('MAIL_FROM_NAME', portalSetting('MAIL_FROM_NAME', HTML_PAGE_NAME));
 define('CHANGE_REQUESTS_TO', portalSetting('CHANGE_REQUESTS_TO'));
 
-require SRC_DIR . '/lang/' . basename(LANGUAGE) . '.php';
-
 $invoice_delivery_type_options = [
-    0 => INVOICE_DELIVERY_NONE,
-    1 => INVOICE_DELIVERY_EMAIL,
+    0 => __('do not send...'),
+    1 => __('send by e-mail...'),
 ];
 $address_types = [
-    0 => INSTALLATION_ADDRESS,
-    1 => BILLING_ADDRESS,
-    2 => DELIVERY_ADDRESS,
-    3 => PERMANENT_ADDRESS,
+    0 => __('Installation address'),
+    1 => __('Billing address'),
+    2 => __('Delivery address'),
+    3 => __('Permanent address'),
 ];
 
 // the row under the pointer

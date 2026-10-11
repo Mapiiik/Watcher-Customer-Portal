@@ -1,0 +1,287 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Watcher Customer Portal\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs_CZ\n"
+
+msgid "Access denied"
+msgstr "Přístup zamítnut"
+
+msgid "Access granted"
+msgstr "Přístup povolen"
+
+msgid "Account locked"
+msgstr "Účet zablokován"
+
+msgid "Account number"
+msgstr "Účet"
+
+msgid "Additional settings"
+msgstr "Další nastavení"
+
+msgid "Bank"
+msgstr "Banka"
+
+msgid "Bank code"
+msgstr "Kód banky"
+
+msgid "Bank details"
+msgstr "Bankovní údaje"
+
+msgid "Billing address"
+msgstr "Fakturační adresa"
+
+msgid "Billing details"
+msgstr "Fakturační údaje"
+
+msgid "By ticking below I choose which messages I want to receive from %s (the \"Controller\") at my contact details. For commercial communications I also give the Controller my consent to sending them and to processing my contact details for this purpose."
+msgstr "Zaškrtnutím níže volím, které zprávy chci od %s (dále jen „Správce“) dostávat na své kontaktní údaje. U obchodních sdělení tím Správci zároveň dávám souhlas s jejich zasíláním a se zpracováním svých kontaktních údajů pro tento účel."
+
+msgid "Change password"
+msgstr "Změna hesla"
+
+msgid "City"
+msgstr "Město"
+
+msgid "Click an invoice number to show the invoice"
+msgstr "Fakturu zobrazíte kliknutím na její číslo"
+
+msgid "Company"
+msgstr "Společnost"
+
+msgid "Company ID"
+msgstr "IČ"
+
+msgid "Confirm password"
+msgstr "Potvrzení hesla"
+
+msgid "Confirm sending"
+msgstr "Potvrdit odeslání"
+
+msgid "Confirm the change?"
+msgstr "Potvrdit změnu?"
+
+msgid "Consent to the processing of personal data"
+msgstr "Souhlas se zpracováním osobních údajů"
+
+msgid "Consent to the processing of personal data is required. Without it no contract can be concluded and no service provided."
+msgstr "Je třeba udělit souhlas se zpracováním osobních údajů. Bez tohoto souhlasu není možné uzavřít smlouvu ani poskytovat službu."
+
+msgid "Contract"
+msgstr "Smlouva"
+
+msgid "Country"
+msgstr "Země"
+
+msgid "Customer"
+msgstr "Uživatel"
+
+msgid "Customer data"
+msgstr "Uživatelské údaje"
+
+msgid "Customer portal"
+msgstr "Uživatelský portál"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Date of birth"
+msgstr "Datum narození"
+
+msgid "Debt"
+msgstr "Dluh"
+
+msgid "Delivery address"
+msgstr "Doručovací adresa"
+
+msgid "Due date"
+msgstr "Splatnost"
+
+msgid "E-mail"
+msgstr "E-mail"
+
+msgid "File not found!"
+msgstr "Soubor nebyl nalezen!"
+
+msgid "First name"
+msgstr "Jméno"
+
+msgid "Here are your details. You can correct them and send them for processing: they change only after they have been checked."
+msgstr "Zde je soupis vašich údajů. Můžete je opravit a odeslat ke zpracování, změní se až po jejich ověření."
+
+msgid "Here you can change the password you sign in with."
+msgstr "Zde máte možnost změny přihlašovacího hesla."
+
+msgid "Here you can correct or complete your details and send them for processing."
+msgstr "Zde máte možnost opravit nebo doplnit jednotlivé údaje a odeslat je ke zpracování."
+
+msgid "Here you see all invoices issued to you: the variable symbol, the date of issue, the due date, the date of payment and the amount. An amount in the Debt column means the invoice has not been paid."
+msgstr "Zde vidíte všechny vystavené faktury, variabilní symbol, datum vystavení, splatnost, datum úhrady a částku. Pokud je ve sloupci „Dluh“ uvedena částka, je faktura vedena jako neuhrazená."
+
+msgid "Home page"
+msgstr "Úvodní stránka"
+
+msgid "House number"
+msgstr "č.p."
+
+msgid "How the Controller processes personal data is described in its %s."
+msgstr "Jak Správce zpracovává osobní údaje, popisují jeho %s."
+
+msgid "I agree to receive commercial communications"
+msgstr "Souhlasím se zasíláním obchodních sdělení"
+
+msgid "I can change or withdraw my choice and consent at any time, here in the customer portal or through the contact details of the Controller. Withdrawing does not affect the lawfulness of the processing before it."
+msgstr "Volbu i souhlas mohu kdykoli změnit nebo odvolat, a to zde v Uživatelském portálu nebo prostřednictvím kontaktních údajů Správce. Odvolání nemá vliv na zákonnost zpracování před ním."
+
+msgid "I want to receive correspondence about the monthly billing"
+msgstr "Přeji si dostávat korespondenci spojenou s měsíčním vyúčtováním"
+
+msgid "I want to receive information about outages and faults"
+msgstr "Přeji si dostávat informace o odstávkách a poruchách"
+
+msgid "ID card number"
+msgstr "Číslo OP"
+
+msgid "IP address"
+msgstr "IP adresa"
+
+msgid "Installation address"
+msgstr "Místo instalace"
+
+msgid "Invoice"
+msgstr "Faktura"
+
+msgid "Invoice delivery"
+msgstr "Zasílání faktur"
+
+msgid "Invoice number"
+msgstr "Číslo faktury"
+
+msgid "Invoices"
+msgstr "Přehled faktur"
+
+msgid "Last name"
+msgstr "Příjmení"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "New password"
+msgstr "Nové heslo"
+
+msgid "Not found"
+msgstr "Nenalezeno"
+
+msgid "Paid"
+msgstr "Uhrazeno"
+
+msgid "Password"
+msgstr "Heslo"
+
+msgid "Permanent address"
+msgstr "Adresa trvalého bydliště"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Postcode"
+msgstr "PSČ"
+
+msgid "Really remove?"
+msgstr "Opravdu odstranit?"
+
+msgid "Saving the new settings"
+msgstr "Nastavuji nové parametry"
+
+msgid "Security error"
+msgstr "Chyba zabezpečení"
+
+msgid "Show on map"
+msgstr "Ukázat na mapě"
+
+msgid "Sign out"
+msgstr "Odhlásit"
+
+msgid "Signed in"
+msgstr "Přihlášen"
+
+msgid "Street"
+msgstr "Ulice"
+
+msgid "Suffix"
+msgstr "Přípona"
+
+msgid "System error!"
+msgstr "Chyba systému!"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "The menu offers the following:"
+msgstr "V nabídce máte následující možnosti:"
+
+msgid "The passwords do not match!"
+msgstr "Hesla se liší!"
+
+msgid "This page uses frames, which your browser does not support."
+msgstr "Na této stránce jsou použity rámce, prohlížeč je však nepodporuje."
+
+msgid "Title"
+msgstr "Titul"
+
+msgid "Too many failed attempts, please try again in a while"
+msgstr "Příliš mnoho neúspěšných pokusů, zkuste to prosím za chvíli"
+
+msgid "Total"
+msgstr "Celkem"
+
+msgid "Use for billing"
+msgstr "Použit pro fakturaci"
+
+msgid "Use for commercial messages"
+msgstr "Použít pro komerční"
+
+msgid "Use for outages"
+msgstr "Použít pro výpadky"
+
+msgid "VAT number"
+msgstr "DIČ"
+
+msgid "Variable symbol"
+msgstr "Variabilní symbol"
+
+msgid "Website"
+msgstr "WWW"
+
+msgid "You also see the IP addresses assigned to you."
+msgstr "Dále zde vidíte přidělené IP adresy."
+
+msgid "You are not signed in, please sign in"
+msgstr "Nejste přihlášeni, přihlašte se prosím"
+
+msgid "You can also give your consent to the processing of personal data here."
+msgstr "Je možné zde zároveň udělit souhlas se zpracováním osobních údajů."
+
+msgid "You can download an invoice as a PDF by clicking its number."
+msgstr "Fakturu si stáhnete ve formátu PDF kliknutím na její číslo."
+
+msgid "You have signed in to the customer portal."
+msgstr "Byli jste úspěšně přihlášeni do uživatelského portálu."
+
+msgid "Your IP address has changed"
+msgstr "Změnila se vaše IP adresa"
+
+msgid "Your details have been sent for processing..."
+msgstr "Údaje byly odeslány ke zpracování..."
+
+msgid "do not send..."
+msgstr "nezasílat žádnou formou..."
+
+msgid "privacy policy"
+msgstr "zásady zpracování osobních údajů"
+
+msgid "send by e-mail..."
+msgstr "zasílat e-mailem..."
+

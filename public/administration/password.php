@@ -17,7 +17,7 @@ header("Content-type: text/html; charset=UTF-8");
 header("Content-Security-Policy: frame-ancestors 'self'");
 header("X-Frame-Options: SAMEORIGIN");
 
-$pageTitle = HTML_PAGE_NAME . ' - ' . SET_PASSWORD;
+$pageTitle = HTML_PAGE_NAME . ' - ' . __('Change password');
 require SRC_DIR . '/includes/head.html.inc.php';
 
 // Init security
@@ -34,7 +34,7 @@ $sqllisting = false;
 // START Password
 if (isset($_POST['set_password']) && $_POST['set_password'] == 'yes' && isset($_POST['set_password_1']) && isset($_POST['set_password_2']) && !($_POST['set_password_1'] == '' && $_POST['set_password_2'] == ''))
 {
-	echo SET_PASSWORD . '...';
+	echo __('Change password') . '...';
 	if ($_POST['set_password_1'] == $_POST['set_password_2'])
 	{
 		// Change password
@@ -48,19 +48,19 @@ if (isset($_POST['set_password']) && $_POST['set_password'] == 'yes' && isset($_
 			$session->crmFailed($crm);
 		}
 	}
-	else echo "<div class='fred'>" . PASSWORDS_ARE_DIFFERENT . "</div>";
+	else echo "<div class='fred'>" . __('The passwords do not match!') . "</div>";
 }
 ?>
 
 <form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post" enctype="multipart/form-data">
-<h1><?php echo SET_PASSWORD; ?></h1>
+<h1><?php echo __('Change password'); ?></h1>
   <table>
     <tr>
-	  <td><?php echo NEW_PASSWORD . ":"; ?></td>
+	  <td><?php echo __('New password') . ":"; ?></td>
 	  <td><input name="set_password_1" type="password" value="" /></td>
     </tr>
     <tr>
-	  <td><?php echo PASSWORD_CONFIRMATION . ":"; ?></td>
+	  <td><?php echo __('Confirm password') . ":"; ?></td>
 	  <td><input name="set_password_2" type="password" value="" /></td>
     </tr>
     <tr>

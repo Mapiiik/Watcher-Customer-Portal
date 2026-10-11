@@ -5,8 +5,11 @@
     "license": "AGPL-3.0-or-later",
     "require": {
         "php": ">=8.4",
+        "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
+        "gettext/gettext": "^5.7",
+        "gettext/translator": "^1.2",
         "phpmailer/phpmailer": "^7.1"
     },
     "config": {

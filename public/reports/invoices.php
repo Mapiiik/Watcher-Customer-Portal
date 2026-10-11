@@ -21,7 +21,7 @@ if (!isset($_GET['invoice']))
     header('Pragma: public');
 }
 
-$pageTitle = HTML_PAGE_NAME . ' - ' . INVOICES_LIST;
+$pageTitle = HTML_PAGE_NAME . ' - ' . __('Invoices');
 if (!isset($_GET['invoice'])) require SRC_DIR . '/includes/head.html.inc.php';
 
 // Init security
@@ -60,8 +60,8 @@ if (isset($_GET['invoice']))
             $filename = strtr($profile['invoice_file'], ['{number}' => $invoice['number'], '{variable_symbol}' => $invoice['variable_symbol']]);
             header('Content-Disposition: attachment; filename="' . str_replace(['"', '/', '\\'], '-', $filename) . '"');
             echo($file);
-        } else echo FILE_NOT_FOUND;
-    } else echo NOT_FOUND;
+        } else echo __('File not found!');
+    } else echo __('Not found');
 }
 else
 {

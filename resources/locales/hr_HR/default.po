@@ -1,0 +1,287 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Watcher Customer Portal\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hr_HR\n"
+
+msgid "Access denied"
+msgstr "Pristup odbijen"
+
+msgid "Access granted"
+msgstr "Pristup odobren"
+
+msgid "Account locked"
+msgstr "Račun blokiran"
+
+msgid "Account number"
+msgstr "Račun banke"
+
+msgid "Additional settings"
+msgstr "Ostale postavke"
+
+msgid "Bank"
+msgstr "Banka"
+
+msgid "Bank code"
+msgstr "Kod banke"
+
+msgid "Bank details"
+msgstr "Bankovni podaci"
+
+msgid "Billing address"
+msgstr "Adresa za naplatu"
+
+msgid "Billing details"
+msgstr "Podaci o naplati"
+
+msgid "By ticking below I choose which messages I want to receive from %s (the \"Controller\") at my contact details. For commercial communications I also give the Controller my consent to sending them and to processing my contact details for this purpose."
+msgstr "Označavanjem u nastavku biram koje poruke želim primati od %s (u daljnjem tekstu „Voditelj obrade“) na svoje kontaktne podatke. Za komercijalne poruke Voditelju obrade ujedno dajem privolu za njihovo slanje i za obradu svojih kontaktnih podataka u tu svrhu."
+
+msgid "Change password"
+msgstr "Promjena lozinke"
+
+msgid "City"
+msgstr "Grad"
+
+msgid "Click an invoice number to show the invoice"
+msgstr "Fakturu ćete prikazati klikom na njezin broj"
+
+msgid "Company"
+msgstr "Tvrtka"
+
+msgid "Company ID"
+msgstr "OIB"
+
+msgid "Confirm password"
+msgstr "Potvrda lozinke"
+
+msgid "Confirm sending"
+msgstr "Potvrdi slanje"
+
+msgid "Confirm the change?"
+msgstr "Potvrditi promjenu?"
+
+msgid "Consent to the processing of personal data"
+msgstr "Privola za obradu osobnih podataka"
+
+msgid "Consent to the processing of personal data is required. Without it no contract can be concluded and no service provided."
+msgstr "Potrebno je dati privolu za obradu osobnih podataka, bez nje nije moguće sklopiti ugovor niti pružati uslugu"
+
+msgid "Contract"
+msgstr "Ugovor"
+
+msgid "Country"
+msgstr "Država"
+
+msgid "Customer"
+msgstr "Korisnik"
+
+msgid "Customer data"
+msgstr "Korisnički podaci"
+
+msgid "Customer portal"
+msgstr "Korisnički portal"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Date of birth"
+msgstr "Datum rođenja"
+
+msgid "Debt"
+msgstr "Dug"
+
+msgid "Delivery address"
+msgstr "Adresa dostave"
+
+msgid "Due date"
+msgstr "Dospijeće"
+
+msgid "E-mail"
+msgstr "E-mail"
+
+msgid "File not found!"
+msgstr "Datoteka nije pronađena!"
+
+msgid "First name"
+msgstr "Ime"
+
+msgid "Here are your details. You can correct them and send them for processing: they change only after they have been checked."
+msgstr "Ovdje su vaši podaci. Možete ih ispraviti i poslati na obradu, promijenit će se tek nakon provjere."
+
+msgid "Here you can change the password you sign in with."
+msgstr "Ovdje možete promijeniti lozinku za prijavu."
+
+msgid "Here you can correct or complete your details and send them for processing."
+msgstr "Ovdje imate mogućnost ispraviti ili dopuniti pojedinačne podatke i poslati ih na obradu."
+
+msgid "Here you see all invoices issued to you: the variable symbol, the date of issue, the due date, the date of payment and the amount. An amount in the Debt column means the invoice has not been paid."
+msgstr "Ovdje vidite sve izdane račune, poziv na broj, datum izdavanja, dospijeće, datum plaćanja i iznos. Iznos u stupcu „Dug“ znači da račun nije plaćen."
+
+msgid "Home page"
+msgstr "Glavna stranica"
+
+msgid "House number"
+msgstr "Br."
+
+msgid "How the Controller processes personal data is described in its %s."
+msgstr "Kako Voditelj obrade obrađuje osobne podatke, opisuje njegova %s."
+
+msgid "I agree to receive commercial communications"
+msgstr "Slažem se primati komercijalne komunikacije"
+
+msgid "I can change or withdraw my choice and consent at any time, here in the customer portal or through the contact details of the Controller. Withdrawing does not affect the lawfulness of the processing before it."
+msgstr "Izbor i privolu mogu u bilo kojem trenutku promijeniti ili povući, ovdje u korisničkom portalu ili putem kontaktnih podataka Voditelja obrade. Povlačenje ne utječe na zakonitost obrade prije njega."
+
+msgid "I want to receive correspondence about the monthly billing"
+msgstr "Slažem se primati svu korespondenciju vezanu uz mjesečno naplaćivanje"
+
+msgid "I want to receive information about outages and faults"
+msgstr "Slažem se primati obavijesti o prekidima i kvarovima."
+
+msgid "ID card number"
+msgstr "Broj osobne iskaznice"
+
+msgid "IP address"
+msgstr "IP adresa"
+
+msgid "Installation address"
+msgstr "Adresa instalacije"
+
+msgid "Invoice"
+msgstr "Račun"
+
+msgid "Invoice delivery"
+msgstr "Slanje fakture"
+
+msgid "Invoice number"
+msgstr "Broj fakture"
+
+msgid "Invoices"
+msgstr "Pregled faktura"
+
+msgid "Last name"
+msgstr "Prezime"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "New password"
+msgstr "Nova lozinka"
+
+msgid "Not found"
+msgstr "Nije pronađeno"
+
+msgid "Paid"
+msgstr "Plaćeno"
+
+msgid "Password"
+msgstr "Lozinka"
+
+msgid "Permanent address"
+msgstr "Stalna adresa"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Postcode"
+msgstr "Pošt.br."
+
+msgid "Really remove?"
+msgstr "Stvarno ukloniti?"
+
+msgid "Saving the new settings"
+msgstr "Postavljam nove parametre"
+
+msgid "Security error"
+msgstr "Greška sigurnosti"
+
+msgid "Show on map"
+msgstr "Prikaži na karti"
+
+msgid "Sign out"
+msgstr "Odjava"
+
+msgid "Signed in"
+msgstr "Prijavljen"
+
+msgid "Street"
+msgstr "Ulica"
+
+msgid "Suffix"
+msgstr "Sufiks"
+
+msgid "System error!"
+msgstr "Greška sustava!"
+
+msgid "Text"
+msgstr "Tekst"
+
+msgid "The menu offers the following:"
+msgstr "Izbornik nudi sljedeće:"
+
+msgid "The passwords do not match!"
+msgstr "Lozinke su različite!"
+
+msgid "This page uses frames, which your browser does not support."
+msgstr "Ova stranica koristi okvire, koje vaš preglednik ne podržava."
+
+msgid "Title"
+msgstr "Titula"
+
+msgid "Too many failed attempts, please try again in a while"
+msgstr "Previše neuspjelih pokušaja, pokušajte ponovno kasnije"
+
+msgid "Total"
+msgstr "Ukupno"
+
+msgid "Use for billing"
+msgstr "Koristi za naplatu"
+
+msgid "Use for commercial messages"
+msgstr "Koristi za komercijalne poruke"
+
+msgid "Use for outages"
+msgstr "Koristi za obavijesti o prekidima"
+
+msgid "VAT number"
+msgstr "PIB (VAT)"
+
+msgid "Variable symbol"
+msgstr "Poziv na broj"
+
+msgid "Website"
+msgstr "WWW"
+
+msgid "You also see the IP addresses assigned to you."
+msgstr "Također vidite dodijeljene IP adrese."
+
+msgid "You are not signed in, please sign in"
+msgstr "Niste prijavljeni, molimo prijavite se"
+
+msgid "You can also give your consent to the processing of personal data here."
+msgstr "Ovdje također možete dati privolu za obradu osobnih podataka."
+
+msgid "You can download an invoice as a PDF by clicking its number."
+msgstr "Račun možete preuzeti u PDF formatu klikom na njegov broj."
+
+msgid "You have signed in to the customer portal."
+msgstr "Uspješno ste se prijavili u korisnički portal."
+
+msgid "Your IP address has changed"
+msgstr "Promijenila se vaša IP adresa"
+
+msgid "Your details have been sent for processing..."
+msgstr "Podaci su poslani na obradu..."
+
+msgid "do not send..."
+msgstr "ne slati ni na koji način..."
+
+msgid "privacy policy"
+msgstr "politika privatnosti"
+
+msgid "send by e-mail..."
+msgstr "slati e-poštom..."
+

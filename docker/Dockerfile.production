@@ -13,7 +13,8 @@ RUN composer install \
     --no-progress \
     --no-scripts \
     --classmap-authoritative \
-    --ignore-platform-req=php
+    --ignore-platform-req=php \
+    --ignore-platform-req=ext-intl
 
 ############################
 # Runtime
@@ -35,6 +36,7 @@ RUN echo "Based on commit: $gitcommithash"
 # PHP
 ############################
 RUN install-php-extensions \
+    intl \
     opcache
 
 # Production defaults; the time zone is set by the portal from TIMEZONE
@@ -50,6 +52,7 @@ COPY composer.json /app/
 COPY src/ /app/src/
 COPY profiles/ /app/profiles/
 COPY public/ /app/public/
+COPY resources/ /app/resources/
 
 ############################
 # Caddy configuration

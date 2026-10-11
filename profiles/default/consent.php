@@ -1,11 +1,11 @@
 <?php
 // What the customer is told about the consents above the checkboxes on the customer data page
 ?>
-                        <h4>Souhlas se zpracováním osobních údajů</h4>
+                        <h4><?php echo __('Consent to the processing of personal data'); ?></h4>
                         <ul>
-                            <li>Zaškrtnutím níže volím, které zprávy chci od <?php echo htmlspecialchars(OPERATOR_NAME); ?> (dále jen „Správce“) dostávat na své kontaktní údaje.<br>U obchodních sdělení tím Správci zároveň dávám souhlas s jejich zasíláním a se zpracováním svých kontaktních údajů pro tento účel.</li>
-                            <li>Volbu i souhlas mohu kdykoli změnit nebo odvolat, a to zde v Uživatelském portálu nebo prostřednictvím kontaktních údajů Správce. Odvolání nemá vliv na zákonnost zpracování před ním.</li>
+                            <li><?php echo __('By ticking below I choose which messages I want to receive from %s (the "Controller") at my contact details. For commercial communications I also give the Controller my consent to sending them and to processing my contact details for this purpose.', htmlspecialchars(OPERATOR_NAME)); ?></li>
+                            <li><?php echo __('I can change or withdraw my choice and consent at any time, here in the customer portal or through the contact details of the Controller. Withdrawing does not affect the lawfulness of the processing before it.'); ?></li>
 <?php if (PRIVACY_POLICY_URL !== '') { ?>
-                            <li>Jak Správce zpracovává osobní údaje, popisují <a href="<?php echo htmlspecialchars(PRIVACY_POLICY_URL); ?>" target="_blank">Zásady zpracování osobních údajů</a>.</li>
+                            <li><?php echo __('How the Controller processes personal data is described in its %s.', '<a href="' . htmlspecialchars(PRIVACY_POLICY_URL) . '" target="_blank">' . __('privacy policy') . '</a>'); ?></li>
 <?php } ?>
                         </ul>

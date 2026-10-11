@@ -17,7 +17,7 @@ header("Content-type: text/html; charset=UTF-8");
 header("Content-Security-Policy: frame-ancestors 'self'");
 header("X-Frame-Options: SAMEORIGIN");
 
-$pageTitle = HTML_PAGE_NAME . ' - ' . INTRODUCTION_PAGE;
+$pageTitle = HTML_PAGE_NAME . ' - ' . __('Home page');
 require SRC_DIR . '/includes/head.html.inc.php';
 
 // Init security

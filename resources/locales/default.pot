@@ -1,0 +1,286 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Watcher Customer Portal\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Access denied"
+msgstr ""
+
+msgid "Access granted"
+msgstr ""
+
+msgid "Account locked"
+msgstr ""
+
+msgid "Account number"
+msgstr ""
+
+msgid "Additional settings"
+msgstr ""
+
+msgid "Bank"
+msgstr ""
+
+msgid "Bank code"
+msgstr ""
+
+msgid "Bank details"
+msgstr ""
+
+msgid "Billing address"
+msgstr ""
+
+msgid "Billing details"
+msgstr ""
+
+msgid "By ticking below I choose which messages I want to receive from %s (the \"Controller\") at my contact details. For commercial communications I also give the Controller my consent to sending them and to processing my contact details for this purpose."
+msgstr ""
+
+msgid "Change password"
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "Click an invoice number to show the invoice"
+msgstr ""
+
+msgid "Company"
+msgstr ""
+
+msgid "Company ID"
+msgstr ""
+
+msgid "Confirm password"
+msgstr ""
+
+msgid "Confirm sending"
+msgstr ""
+
+msgid "Confirm the change?"
+msgstr ""
+
+msgid "Consent to the processing of personal data"
+msgstr ""
+
+msgid "Consent to the processing of personal data is required. Without it no contract can be concluded and no service provided."
+msgstr ""
+
+msgid "Contract"
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
+msgid "Customer"
+msgstr ""
+
+msgid "Customer data"
+msgstr ""
+
+msgid "Customer portal"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Date of birth"
+msgstr ""
+
+msgid "Debt"
+msgstr ""
+
+msgid "Delivery address"
+msgstr ""
+
+msgid "Due date"
+msgstr ""
+
+msgid "E-mail"
+msgstr ""
+
+msgid "File not found!"
+msgstr ""
+
+msgid "First name"
+msgstr ""
+
+msgid "Here are your details. You can correct them and send them for processing: they change only after they have been checked."
+msgstr ""
+
+msgid "Here you can change the password you sign in with."
+msgstr ""
+
+msgid "Here you can correct or complete your details and send them for processing."
+msgstr ""
+
+msgid "Here you see all invoices issued to you: the variable symbol, the date of issue, the due date, the date of payment and the amount. An amount in the Debt column means the invoice has not been paid."
+msgstr ""
+
+msgid "Home page"
+msgstr ""
+
+msgid "House number"
+msgstr ""
+
+msgid "How the Controller processes personal data is described in its %s."
+msgstr ""
+
+msgid "I agree to receive commercial communications"
+msgstr ""
+
+msgid "I can change or withdraw my choice and consent at any time, here in the customer portal or through the contact details of the Controller. Withdrawing does not affect the lawfulness of the processing before it."
+msgstr ""
+
+msgid "I want to receive correspondence about the monthly billing"
+msgstr ""
+
+msgid "I want to receive information about outages and faults"
+msgstr ""
+
+msgid "ID card number"
+msgstr ""
+
+msgid "IP address"
+msgstr ""
+
+msgid "Installation address"
+msgstr ""
+
+msgid "Invoice"
+msgstr ""
+
+msgid "Invoice delivery"
+msgstr ""
+
+msgid "Invoice number"
+msgstr ""
+
+msgid "Invoices"
+msgstr ""
+
+msgid "Last name"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "New password"
+msgstr ""
+
+msgid "Not found"
+msgstr ""
+
+msgid "Paid"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Permanent address"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "Postcode"
+msgstr ""
+
+msgid "Really remove?"
+msgstr ""
+
+msgid "Saving the new settings"
+msgstr ""
+
+msgid "Security error"
+msgstr ""
+
+msgid "Show on map"
+msgstr ""
+
+msgid "Sign out"
+msgstr ""
+
+msgid "Signed in"
+msgstr ""
+
+msgid "Street"
+msgstr ""
+
+msgid "Suffix"
+msgstr ""
+
+msgid "System error!"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "The menu offers the following:"
+msgstr ""
+
+msgid "The passwords do not match!"
+msgstr ""
+
+msgid "This page uses frames, which your browser does not support."
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Too many failed attempts, please try again in a while"
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "Use for billing"
+msgstr ""
+
+msgid "Use for commercial messages"
+msgstr ""
+
+msgid "Use for outages"
+msgstr ""
+
+msgid "VAT number"
+msgstr ""
+
+msgid "Variable symbol"
+msgstr ""
+
+msgid "Website"
+msgstr ""
+
+msgid "You also see the IP addresses assigned to you."
+msgstr ""
+
+msgid "You are not signed in, please sign in"
+msgstr ""
+
+msgid "You can also give your consent to the processing of personal data here."
+msgstr ""
+
+msgid "You can download an invoice as a PDF by clicking its number."
+msgstr ""
+
+msgid "You have signed in to the customer portal."
+msgstr ""
+
+msgid "Your IP address has changed"
+msgstr ""
+
+msgid "Your details have been sent for processing..."
+msgstr ""
+
+msgid "do not send..."
+msgstr ""
+
+msgid "privacy policy"
+msgstr ""
+
+msgid "send by e-mail..."
+msgstr ""
+

@@ -58,6 +58,8 @@ for PROFILE in $PROFILES; do
       (SELECT customer_id FROM invoices GROUP BY customer_id ORDER BY count(*) DESC LIMIT 1), now(), now()"
   MOUNT=()
   [ "$PROFILE" != default ] && MOUNT=(-v "$(host_path "$ROOT/data/$PROFILE/profile"):/app/profile:ro")
+  # the language and currency an operator's deployment sets, the defaults (en_US, EUR) otherwise
+  [ -f "data/$PROFILE/test.env" ] && MOUNT+=(--env-file "data/$PROFILE/test.env")
   dk run -d --name $RUN --network "$NETWORK" -p $PORT:443 "${MOUNT[@]}" \
     -e SERVER_NAME=localhost -e OPERATOR_NAME="Test Operator, s.r.o." -e OPERATOR_WEBSITE=https://www.example.net \
     -e PRIVACY_POLICY_URL=https://www.example.net/privacy -e PORTAL_DEBUG=true \
@@ -101,7 +103,7 @@ for PROFILE in $PROFILES; do
            administration/password.php "reports/invoices.php?invoice=00000000-0000-0000-0000-000000000000"; do
     code=$(c -o "$H.body" -w '%{http_code}' -H "Cookie: PHPSESSID=$C2" "$B/$p")
     # the system error is what the portal says when the CRM did not answer
-    bad=$(sed -e 's/<[^>]*>//g' "$H.body" | grep -c -i -E "warning|fatal|deprecated|notice|uncaught|Chyba systému|Greška sustava")
+    bad=$(sed -e 's/<[^>]*>//g' "$H.body" | grep -c -i -E "warning|fatal|deprecated|notice|uncaught|System error|Chyba systému|Greška sustava")
     printf "  %-66s %s problems=%s bytes=%s\n" "$p" "$code" "$bad" "$(wc -c < "$H.body")"
     sed -e 's/<[^>]*>//g' "$H.body" | grep -o -i -E "(warning|fatal error|deprecated|notice|uncaught)[^:]*:.{0,170}" | sort -u | head -5 | sed 's/^/      /'
     [ "$code" = 200 ] && [ "$bad" = 0 ] || FAILED=1
@@ -115,7 +117,7 @@ for PROFILE in $PROFILES; do
   code=$(c -o "$H.body" -w '%{http_code}' -H "Cookie: PHPSESSID=$C2" --data-urlencode agree_gdpr=yes \
     --data-urlencode agree_mailing_billing=yes --data-urlencode company=Changed --data-urlencode 'email[new][email]=' \
     --data-urlencode 'phone[new][phone]=' --data-urlencode 'address[new][street]=Somewhere' "$B/reports/customer-data.php")
-  bad=$(sed -e 's/<[^>]*>//g' "$H.body" | grep -c -i -E "warning|fatal|deprecated|notice|uncaught|Chyba systému|Greška sustava")
+  bad=$(sed -e 's/<[^>]*>//g' "$H.body" | grep -c -i -E "warning|fatal|deprecated|notice|uncaught|System error|Chyba systému|Greška sustava")
   printf "  %-66s %s problems=%s\n" "POST reports/customer-data.php" "$code" "$bad"
   [ "$code" = 200 ] && [ "$bad" = 0 ] && grep -q ' OK' "$H.body" || FAILED=1
   IFS=, read -r G B1 O C M <<< "$CONSENTS"
@@ -129,22 +131,34 @@ for PROFILE in $PROFILES; do
   }
   expect reports/customer-data.php 'name="varsym" type="text" value="[0-9]' "the customer number"
   expect reports/invoices.php 'invoices.php?invoice=[0-9a-f-]\{36\}' "invoices"
+  case "$PROFILE" in
+    # ICU puts a no-break space between the amount and the currency
+    netair) expect menu.php 'Uživatelské údaje' "Czech"; expect reports/invoices.php '[0-9],[0-9][0-9].\{1,3\}Kč' "prices in CZK" ;;
+    multikomunikacije) expect menu.php 'Korisnički podaci' "Croatian"; expect reports/invoices.php '[0-9],[0-9][0-9].\{1,3\}€' "prices in EUR" ;;
+    default) expect menu.php 'Customer data' "English"; expect reports/invoices.php '€[0-9]' "prices in EUR" ;;
+  esac
   # the sign-in page, the one with the footer
   c "$B/index.php" | grep -q 'www.example.net">Test Operator, s.r.o.</a>' && echo "  index.php signed out                                               shows the operator in the footer" \
     || { echo "FAIL index.php signed out shows no operator in the footer"; FAILED=1; }
   if [ "$PROFILE" = default ]; then
     expect reports/customer-data.php 'Test Operator, s.r.o.' "the operator in the consents"
   else
-    expect menu.php 'branding.php?file=' "the profile's logo"
+    expect menu.php 'branding.php?file=logo' "the profile's logo"
+    expect index.php 'rel="icon" href="/branding.php?file=favicon-32.png" type="image/png" sizes="32x32"' "the favicon"
+    expect menu.php 'rel="apple-touch-icon"' "the home screen icon"
+    c "$B/index.php" | grep -q 'rel="icon"' && echo "  index.php signed out                                               shows the favicon" \
+      || { echo "FAIL index.php signed out shows no favicon"; FAILED=1; }
   fi
 
   echo "-- branding"
   [ "$(c -o /dev/null -w '%{http_code}' "$B/branding.php?file=../profile.php")" = 404 ] || { echo "FAIL a path outside assets/ is served"; FAILED=1; }
   [ "$(c -o /dev/null -w '%{http_code}' "$B/branding.php?file=profile.php")" = 404 ] || { echo "FAIL a PHP file is served"; FAILED=1; }
   if [ "$PROFILE" != default ]; then
-    code=$(c -o /dev/null -w '%{http_code} %{content_type}' "$B/branding.php?file=colors.css")
-    echo "  colors.css $code"
-    [ "${code%% *}" = 200 ] || FAILED=1
+    for f in colors.css favicon-32.png; do
+      code=$(c -o /dev/null -w '%{http_code} %{content_type}' "$B/branding.php?file=$f")
+      echo "  $f $code"
+      [ "${code%% *}" = 200 ] || FAILED=1
+    done
   fi
   [ "$(c -o /dev/null -w '%{http_code}' "$B/fonts/jost-latin.woff2")" = 200 ] || { echo "FAIL the font is not served"; FAILED=1; }
   c "$B/style/portal.css" | grep -q "googleapis" && { echo "FAIL the CSS still loads from Google"; FAILED=1; }

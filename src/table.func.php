@@ -4,18 +4,18 @@ function printInvoicesTable ($invoices)
 {
 	$total_sum = 0;
 	$total_debit = 0;
-	echo "<h1>" . INVOICES_LIST . "</h1>\n";
-	echo "<p>" . INVOICES_DOWNLOAD_TEXT . "</p>\n";
+	echo "<h1>" . __('Invoices') . "</h1>\n";
+	echo "<p>" . __('Click an invoice number to show the invoice') . "</p>\n";
 	echo "<table>\n";
 	echo "<tr class='title'>";
-	echo "<td>" . INVOICE_NUMBER . "</td>";
-	echo "<td>" . VARSYM . "</td>";
-	echo "<td>" . DATE . "</td>";
-	echo "<td>" . MATURITY . "</td>";
-	echo "<td>" . PAYMENT_DATE . "</td>";
-	echo "<td>" . TEXT . "</td>";
-	echo "<td>" . SUM . "</td>";
-	echo "<td>" . DEBIT . "</td>";
+	echo "<td>" . __('Invoice number') . "</td>";
+	echo "<td>" . __('Variable symbol') . "</td>";
+	echo "<td>" . __('Date') . "</td>";
+	echo "<td>" . __('Due date') . "</td>";
+	echo "<td>" . __('Paid') . "</td>";
+	echo "<td>" . __('Text') . "</td>";
+	echo "<td>" . __('Total') . "</td>";
+	echo "<td>" . __('Debt') . "</td>";
 	echo "</tr>\n";
         
 	foreach ($invoices as $invoice)

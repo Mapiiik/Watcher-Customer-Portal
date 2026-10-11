@@ -8,6 +8,7 @@
 	<meta name="robots" content="noindex, nofollow" />
 
 	<title><?php echo htmlspecialchars($pageTitle); ?></title>
+<?php echo profileIcons($profile['icons']); ?>
 	<link href="<?php echo PREFIX; ?>/style/portal.css" rel="stylesheet" type="text/css" />
 <?php if ($profile['colors'] !== null) { ?>
 	<link href="<?php echo brandingUrl($profile['colors']); ?>" rel="stylesheet" type="text/css" />

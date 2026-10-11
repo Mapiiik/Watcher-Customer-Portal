@@ -54,6 +54,7 @@ if($session->isLogged())
 	<meta name="robots" content="noindex, nofollow" />
 
 	<title><?php echo htmlspecialchars($pageTitle); ?></title>
+<?php echo profileIcons($profile['icons']); ?>
 	<link href="<?php echo PREFIX; ?>/style/portal.css" rel="stylesheet" type="text/css" />
 </head>
 <frameset cols="200,*">
@@ -68,7 +69,7 @@ if (isset($_SESSION['blockedURL']) && ($_SESSION['blockedURL'] <> '')) {
   <frame frameborder="0" framespacing="0" src="<?php echo PREFIX; ?>/introduction.php/<?php echo $year?>/<?php echo $month; ?>/" name="_right" scrolling="auto" />
 <?php } ?>
   <noframes>
-    <body><p>Na této stránce jsou použity rámce, prohlížeč je však nepodporuje.</p></body>
+    <body><p><?php echo __('This page uses frames, which your browser does not support.'); ?></p></body>
   </noframes>
 </frameset>
 <?php
@@ -83,15 +84,15 @@ else
             <h1><?php echo htmlspecialchars($profile['heading']); ?></h1>
             <form id="login_form" action="<?php echo $pageName; ?>" method="post" enctype="multipart/form-data">
             <table>
-              <tr class="title"><td><?php echo LOGIN; ?></td></tr>
+              <tr class="title"><td><?php echo __('Login'); ?></td></tr>
               <tr><td class="td_login">
               <table class="noborder">
                 <tr>
-                  <td><?php echo LOGIN; ?>:</td>
+                  <td><?php echo __('Login'); ?>:</td>
                   <td><input name="login" type="text" value="" /></td>
                 </tr>
                 <tr>
-                  <td><?php echo PASSWORD; ?>:</td>
+                  <td><?php echo __('Password'); ?>:</td>
                   <td><input name="password" type="password" value="" /></td>
                 </tr>
               </table>
