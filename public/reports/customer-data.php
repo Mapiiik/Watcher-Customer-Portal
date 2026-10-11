@@ -11,11 +11,7 @@ if (DEBUG) {
 // Session
 
 session_start();
-header("Pragma: no-cache");
-header("Content-type: text/html; charset=UTF-8");
-// iframe security
-header("Content-Security-Policy: frame-ancestors 'self'");
-header("X-Frame-Options: SAMEORIGIN");
+pageHeaders();
 
 $pageTitle = HTML_PAGE_NAME . ' - ' . __('Customer data');
 require SRC_DIR . '/includes/head.html.inc.php';
@@ -32,7 +28,7 @@ $sqllisting = false;
 <script type="text/javascript">
 function deleteClick()
 {
-  if ( !confirm('<?= __('Really remove?') ?>') ) {
+  if ( !confirm(<?= json_encode(__('Really remove?')) ?>) ) {
 	return false;
   }
   else
@@ -40,7 +36,7 @@ function deleteClick()
 }
 function confirmChange()
 {
-  if ( !confirm('<?= __('Confirm the change?') ?>') ) {
+  if ( !confirm(<?= json_encode(__('Confirm the change?')) ?>) ) {
 	return false;
   }
   else
@@ -50,7 +46,7 @@ function confirmSubmit()
 {
   var checkBox = document.getElementById("gdpr");
   
-  if ( !confirm('<?= __('Confirm sending') ?>') ) {
+  if ( !confirm(<?= json_encode(__('Confirm sending')) ?>) ) {
     return false;
   }
   else
@@ -64,7 +60,7 @@ function confirmSubmitHard()
   
   if (checkBox.checked == true)
   {
-    if ( !confirm('<?= __('Confirm sending') ?>') ) {
+    if ( !confirm(<?= json_encode(__('Confirm sending')) ?>) ) {
   	return false;
     }
     else
@@ -74,7 +70,7 @@ function confirmSubmitHard()
   }
   else
   {
-    alert('<?= __('Consent to the processing of personal data is required. Without it no contract can be concluded and no service provided.') ?>');
+    alert(<?= json_encode(__('Consent to the processing of personal data is required. Without it no contract can be concluded and no service provided.')) ?>);
     return false;
   }
 }
@@ -199,7 +195,7 @@ $customers[$customer['id']] = $customer;
 		else
 		{
 			// START Customer informations
-			echo "\n\n" . '<form action="' . "$pageName?edit=$edit_id" . '" method="post" enctype="multipart/form-data" name="update_data" lang="' . LANGUAGE . '">';
+			echo "\n\n" . '<form action="' . htmlspecialchars("$pageName?edit=$edit_id") . '" method="post" enctype="multipart/form-data" name="update_data" lang="' . LANGUAGE . '">';
                         require profilePart('consent');
                         ?>
 
@@ -230,7 +226,7 @@ $customers[$customer['id']] = $customer;
                     echo "\n  </tr>";
                     echo "\n  <tr>";
                     echo "\n   <td width='100'>" . __('Variable symbol') . ":</td>";
-                    echo "\n   <td>" . '<input name="varsym" type="text" value="' . $customers[$edit_id]['number'] . '" readonly="readonly">' . "</td>";
+                    echo "\n   <td>" . '<input name="varsym" type="text" value="' . htmlspecialchars((string)$customers[$edit_id]['number']) . '" readonly="readonly">' . "</td>";
                     echo "\n  </tr>";
 		}
                     else $customers[$edit_id]["invoice_delivery_type"] = 1;
@@ -286,14 +282,14 @@ $customers[$customer['id']] = $customer;
 
                         foreach ($emails as $email)
                         {
-                            echo '<input name="email[' . $email["id"] . '][email]" type="text" value="' . htmlspecialchars((string)$email["email"]) . '">';
-                            echo '<input name="email[' . $email["id"] . '][use_for_billing]" type="checkbox" title="' . __('Use for billing') . '" value="yes"';
+                            echo '<input name="email[' . htmlspecialchars((string)$email["id"]) . '][email]" type="text" value="' . htmlspecialchars((string)$email["email"]) . '">';
+                            echo '<input name="email[' . htmlspecialchars((string)$email["id"]) . '][use_for_billing]" type="checkbox" title="' . __('Use for billing') . '" value="yes"';
                             if ($email["use_for_billing"]) echo " checked";
                             echo '>B';
-                            echo '<input name="email[' . $email["id"] . '][use_for_outages]" type="checkbox" title="' . __('Use for outages') . '" value="yes"';
+                            echo '<input name="email[' . htmlspecialchars((string)$email["id"]) . '][use_for_outages]" type="checkbox" title="' . __('Use for outages') . '" value="yes"';
                             if ($email["use_for_outages"]) echo " checked";
                             echo '>O';
-                            echo '<input name="email[' . $email["id"] . '][use_for_commercial]" type="checkbox" title="' . __('Use for commercial messages') . '" value="yes"';
+                            echo '<input name="email[' . htmlspecialchars((string)$email["id"]) . '][use_for_commercial]" type="checkbox" title="' . __('Use for commercial messages') . '" value="yes"';
                             if ($email["use_for_commercial"]) echo " checked";
                             echo '>C';
                             echo "<br />";
@@ -308,7 +304,7 @@ $customers[$customer['id']] = $customer;
                         // add empty phone field
                         $phones['new']['id'] = 'new';
                         $phones['new']['phone'] = '';
-                        foreach ($phones as $phone) echo '<input name="phone[' . $phone["id"] . '][phone]" type="text" value="' . htmlspecialchars((string)$phone["phone"]) . '">' . "<br />";
+                        foreach ($phones as $phone) echo '<input name="phone[' . htmlspecialchars((string)$phone["id"]) . '][phone]" type="text" value="' . htmlspecialchars((string)$phone["phone"]) . '">' . "<br />";
                         echo "</td>";
                         echo "\n  </tr>";
                         // www
@@ -388,14 +384,14 @@ $customers[$customer['id']] = $customer;
                 // ADDRESS
                 if (isset($address['type']))
                 {
-                    echo "\n\n " . '<input name="address[' . $address["id"] . '][active]" type="checkbox" checked value="yes" onClick="return deleteClick()">';
+                    echo "\n\n " . '<input name="address[' . htmlspecialchars((string)$address["id"]) . '][active]" type="checkbox" checked value="yes" onClick="return deleteClick()">';
                     echo "<strong>" . $address_types[$address['type']] . "...</strong>";
-                    echo " (<a rel='external' href='http://maps.google.com/maps?q=" . htmlspecialchars((string)$address["street"] . " " . $address["number"] . ", " . $address["city"] . ", " . $countries[$address["country_id"]]) . "'" . ' title="' . __('Show on map') . '">' . __('Show on map') . "</a>)";
+                    echo " (<a rel='external' href='https://www.google.com/maps/search/?api=1&amp;query=" . rawurlencode((string)$address["street"] . " " . $address["number"] . ", " . $address["city"] . ", " . ($countries[$address["country_id"]] ?? '')) . "'" . ' title="' . __('Show on map') . '">' . __('Show on map') . "</a>)";
                 }
                 else
                 {
-                    echo "\n\n " . '<input name="address[' . $address["id"] . '][active]" type="checkbox" value="yes">';
-                    echo '<select name="address[' . $address["id"] . '][type]">';
+                    echo "\n\n " . '<input name="address[' . htmlspecialchars((string)$address["id"]) . '][active]" type="checkbox" value="yes">';
+                    echo '<select name="address[' . htmlspecialchars((string)$address["id"]) . '][type]">';
                     foreach($address_types as $addressTypeId => $addressType)
                     {
                             echo "<option value=\"$addressTypeId\">$addressType</option>";
@@ -406,47 +402,47 @@ $customers[$customer['id']] = $customer;
                 // company
                 echo "\n  <tr>";
                 echo "\n   <td>" . __('Company') . ":</td>";
-                echo "\n   <td>" . '<input name="address[' . $address["id"] . '][company]" type="text" value="' . htmlspecialchars((string)$address["company"]) . '">' . "</td>";
+                echo "\n   <td>" . '<input name="address[' . htmlspecialchars((string)$address["id"]) . '][company]" type="text" value="' . htmlspecialchars((string)$address["company"]) . '">' . "</td>";
                 // street
                 echo "\n   <td width='100'>" . __('Street') . ":</td>";
-                echo "\n   <td>" . '<input name="address[' . $address["id"] . '][street]" type="text" value="' . htmlspecialchars((string)$address["street"]) . '">' . "</td>";
+                echo "\n   <td>" . '<input name="address[' . htmlspecialchars((string)$address["id"]) . '][street]" type="text" value="' . htmlspecialchars((string)$address["street"]) . '">' . "</td>";
                 echo "\n  </tr>";
                 // title
                 echo "\n  <tr>";
                 echo "\n   <td>" . __('Title') . ":</td>";
-                echo "\n   <td>" . '<input name="address[' . $address["id"] . '][title]" type="text" value="' . htmlspecialchars((string)$address["title"]) . '" maxlength="16">' . "</td>";
+                echo "\n   <td>" . '<input name="address[' . htmlspecialchars((string)$address["id"]) . '][title]" type="text" value="' . htmlspecialchars((string)$address["title"]) . '" maxlength="16">' . "</td>";
                 // number
                 echo "\n   <td>" . __('House number') . ":</td>";
-                echo "\n   <td>" . '<input name="address[' . $address["id"] . '][number]" type="text" value="' . htmlspecialchars((string)$address["number"]) . '" maxlength="16">' . "</td>";
+                echo "\n   <td>" . '<input name="address[' . htmlspecialchars((string)$address["id"]) . '][number]" type="text" value="' . htmlspecialchars((string)$address["number"]) . '" maxlength="16">' . "</td>";
                 echo "\n  </tr>";
                 // last name
                 echo "\n  <tr>";
                 echo "\n   <td>" . __('Last name') . ":</td>";
-                echo "\n   <td>" . '<input name="address[' . $address["id"] . '][last_name]" type="text" value="' . htmlspecialchars((string)$address["last_name"]) . '">' . "</td>";
+                echo "\n   <td>" . '<input name="address[' . htmlspecialchars((string)$address["id"]) . '][last_name]" type="text" value="' . htmlspecialchars((string)$address["last_name"]) . '">' . "</td>";
                 // city
                 echo "\n   <td>" . __('City') . ":</td>";
-                echo "\n   <td>" . '<input name="address[' . $address["id"] . '][city]" type="text" value="' . htmlspecialchars((string)$address["city"]) . '">' . "</td>";
+                echo "\n   <td>" . '<input name="address[' . htmlspecialchars((string)$address["id"]) . '][city]" type="text" value="' . htmlspecialchars((string)$address["city"]) . '">' . "</td>";
                 echo "\n  </tr>";
                 // first name
                 echo "\n  <tr>";
                 echo "\n   <td>" . __('First name') . ":</td>";
-                echo "\n   <td>" . '<input name="address[' . $address["id"] . '][first_name]" type="text" value="' . htmlspecialchars((string)$address["first_name"]) . '">' . "</td>";
+                echo "\n   <td>" . '<input name="address[' . htmlspecialchars((string)$address["id"]) . '][first_name]" type="text" value="' . htmlspecialchars((string)$address["first_name"]) . '">' . "</td>";
                 // zip
                 echo "\n   <td>" . __('Postcode') . ":</td>";
-                echo "\n   <td>" . '<input name="address[' . $address["id"] . '][zip]" type="text" value="' . htmlspecialchars((string)$address["zip"]) . '" maxlength="5">' . "</td>";
+                echo "\n   <td>" . '<input name="address[' . htmlspecialchars((string)$address["id"]) . '][zip]" type="text" value="' . htmlspecialchars((string)$address["zip"]) . '" maxlength="5">' . "</td>";
                 echo "\n  </tr>";
                 // suffix
                 echo "\n  <tr>";
                 echo "\n   <td>" . __('Suffix') . ":</td>";
-                echo "\n   <td>" . '<input name="address[' . $address["id"] . '][suffix]" type="text" value="' . htmlspecialchars((string)$address["suffix"]) . '">' . "</td>";
+                echo "\n   <td>" . '<input name="address[' . htmlspecialchars((string)$address["id"]) . '][suffix]" type="text" value="' . htmlspecialchars((string)$address["suffix"]) . '">' . "</td>";
                 // country
                 echo "\n   <td>" . __('Country') . ":</td>";
-                echo "\n   <td>" . '<select name="address[' . $address["id"] . '][country_id]">';
+                echo "\n   <td>" . '<select name="address[' . htmlspecialchars((string)$address["id"]) . '][country_id]">';
                 foreach($countries as $country_id => $country_name)
                 {
-                        echo "\n    <option value=\"$country_id\"";
+                        echo "\n    <option value=\"" . htmlspecialchars((string)$country_id) . "\"";
                         if($country_id == $address["country_id"]) echo ' selected="selected"';
-                        echo ">$country_name</option>";
+                        echo ">" . htmlspecialchars((string)$country_name) . "</option>";
                 }
                 echo "\n   </select></td>";
                 echo "\n  </tr>";

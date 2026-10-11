@@ -6,7 +6,7 @@ function printInvoicesTable ($invoices)
 	$total_debit = 0;
 	echo "<h1>" . __('Invoices') . "</h1>\n";
 	echo "<p>" . __('Click an invoice number to show the invoice') . "</p>\n";
-	echo "<table>\n";
+	echo "<table class='pointed'>\n";
 	echo "<tr class='title'>";
 	echo "<td>" . __('Invoice number') . "</td>";
 	echo "<td>" . __('Variable symbol') . "</td>";
@@ -20,9 +20,9 @@ function printInvoicesTable ($invoices)
         
 	foreach ($invoices as $invoice)
 	{
-            echo "<tr onMouseOver='this.style.backgroundColor=\"" . COLOR_POINTED . "\";' onMouseOut='this.style.backgroundColor = \"\";'>";
+            echo "<tr>";
 		echo '<td>' . '<a href="../reports/invoices.php?invoice=' . rawurlencode($invoice['id']) . '">' . htmlspecialchars((string)$invoice['number']) . '</a></td>';
-		echo '<td>' . $invoice['variable_symbol'] . '</td>';
+		echo '<td>' . htmlspecialchars((string)$invoice['variable_symbol']) . '</td>';
 		echo '<td>' . formatDate($invoice['creation_date']) . '</td>';
 		echo '<td>' . formatDate($invoice['due_date']) . '</td>';
 		echo '<td>' . formatDate($invoice['payment_date']) . '</td>';

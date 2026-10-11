@@ -70,6 +70,7 @@ class Session
 			$this->rights = $answer['login']['rights'];
 			$this->ip = $_SERVER['REMOTE_ADDR'];
 			$this->token = $answer['token'];
+			$_SESSION['seen'] = time();
 		}
 		else if ($answer['status'] === 'locked')
 		{
@@ -90,6 +91,12 @@ class Session
 	function isLogged()
 	{
 		$ret = FALSE;
+		// signed out after a while without a request
+		if ($this->login_id && isset($_SESSION['seen']) && time() - $_SESSION['seen'] > SESSION_IDLE_MINUTES * 60)
+		{
+			$this->logout();
+			return FALSE;
+		}
 		if ($this->login_id && $this->token)
 		{
 			if ($this->access === A_GRANTED)
@@ -108,6 +115,7 @@ class Session
                                 }
 			}
 		}
+		if ($ret) $_SESSION['seen'] = time();
 		return $ret;
 	}
 
@@ -150,7 +158,8 @@ class Session
 	{
 		if (! $this->isLogged())
 		{
-			$_SESSION['blockedURL'] = $_SERVER['REQUEST_URI'];
+			// where to come back after signing in: a page of the portal, never another site
+			if (preg_match('#^/(?![/\\\\])#', $_SERVER['REQUEST_URI'])) $_SESSION['blockedURL'] = $_SERVER['REQUEST_URI'];
 			?>
 			<body class="center">
 			<table class="center">

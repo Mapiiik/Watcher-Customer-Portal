@@ -43,11 +43,6 @@ class Crm
 		return $this->status == 200 ? $body : false;
 	}
 
-	function identify($ip)
-	{
-		return $this->json('GET', '/identify?' . http_build_query(array('ip' => $ip)));
-	}
-
 	// whether the last answer said the customer is no longer signed in
 	function signedOut()
 	{

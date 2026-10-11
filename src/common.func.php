@@ -25,6 +25,13 @@ function formatName ($customer, $with_company = true)
 	return $name;
 }
 
+// The headers of a page: HTML with the customer's data, which no cache keeps
+function pageHeaders ()
+{
+	header('Content-Type: text/html; charset=UTF-8');
+	header('Cache-Control: no-store');
+}
+
 // A date as the locale writes it, or what was given when it is no date
 function formatDate ($date)
 {

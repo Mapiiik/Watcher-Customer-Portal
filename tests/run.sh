@@ -91,17 +91,17 @@ for PROFILE in $PROFILES; do
   H="$TMP/http"
   c() { curl -sk "$@"; }
   c -D "$H" -o /dev/null "$B/index.php?sid=attackerchosen123"
-  C1=$(grep -i "^set-cookie: PHPSESSID" "$H" | head -1 | sed -E 's/.*PHPSESSID=([^;]+).*/\1/')
-  grep -qi "^set-cookie: PHPSESSID=.*secure; HttpOnly; SameSite=Lax" "$H" || { echo "FAIL cookie flags"; FAILED=1; }
+  C1=$(grep -i "^set-cookie: __Host-portal" "$H" | head -1 | sed -E 's/.*__Host-portal=([^;]+).*/\1/')
+  grep -qi "^set-cookie: __Host-portal=.*path=/; secure; HttpOnly; SameSite=Lax" "$H" || { echo "FAIL cookie flags"; FAILED=1; }
   [ "$C1" != attackerchosen123 ] || { echo "FAIL session id from the address accepted"; FAILED=1; }
-  c -D "$H" -o /dev/null -H "Cookie: PHPSESSID=$C1" --data-urlencode login_me=yes \
+  c -D "$H" -o /dev/null -H "Cookie: __Host-portal=$C1" --data-urlencode login_me=yes \
     --data-urlencode login=zz-portal-test --data-urlencode password=Test-Password-2026 "$B/index.php"
-  C2=$(grep -i "^set-cookie: PHPSESSID" "$H" | tail -1 | sed -E 's/.*PHPSESSID=([^;]+).*/\1/')
+  C2=$(grep -i "^set-cookie: __Host-portal" "$H" | tail -1 | sed -E 's/.*__Host-portal=([^;]+).*/\1/')
   [ -n "$C2" ] && [ "$C2" != "$C1" ] || { echo "FAIL no new session id after signing in"; FAILED=1; }
 
   for p in index.php menu.php introduction.php/2026/10/ reports/invoices.php reports/customer-data.php \
            administration/password.php "reports/invoices.php?invoice=00000000-0000-0000-0000-000000000000"; do
-    code=$(c -o "$H.body" -w '%{http_code}' -H "Cookie: PHPSESSID=$C2" "$B/$p")
+    code=$(c -o "$H.body" -w '%{http_code}' -H "Cookie: __Host-portal=$C2" "$B/$p")
     # the system error is what the portal says when the CRM did not answer
     bad=$(sed -e 's/<[^>]*>//g' "$H.body" | grep -c -i -E "warning|fatal|deprecated|notice|uncaught|System error|Chyba systému|Greška sustava")
     printf "  %-66s %s problems=%s bytes=%s\n" "$p" "$code" "$bad" "$(wc -c < "$H.body")"
@@ -109,12 +109,40 @@ for PROFILE in $PROFILES; do
     [ "$code" = 200 ] && [ "$bad" = 0 ] || FAILED=1
   done
 
+  # every page: kept by no cache, framed by nobody else, nothing loaded from elsewhere
+  c -D "$H" -o /dev/null -H "Cookie: __Host-portal=$C2" "$B/reports/invoices.php"
+  for header in "cache-control: no-store" "content-security-policy: default-src 'self'.*frame-ancestors 'self'" \
+                "strict-transport-security: max-age=" "x-content-type-options: nosniff" "referrer-policy: same-origin"; do
+    grep -qi "^$header" "$H" && printf "  %-66s %s\n" "reports/invoices.php" "${header%%:*}" \
+      || { echo "FAIL reports/invoices.php has no $header"; FAILED=1; }
+  done
+  grep -qi "^server:" "$H" && { echo "FAIL the server names itself"; FAILED=1; }
+  # an invoice of the customer, if the development CRM has its PDF
+  INVOICE=$(c -H "Cookie: __Host-portal=$C2" "$B/reports/invoices.php" | grep -o 'invoices.php?invoice=[0-9a-f-]\{36\}' | head -1)
+  code=$(c -D "$H" -o "$H.body" -w '%{http_code}' -H "Cookie: __Host-portal=$C2" "$B/reports/$INVOICE")
+  if head -c 4 "$H.body" | grep -q '%PDF'; then
+    grep -qi '^content-type: application/pdf' "$H" && grep -qi '^cache-control: private, no-store' "$H" \
+      && grep -qi '^content-disposition: attachment' "$H" \
+      && echo "  invoice PDF                                                        pdf, private, no-store, attachment" \
+      || { echo "FAIL the invoice PDF headers"; grep -i '^content-\|^cache' "$H"; FAILED=1; }
+  else
+    echo "  invoice PDF                                                        not in the development CRM ($code), headers not checked"
+  fi
+  # a form sent from another site is refused, one from the portal's own page is taken
+  for h in "Origin: https://attacker.example" "Sec-Fetch-Site: cross-site" "Sec-Fetch-Site: same-site" "Origin: null"; do
+    code=$(c -o /dev/null -w '%{http_code}' -H "Cookie: __Host-portal=$C2" -H "$h" --data-urlencode set_password=yes "$B/administration/password.php")
+    [ "$code" = 403 ] && printf "  %-66s %s\n" "POST with $h" "403" || { echo "FAIL POST with $h answered $code"; FAILED=1; }
+  done
+  code=$(c -o /dev/null -w '%{http_code}' -H "Cookie: __Host-portal=$C2" -H "Origin: $B" -H "Sec-Fetch-Site: same-origin" "$B/administration/password.php" --data-urlencode set_password=no)
+  [ "$code" = 200 ] && printf "  %-66s %s\n" "POST from the portal itself" "200" \
+    || { echo "FAIL POST from the portal itself answered $code"; FAILED=1; }
+
   # sending the customer data form saves the consents and compares what was typed with what the CRM
   # holds; both are put back as they were afterwards
   CUSTOMER="(SELECT customer_id FROM logins WHERE login = 'zz-portal-test')"
   CONSENTS=$(psql -d "$DEV_DB" -Atc "SELECT concat_ws(',', agree_gdpr, agree_mailing_billing, agree_mailing_outages, agree_mailing_commercial, modified_by) FROM customers WHERE id = $CUSTOMER")
   LABELLED=$(psql -d "$DEV_DB" -Atc "SELECT count(*) FROM customer_labels JOIN labels ON (labels.id = label_id) WHERE customer_id = $CUSTOMER AND labels.name = 'GDPR'")
-  code=$(c -o "$H.body" -w '%{http_code}' -H "Cookie: PHPSESSID=$C2" --data-urlencode agree_gdpr=yes \
+  code=$(c -o "$H.body" -w '%{http_code}' -H "Cookie: __Host-portal=$C2" --data-urlencode agree_gdpr=yes \
     --data-urlencode agree_mailing_billing=yes --data-urlencode company=Changed --data-urlencode 'email[new][email]=' \
     --data-urlencode 'phone[new][phone]=' --data-urlencode 'address[new][street]=Somewhere' "$B/reports/customer-data.php")
   bad=$(sed -e 's/<[^>]*>//g' "$H.body" | grep -c -i -E "warning|fatal|deprecated|notice|uncaught|System error|Chyba systému|Greška sustava")
@@ -126,7 +154,7 @@ for PROFILE in $PROFILES; do
 
   # and they show what the CRM answered, not just no error
   expect() {
-    c -H "Cookie: PHPSESSID=$C2" "$B/$1" | grep -q "$2" && printf "  %-66s shows %s\n" "$1" "$3" \
+    c -H "Cookie: __Host-portal=$C2" "$B/$1" | grep -q "$2" && printf "  %-66s shows %s\n" "$1" "$3" \
       || { printf "FAIL %-61s shows no %s\n" "$1" "$3"; FAILED=1; }
   }
   expect reports/customer-data.php 'name="varsym" type="text" value="[0-9]' "the customer number"

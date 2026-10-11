@@ -4,11 +4,7 @@ require dirname(__DIR__) . '/src/bootstrap.php';
 
 
 session_start();
-header("Pragma: no-cache");
-header("Content-type: text/html; charset=UTF-8");
-// iframe security
-header("Content-Security-Policy: frame-ancestors 'self'");
-header("X-Frame-Options: SAMEORIGIN");
+pageHeaders();
 
 // Variables
 $pageTitle = HTML_PAGE_NAME;
@@ -60,7 +56,7 @@ if($session->isLogged())
 <frameset cols="200,*">
   <frame frameborder="0" framespacing="0" src="<?= PREFIX ?>/menu.php" name="_menu" scrolling="no" />
 <?php
-if (isset($_SESSION['blockedURL']) && ($_SESSION['blockedURL'] <> '')) {
+if (isset($_SESSION['blockedURL']) && preg_match('#^/(?![/\\\\])#', $_SESSION['blockedURL'])) {
 ?>
   <frame frameborder="0" framespacing="0" src="<?= htmlspecialchars($_SESSION['blockedURL']) ?>" name="_right" scrolling="auto" />
 <?php
@@ -82,7 +78,7 @@ else
 	<p><?= profileImage($profile['logo']) ?></p>
         <div class="center">
             <h1><?= htmlspecialchars($profile['heading']) ?></h1>
-            <form id="login_form" action="<?= $pageName ?>" method="post" enctype="multipart/form-data">
+            <form id="login_form" action="<?= htmlspecialchars($pageName) ?>" method="post" enctype="multipart/form-data">
             <table>
               <tr class="title"><td><?= __('Login') ?></td></tr>
               <tr><td class="td_login">

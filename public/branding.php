@@ -27,4 +27,5 @@ header('Content-Type: ' . $type);
 header('Content-Length: ' . filesize($path));
 header('Cache-Control: public, max-age=3600');
 header('X-Content-Type-Options: nosniff');
+header("Content-Security-Policy: default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; sandbox");
 readfile($path);

@@ -30,6 +30,17 @@
 	root {$SERVER_ROOT:public/}
 	encode zstd br gzip
 
+	# The portal loads nothing from elsewhere and is framed only by itself; a page may set its own
+	header {
+		?Strict-Transport-Security "max-age=31536000"
+		?Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'self'"
+		?X-Frame-Options "SAMEORIGIN"
+		?X-Content-Type-Options "nosniff"
+		?Referrer-Policy "same-origin"
+		?Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+		-Server
+	}
+
 	{$CADDY_SERVER_EXTRA_DIRECTIVES}
 
 	php_server

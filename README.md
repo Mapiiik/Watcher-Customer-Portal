@@ -68,7 +68,9 @@ Behind HAProxy (TLS passed through by SNI, `send-proxy-v2`), set `LISTENER_MODE=
 `PROXY_ALLOW` to the proxy's network. The CRM counts failed sign-ins by the customer's address,
 so the portal has to see the real one.
 
-Sessions are kept in the `sessions` volume, so an update of the container signs nobody out.
+Sessions are kept in the `sessions` volume, so an update of the container signs nobody out. A
+customer is signed out after `SESSION_IDLE_MINUTES` (30) without a request, and when the CRM's
+token for them expires.
 
 ## Development
 

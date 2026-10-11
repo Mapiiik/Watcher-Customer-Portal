@@ -81,6 +81,11 @@ if ($labelled == 0)
     pg_query_params($admin, "DELETE FROM customer_labels WHERE customer_id = $1 AND note = 'form' AND label_id IN (SELECT id FROM labels WHERE name = 'GDPR')", array($s->customer_id));
 }
 
+// a while without a request signs the customer out
+check('signed in before the idle time', $s->isLogged());
+$_SESSION['seen'] = time() - SESSION_IDLE_MINUTES * 60 - 1;
+check('signed out after the idle time', !$s->isLogged() && $s->token === false);
+
 // mail without a server fails rather than breaks the page
 check('sendMessage without a server returns false', @sendMessage('test', 'nobody@example.invalid', 'Test – portal') === false);
 

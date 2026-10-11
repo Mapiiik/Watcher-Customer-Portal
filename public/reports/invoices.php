@@ -10,16 +10,7 @@ if (DEBUG) {
 
 session_start();
 
-if (!isset($_GET['invoice']))
-{
-    header("Content-type: text/html; charset=UTF-8");
-    header("Pragma: no-cache");
-    // iframe security
-    header("Content-Security-Policy: frame-ancestors 'self'");
-    header("X-Frame-Options: SAMEORIGIN");
-} else {
-    header('Pragma: public');
-}
+if (!isset($_GET['invoice'])) pageHeaders();
 
 $pageTitle = HTML_PAGE_NAME . ' - ' . __('Invoices');
 if (!isset($_GET['invoice'])) require SRC_DIR . '/includes/head.html.inc.php';
@@ -52,11 +43,9 @@ if (isset($_GET['invoice']))
     {
         if ($file = $crm->invoicePdf($session->token, $invoice['id']))
         {
-            if(isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'],'MSIE'))
-                    header('Content-Type: application/force-download');
-            else
-                    header('Content-Type: application/octet-stream');
-
+            // the customer's own document, which no cache keeps
+            header('Content-Type: application/pdf');
+            header('Cache-Control: private, no-store');
             $filename = strtr($profile['invoice_file'], ['{number}' => $invoice['number'], '{variable_symbol}' => $invoice['variable_symbol']]);
             header('Content-Disposition: attachment; filename="' . str_replace(['"', '/', '\\'], '-', $filename) . '"');
             echo($file);

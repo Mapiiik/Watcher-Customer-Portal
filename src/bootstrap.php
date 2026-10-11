@@ -107,14 +107,27 @@ $address_types = [
     3 => __('Permanent address'),
 ];
 
-// the row under the pointer
-define('COLOR_POINTED', '#F0F0C1');
-
-// session cookies only over HTTPS, out of reach of scripts, and only with identifiers the server issued itself
+// session cookies only over HTTPS, out of reach of scripts, and only with identifiers the server issued
+// itself; the __Host- prefix keeps other sites of the domain from setting one
+define('SESSION_IDLE_MINUTES', max(1, (int)portalSetting('SESSION_IDLE_MINUTES', '30')));
+session_name('__Host-portal');
 ini_set('session.use_strict_mode', '1');
 ini_set('session.cookie_secure', '1');
 ini_set('session.cookie_httponly', '1');
 ini_set('session.cookie_samesite', 'Lax');
+ini_set('session.cookie_path', '/');
+ini_set('session.gc_maxlifetime', (string)(SESSION_IDLE_MINUTES * 60));
+
+// a form is taken only from the portal's own pages, as the browser says where a request comes from
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+    $site = $_SERVER['HTTP_SEC_FETCH_SITE'] ?? '';
+    $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+    if (!in_array($site, ['', 'same-origin', 'none'], true) || ($origin !== '' && $origin !== 'https://' . ($_SERVER['HTTP_HOST'] ?? ''))) {
+        http_response_code(403);
+        exit;
+    }
+    unset($site, $origin);
+}
 // kept in a volume of their own, so that an update of the container signs nobody out
 if (is_dir(ROOT_DIR . '/sessions') && is_writable(ROOT_DIR . '/sessions')) {
     session_save_path(ROOT_DIR . '/sessions');

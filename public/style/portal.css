@@ -206,6 +206,9 @@ th {
   width: 20px;
   text-align: center;
 }
+.pointed tr:not(.title):hover {
+  background-color: #F0F0C1;
+}
 .fred {
   color: #ff0000;
 }

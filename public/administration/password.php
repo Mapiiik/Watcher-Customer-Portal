@@ -11,11 +11,7 @@ if (DEBUG) {
 // Session
 
 session_start();
-header("Pragma: no-cache");
-header("Content-type: text/html; charset=UTF-8");
-// iframe security
-header("Content-Security-Policy: frame-ancestors 'self'");
-header("X-Frame-Options: SAMEORIGIN");
+pageHeaders();
 
 $pageTitle = HTML_PAGE_NAME . ' - ' . __('Change password');
 require SRC_DIR . '/includes/head.html.inc.php';
