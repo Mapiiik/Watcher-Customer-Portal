@@ -1,0 +1,8 @@
+.git
+.github
+.env
+compose*.yaml
+data
+profile
+tests
+vendor

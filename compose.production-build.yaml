@@ -1,0 +1,44 @@
+services:
+  customer-portal:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.production
+      args:
+        - buildno
+        - gitcommithash
+    image: watcher-customer-portal:local
+    restart: unless-stopped
+    environment:
+      SERVER_NAME: ${SERVER_NAME:-localhost}
+      LISTENER_MODE: ${LISTENER_MODE:-direct}
+      PROXY_ALLOW: ${PROXY_ALLOW:-127.0.0.1/32 ::1/128}
+      OPERATOR_NAME: ${OPERATOR_NAME:?set OPERATOR_NAME}
+      OPERATOR_WEBSITE: ${OPERATOR_WEBSITE:-}
+      PRIVACY_POLICY_URL: ${PRIVACY_POLICY_URL:-}
+      TIMEZONE: ${TIMEZONE:-}
+      CRM_API_URL: ${CRM_API_URL:?set CRM_API_URL}
+      CRM_API_KEY: ${CRM_API_KEY:?set CRM_API_KEY}
+      CRM_API_VERIFY_TLS: ${CRM_API_VERIFY_TLS:-true}
+      SMTP_HOST: ${SMTP_HOST:?set SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURE: ${SMTP_SECURE:-tls}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      MAIL_FROM: ${MAIL_FROM:?set MAIL_FROM}
+      MAIL_FROM_NAME: ${MAIL_FROM_NAME:-}
+      CHANGE_REQUESTS_TO: ${CHANGE_REQUESTS_TO:?set CHANGE_REQUESTS_TO}
+    volumes:
+      # the operator's profile; without it the portal uses profiles/default
+      - ${DATA_DIR:-./data}/profile:/app/profile:ro
+      - sessions:/app/sessions
+      - caddy_data:/data
+      - caddy_config:/config
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+
+volumes:
+  sessions:
+  caddy_data:
+  caddy_config:

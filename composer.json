@@ -1,0 +1,18 @@
+{
+    "name": "mapiiik/watcher-customer-portal",
+    "description": "Customer portal for an ISP: customer data and consents, invoices and password, all from Watcher CRM over its API.",
+    "type": "project",
+    "license": "AGPL-3.0-or-later",
+    "require": {
+        "php": ">=8.4",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "phpmailer/phpmailer": "^7.1"
+    },
+    "config": {
+        "platform": {
+            "php": "8.4.0"
+        },
+        "sort-packages": true
+    }
+}

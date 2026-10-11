@@ -1,0 +1,6 @@
+/vendor/
+/data/*
+/profile/
+.env
+compose.yaml
+tests/.tmp/
