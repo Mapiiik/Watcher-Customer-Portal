@@ -32,7 +32,7 @@ $sqllisting = false;
 <script type="text/javascript">
 function deleteClick()
 {
-  if ( !confirm('<?php echo __('Really remove?'); ?>') ) {
+  if ( !confirm('<?= __('Really remove?') ?>') ) {
 	return false;
   }
   else
@@ -40,7 +40,7 @@ function deleteClick()
 }
 function confirmChange()
 {
-  if ( !confirm('<?php echo __('Confirm the change?'); ?>') ) {
+  if ( !confirm('<?= __('Confirm the change?') ?>') ) {
 	return false;
   }
   else
@@ -50,7 +50,7 @@ function confirmSubmit()
 {
   var checkBox = document.getElementById("gdpr");
   
-  if ( !confirm('<?php echo __('Confirm sending'); ?>') ) {
+  if ( !confirm('<?= __('Confirm sending') ?>') ) {
     return false;
   }
   else
@@ -64,7 +64,7 @@ function confirmSubmitHard()
   
   if (checkBox.checked == true)
   {
-    if ( !confirm('<?php echo __('Confirm sending'); ?>') ) {
+    if ( !confirm('<?= __('Confirm sending') ?>') ) {
   	return false;
     }
     else
@@ -74,7 +74,7 @@ function confirmSubmitHard()
   }
   else
   {
-    alert('<?php echo __('Consent to the processing of personal data is required. Without it no contract can be concluded and no service provided.'); ?>');
+    alert('<?= __('Consent to the processing of personal data is required. Without it no contract can be concluded and no service provided.') ?>');
     return false;
   }
 }
@@ -203,12 +203,12 @@ $customers[$customer['id']] = $customer;
                         require profilePart('consent');
                         ?>
 
-                        <?php /* <p><input id="gdpr" name="agree_gdpr" type="checkbox" <?php if ($customers[$edit_id]["agree_gdpr"]) echo ' checked="checked"'; ?> value="yes"><strong><?php echo CONFIRM_GDPR . '</strong><br /> (' . PLEASE_CONFIRM_GDPR . ')'; ?></p> */ ?>
+                        <?php /* <p><input id="gdpr" name="agree_gdpr" type="checkbox" <?php if ($customers[$edit_id]["agree_gdpr"]) echo ' checked="checked"'; ?> value="yes"><strong><?= CONFIRM_GDPR . '</strong><br /> (' . PLEASE_CONFIRM_GDPR . ')' ?></p> */ ?>
                         <input id="gdpr" name="agree_gdpr" type="hidden" value="yes">
 
-                        <p><input name="agree_mailing_billing" type="checkbox" <?php if ($customers[$edit_id]["agree_mailing_billing"]) echo ' checked="checked"'; ?> value="yes"><strong><?php echo __('I want to receive correspondence about the monthly billing'); ?></strong></p>
-                        <p><input name="agree_mailing_outages" type="checkbox" <?php if ($customers[$edit_id]["agree_mailing_outages"]) echo ' checked="checked"'; ?> value="yes"><strong><?php echo __('I want to receive information about outages and faults'); ?></strong></p>
-                        <p><input name="agree_mailing_commercial" type="checkbox" <?php if ($customers[$edit_id]["agree_mailing_commercial"]) echo ' checked="checked"'; ?> value="yes"><strong><?php echo __('I agree to receive commercial communications'); ?></strong></p>
+                        <p><input name="agree_mailing_billing" type="checkbox" <?php if ($customers[$edit_id]["agree_mailing_billing"]) echo ' checked="checked"'; ?> value="yes"><strong><?= __('I want to receive correspondence about the monthly billing') ?></strong></p>
+                        <p><input name="agree_mailing_outages" type="checkbox" <?php if ($customers[$edit_id]["agree_mailing_outages"]) echo ' checked="checked"'; ?> value="yes"><strong><?= __('I want to receive information about outages and faults') ?></strong></p>
+                        <p><input name="agree_mailing_commercial" type="checkbox" <?php if ($customers[$edit_id]["agree_mailing_commercial"]) echo ' checked="checked"'; ?> value="yes"><strong><?= __('I agree to receive commercial communications') ?></strong></p>
     
                         <?php
                         echo "<br />";

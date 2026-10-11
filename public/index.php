@@ -46,30 +46,30 @@ if($session->isLogged())
 ?>
 <!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo LANGUAGE; ?>" lang="<?php echo LANGUAGE; ?>">
+     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?= LANGUAGE ?>" lang="<?= LANGUAGE ?>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="author" content="Martin Patočka [www.mapik.net]" />
-	<meta name="description" content="<?php echo htmlspecialchars(HTML_PAGE_NAME); ?>" />
+	<meta name="description" content="<?= htmlspecialchars(HTML_PAGE_NAME) ?>" />
 	<meta name="robots" content="noindex, nofollow" />
 
-	<title><?php echo htmlspecialchars($pageTitle); ?></title>
-<?php echo profileIcons($profile['icons']); ?>
-	<link href="<?php echo PREFIX; ?>/style/portal.css" rel="stylesheet" type="text/css" />
+	<title><?= htmlspecialchars($pageTitle) ?></title>
+<?= profileIcons($profile['icons']) ?>
+	<link href="<?= PREFIX ?>/style/portal.css" rel="stylesheet" type="text/css" />
 </head>
 <frameset cols="200,*">
-  <frame frameborder="0" framespacing="0" src="<?php echo PREFIX; ?>/menu.php" name="_menu" scrolling="no" />
+  <frame frameborder="0" framespacing="0" src="<?= PREFIX ?>/menu.php" name="_menu" scrolling="no" />
 <?php
 if (isset($_SESSION['blockedURL']) && ($_SESSION['blockedURL'] <> '')) {
 ?>
-  <frame frameborder="0" framespacing="0" src="<?php echo htmlspecialchars($_SESSION['blockedURL']); ?>" name="_right" scrolling="auto" />
+  <frame frameborder="0" framespacing="0" src="<?= htmlspecialchars($_SESSION['blockedURL']) ?>" name="_right" scrolling="auto" />
 <?php
     unset($_SESSION['blockedURL']);
 } else { ?>
-  <frame frameborder="0" framespacing="0" src="<?php echo PREFIX; ?>/introduction.php/<?php echo $year?>/<?php echo $month; ?>/" name="_right" scrolling="auto" />
+  <frame frameborder="0" framespacing="0" src="<?= PREFIX ?>/introduction.php/<?= $year ?>/<?= $month ?>/" name="_right" scrolling="auto" />
 <?php } ?>
   <noframes>
-    <body><p><?php echo __('This page uses frames, which your browser does not support.'); ?></p></body>
+    <body><p><?= __('This page uses frames, which your browser does not support.') ?></p></body>
   </noframes>
 </frameset>
 <?php
@@ -79,20 +79,20 @@ else
   require SRC_DIR . '/includes/head.html.inc.php';
 	?>
 	<body>
-	<p><?php echo profileImage($profile['logo']); ?></p>
+	<p><?= profileImage($profile['logo']) ?></p>
         <div class="center">
-            <h1><?php echo htmlspecialchars($profile['heading']); ?></h1>
-            <form id="login_form" action="<?php echo $pageName; ?>" method="post" enctype="multipart/form-data">
+            <h1><?= htmlspecialchars($profile['heading']) ?></h1>
+            <form id="login_form" action="<?= $pageName ?>" method="post" enctype="multipart/form-data">
             <table>
-              <tr class="title"><td><?php echo __('Login'); ?></td></tr>
+              <tr class="title"><td><?= __('Login') ?></td></tr>
               <tr><td class="td_login">
               <table class="noborder">
                 <tr>
-                  <td><?php echo __('Login'); ?>:</td>
+                  <td><?= __('Login') ?>:</td>
                   <td><input name="login" type="text" value="" /></td>
                 </tr>
                 <tr>
-                  <td><?php echo __('Password'); ?>:</td>
+                  <td><?= __('Password') ?>:</td>
                   <td><input name="password" type="password" value="" /></td>
                 </tr>
               </table>

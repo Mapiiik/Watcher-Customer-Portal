@@ -52,15 +52,15 @@ if (isset($_POST['set_password']) && $_POST['set_password'] == 'yes' && isset($_
 }
 ?>
 
-<form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post" enctype="multipart/form-data">
-<h1><?php echo __('Change password'); ?></h1>
+<form action="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>" method="post" enctype="multipart/form-data">
+<h1><?= __('Change password') ?></h1>
   <table>
     <tr>
-	  <td><?php echo __('New password') . ":"; ?></td>
+	  <td><?= __('New password') . ":" ?></td>
 	  <td><input name="set_password_1" type="password" value="" /></td>
     </tr>
     <tr>
-	  <td><?php echo __('Confirm password') . ":"; ?></td>
+	  <td><?= __('Confirm password') . ":" ?></td>
 	  <td><input name="set_password_2" type="password" value="" /></td>
     </tr>
     <tr>

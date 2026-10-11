@@ -155,7 +155,7 @@ class Session
 			<body class="center">
 			<table class="center">
 			  <tr><td>
-				<a rel="toppage" href="<?php echo PREFIX; ?>/index.php" title="<?php echo __('You are not signed in, please sign in'); ?>"><?php echo __('You are not signed in, please sign in'); ?></a>
+				<a rel="toppage" href="<?= PREFIX ?>/index.php" title="<?= __('You are not signed in, please sign in') ?>"><?= __('You are not signed in, please sign in') ?></a>
 			  </td></tr>
 			</table>
 			<div class="fred">
