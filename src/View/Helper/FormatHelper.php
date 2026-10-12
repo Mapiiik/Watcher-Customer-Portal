@@ -19,7 +19,8 @@ use IntlDateFormatter;
 class FormatHelper extends Helper
 {
     /**
-     * A date of the CRM (Y-m-d), or a dash when there is none.
+     * A date of the CRM (Y-m-d), or a dash when there is none. Its spaces do not break, so that
+     * a date is never split between lines.
      */
     public function date(string $date): string
     {
@@ -28,8 +29,10 @@ class FormatHelper extends Helper
         }
 
         // composed from its parts, so that no time zone moves the day
-        return (string)Date::create((int)$parts[1], (int)$parts[2], (int)$parts[3])
+        $date = (string)Date::create((int)$parts[1], (int)$parts[2], (int)$parts[3])
             ->i18nFormat(IntlDateFormatter::MEDIUM);
+
+        return str_replace(' ', "\u{a0}", $date);
     }
 
     /**

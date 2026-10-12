@@ -37,7 +37,7 @@ class FormatHelperTest extends TestCase
         I18n::setLocale('cs_CZ');
         Configure::write('Portal.currency', 'CZK');
 
-        $this->assertSame('1. 4. 1880', $this->format->date('1880-04-01'));
+        $this->assertSame("1.\u{a0}4.\u{a0}1880", $this->format->date('1880-04-01'));
         $this->assertSame('–', $this->format->date(''));
         $this->assertSame("1\u{a0}490,00\u{a0}Kč", $this->format->money(1490.0));
         $this->assertSame('cs', $this->format->language());

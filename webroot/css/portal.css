@@ -58,7 +58,7 @@ h3 { font-size: 1.05rem; margin: 1.5rem 0 .5rem; }
 p { margin: 0 0 1rem; }
 .muted { color: var(--muted); }
 .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.wrap { max-width: 1170px; margin: 0 auto; padding: 0 16px; }
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 16px; }
 
 /* the header of the operator's website: a bar with the contacts, the logo in a block, the menu,
    and a block in the accent */
