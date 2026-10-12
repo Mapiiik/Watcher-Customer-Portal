@@ -69,7 +69,7 @@ final readonly class CustomerDetails
             ),
             array_map(Email::fromFields(...), $customer->list('emails')),
             array_map(Phone::fromFields(...), $customer->list('phones')),
-            array_map(Address::fromFields(...), $customer->list('addresses')),
+            self::inOrder(array_map(Address::fromFields(...), $customer->list('addresses'))),
             array_map(Contract::fromFields(...), $customer->list('contracts')),
             $answer->texts('countries'),
         );
@@ -129,6 +129,38 @@ final readonly class CustomerDetails
     }
 
     /**
+     * The addresses of some types, in the order of the addresses.
+     *
+     * @param int ...$types Address::INSTALLATION and the others.
+     * @return list<\App\Crm\Address>
+     */
+    public function addressesOf(int ...$types): array
+    {
+        return array_values(array_filter(
+            $this->addresses,
+            static fn(Address $address): bool => in_array($address->type, $types, true),
+        ));
+    }
+
+    /**
+     * The numbers of the contracts installed at an address.
+     *
+     * @param \App\Crm\Address $address One of the customer's addresses.
+     * @return list<string>
+     */
+    public function contractsAt(Address $address): array
+    {
+        $numbers = [];
+        foreach ($this->contracts as $contract) {
+            if ($contract->installationAddress?->id === $address->id && $address->id !== '') {
+                $numbers[] = $contract->number;
+            }
+        }
+
+        return $numbers;
+    }
+
+    /**
      * The name of a country, empty when there is no such one.
      *
      * @param string $id The country.
@@ -137,5 +169,22 @@ final readonly class CustomerDetails
     public function country(string $id): string
     {
         return $this->countries[$id] ?? '';
+    }
+
+    /**
+     * Addresses in the order of their types, as Address::ORDER has it, each type as the CRM
+     * listed it.
+     *
+     * @param list<\App\Crm\Address> $addresses
+     * @return list<\App\Crm\Address>
+     */
+    private static function inOrder(array $addresses): array
+    {
+        // the sort is stable, so the addresses of one type keep their order
+        $rank = array_flip(Address::ORDER);
+        $of = static fn(Address $address): int => $rank[$address->type] ?? PHP_INT_MAX;
+        usort($addresses, static fn(Address $a, Address $b): int => $of($a) <=> $of($b));
+
+        return $addresses;
     }
 }

@@ -45,16 +45,21 @@ final class Labels
     }
 
     /**
+     * The kinds of address by their type, in the order of Address::ORDER.
+     *
+     * @param int ...$types Only these, or all when none is given.
      * @return array<int, string>
      */
-    public static function addressTypes(): array
+    public static function addressTypes(int ...$types): array
     {
-        return [
-            Address::INSTALLATION => __('Installation address'),
+        $all = [
             Address::BILLING => __('Billing address'),
-            Address::DELIVERY => __('Delivery address'),
             Address::PERMANENT => __('Permanent address'),
+            Address::INSTALLATION => __('Installation address'),
+            Address::DELIVERY => __('Delivery address'),
         ];
+
+        return $types === [] ? $all : array_intersect_key($all, array_flip($types));
     }
 
     /**
@@ -91,9 +96,9 @@ final class Labels
     }
 
     /**
-     * What an e-mail address is used for, as words.
+     * What an e-mail address or a phone number is used for, as words.
      */
-    public static function emailUses(bool $billing, bool $outages, bool $commercial): string
+    public static function uses(bool $billing, bool $outages, bool $commercial): string
     {
         return implode(', ', array_keys(array_filter([
             __('billing') => $billing,

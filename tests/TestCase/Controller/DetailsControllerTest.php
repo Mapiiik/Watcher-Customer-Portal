@@ -19,6 +19,24 @@ class DetailsControllerTest extends PortalTestCase
 {
     use EmailTrait;
 
+    /**
+     * A change of the last name, an e-mail and an address, with a new e-mail and a note.
+     */
+    private const CHANGE = [
+        'first_name' => 'Jan',
+        'last_name' => 'Novak-Smith',
+        'emails' => [
+            'e1' => ['email' => 'jan@example.com', 'billing' => '1', 'outages' => '0', 'commercial' => '0'],
+            'new' => ['email' => 'second@example.com', 'billing' => '1', 'outages' => '1', 'commercial' => '0'],
+        ],
+        'phones' => ['p1' => ['phone' => '+420 777 123 456'], 'new' => ['phone' => '']],
+        'addresses' => [
+            'a1' => ['remove' => '0', 'street' => 'Main street', 'number' => '300', 'city' => 'Springfield', 'zip' => '512 43', 'country_id' => '1'],
+            'new' => ['type' => '1', 'street' => '', 'number' => '', 'city' => ''],
+        ],
+        'note' => 'Please also send the invoices by post.',
+    ];
+
     public function testTheDetailsShowTheConsentsAsTheyAre(): void
     {
         $this->signedIn();
@@ -63,23 +81,59 @@ class DetailsControllerTest extends PortalTestCase
         $this->assertResponseContains('value="1980-04-01"');
     }
 
-    public function testAChangeIsSentByMail(): void
+    public function testAPartOfTheFormHoldsOnlyItsFields(): void
     {
         $this->signedIn();
-        $this->post('/details/change', [
-            'first_name' => 'Jan',
-            'last_name' => 'Novak-Smith',
-            'emails' => [
-                'e1' => ['email' => 'jan@example.com', 'billing' => '1', 'outages' => '0', 'commercial' => '0'],
-                'new' => ['email' => 'second@example.com', 'billing' => '1', 'outages' => '1', 'commercial' => '0'],
-            ],
-            'phones' => ['p1' => ['phone' => '+420 777 123 456'], 'new' => ['phone' => '']],
-            'addresses' => [
-                'a1' => ['remove' => '0', 'street' => 'Main street', 'number' => '300', 'city' => 'Springfield', 'zip' => '512 43', 'country_id' => '1'],
-                'new' => ['type' => '1', 'street' => '', 'number' => '', 'city' => ''],
-            ],
-            'note' => 'Please also send the invoices by post.',
-        ]);
+        $this->get('/details/change?part=contacts');
+
+        $this->assertResponseOk();
+        $this->assertResponseContains('name="part" value="contacts"');
+        $this->assertResponseContains('id="emails-e1-billing" checked="checked"');
+        $this->assertResponseNotContains('id="emails-e1-commercial" checked="checked"');
+        $this->assertResponseNotContains('name="addresses[a1][street]"');
+        $this->assertResponseNotContains('name="last_name"');
+        $this->assertResponseContains('name="note"');
+    }
+
+    public function testBillingAndInstallationEachHoldTheirOwnAddresses(): void
+    {
+        $this->signedIn();
+        $this->get('/details/change?part=billing');
+
+        $this->assertResponseContains('name="invoice_delivery_type"');
+        $this->assertResponseNotContains('name="addresses[a1][street]"');
+        $this->assertResponseContains('name="addresses[new][type]"');
+        $this->assertResponseNotContains('<option value="0">Installation address</option>');
+
+        $this->get('/details/change?part=installation');
+
+        $this->assertResponseContains('name="addresses[a1][street]"');
+        $this->assertResponseContains('Contracts: S-110009-01');
+        $this->assertResponseNotContains('name="addresses[new][type]"');
+        $this->assertResponseNotContains('name="invoice_delivery_type"');
+    }
+
+    public function testAChangeIsShownToBeCheckedBeforeItIsSent(): void
+    {
+        $this->signedIn();
+        $this->post('/details/change', ['part' => 'customer'] + self::CHANGE);
+
+        $this->assertResponseOk();
+        $this->assertResponseContains('Check your request');
+        $this->assertResponseContains('Last name: Novak → Novak-Smith');
+        $this->assertResponseContains('E-mail added: second@example.com (billing, outages)');
+        $this->assertResponseContains('href="/details/change?part=customer&amp;edit=1"');
+        $this->assertNoMailSent();
+        $this->assertSession('customer', 'Portal.changeDraft.part');
+        $this->assertSession('Novak-Smith', 'Portal.changeDraft.form.last_name');
+    }
+
+    public function testACheckedChangeIsSentByMail(): void
+    {
+        // before signing in, which would write the whole of Portal over it
+        $this->session(['Portal.changeDraft' => ['part' => 'customer', 'form' => self::CHANGE]]);
+        $this->signedIn();
+        $this->post('/details/change/send');
 
         $this->assertRedirect('/details');
         $this->assertMailCount(1);
@@ -91,16 +145,49 @@ class DetailsControllerTest extends PortalTestCase
         $this->assertMailContainsText('Installation address: Main street 299, 512 43 Springfield, Czech Republic → Main street 300, 512 43 Springfield, Czech Republic');
         $this->assertMailContainsText('Please also send the invoices by post.');
         $this->assertMailContainsText('Login: jan.novak');
+        $this->assertSessionNotHasKey('Portal.changeDraft');
+    }
+
+    public function testEditingBringsBackWhatWasWritten(): void
+    {
+        $this->session(['Portal.changeDraft' => ['part' => 'customer', 'form' => self::CHANGE]]);
+        $this->signedIn();
+        $this->get('/details/change?part=customer&edit=1');
+
+        $this->assertResponseOk();
+        $this->assertResponseContains('value="Novak-Smith"');
+    }
+
+    public function testWhatIsAddedStaysInSightWhenEditing(): void
+    {
+        $this->session(['Portal.changeDraft' => ['part' => 'contacts', 'form' => self::CHANGE]]);
+        $this->signedIn();
+        $this->get('/details/change?part=contacts&edit=1');
+
+        $this->assertResponseContains('value="second@example.com"');
+        $this->assertResponseContains('<details class="more" open>');
+        $this->assertResponseContains('<details class="more">');
     }
 
     public function testNothingChangedSendsNothing(): void
     {
         $this->signedIn();
-        $this->post('/details/change', ['first_name' => 'Jan', 'last_name' => 'Novak']);
+        $this->post('/details/change', ['part' => 'customer', 'first_name' => 'Jan', 'last_name' => 'Novak']);
 
-        $this->assertRedirect('/details');
+        $this->assertRedirect('/details/change?part=customer');
         $this->assertNoMailSent();
         $this->assertFlashMessage('Nothing has changed, there is nothing to send.');
+        $this->assertSessionNotHasKey('Portal.changeDraft');
+    }
+
+    public function testTheDetailsShowWhichContractsUseAnAddress(): void
+    {
+        $this->signedIn();
+        $this->get('/details');
+
+        $this->assertResponseContains('Contracts: S-110009-01');
+        $this->assertResponseContains('href="/details/change?part=installation"');
+        $this->assertResponseContains('Without a billing address, invoices go to the installation address.');
     }
 
     public function testThePasswordIsChangedWithTheCurrentOne(): void

@@ -19,11 +19,13 @@ class AppView extends View
     {
         parent::initialize();
         $this->addHelper('Format');
-        // labels around the fields, and no inline markup the content security policy would refuse
+        // labels around the fields, and no inline markup the content security policy would refuse;
+        // a field twice as wide as the others in a row of the form carries the class wide
         $this->loadHelper('Form', [
             'templates' => [
-                'inputContainer' => '<div class="field {{type}}{{required}}">{{content}}</div>',
-                'inputContainerError' => '<div class="field {{type}}{{required}} error">{{content}}{{error}}</div>',
+                'inputContainer' => '<div class="field {{type}}{{required}}{{wide}}">{{content}}</div>',
+                'inputContainerError' =>
+                    '<div class="field {{type}}{{required}}{{wide}} error">{{content}}{{error}}</div>',
                 'error' => '<div class="error-message" id="{{id}}">{{content}}</div>',
             ],
         ]);

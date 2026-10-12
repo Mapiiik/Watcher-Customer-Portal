@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2026-10-12 19:55+0200\n"
+"POT-Creation-Date: 2026-10-12 21:16+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -40,42 +40,49 @@ msgid "Customer portal"
 msgstr ""
 
 #: ./profiles/default/profile.php:24
-#: ./templates/Overview/index.php:46
+#: ./templates/Overview/index.php:52
 msgid "Invoice"
 msgstr ""
 
-#: ./src/Controller/DetailsController.php:29
-#: ./templates/Details/change.php:52
-#: ./templates/Details/index.php:16
+#: ./src/Controller/DetailsController.php:40
+#: ./templates/Details/change.php:19
+#: ./templates/Details/change.php:92
+#: ./templates/Details/confirm.php:9
+#: ./templates/Details/index.php:28
 #: ./templates/layout/default.php:16
 msgid "My details"
 msgstr ""
 
-#: ./src/Controller/DetailsController.php:49
+#: ./src/Controller/DetailsController.php:60
 msgid "Your consents have been saved."
 msgstr ""
 
-#: ./src/Controller/DetailsController.php:68
+#: ./src/Controller/DetailsController.php:83
+#: ./src/Controller/DetailsController.php:132
 msgid "Nothing has changed, there is nothing to send."
 msgstr ""
 
-#: ./src/Controller/DetailsController.php:77
+#: ./src/Controller/DetailsController.php:91
+#: ./templates/Details/confirm.php:10
+msgid "Check your request"
+msgstr ""
+
+#: ./src/Controller/DetailsController.php:106
+#: ./templates/Details/change.php:93
+#: ./templates/Details/index.php:23
+msgid "Request a change"
+msgstr ""
+
+#: ./src/Controller/DetailsController.php:141
 msgid "Change of customer details: {0}"
 msgstr ""
 
-#: ./src/Controller/DetailsController.php:94
+#: ./src/Controller/DetailsController.php:158
 msgid "Your request could not be sent, please try again later."
 msgstr ""
 
-#: ./src/Controller/DetailsController.php:100
+#: ./src/Controller/DetailsController.php:168
 msgid "Your details have been sent for processing. They change once they have been checked."
-msgstr ""
-
-#: ./src/Controller/DetailsController.php:108
-#: ./templates/Details/change.php:53
-#: ./templates/Details/index.php:26
-#: ./templates/Details/index.php:62
-msgid "Request a change"
 msgstr ""
 
 #: ./src/Controller/InvoicesController.php:29
@@ -88,7 +95,7 @@ msgstr ""
 msgid "No such invoice."
 msgstr ""
 
-#: ./src/Controller/OverviewController.php:43
+#: ./src/Controller/OverviewController.php:48
 #: ./templates/layout/default.php:14
 msgid "Overview"
 msgstr ""
@@ -147,40 +154,40 @@ msgstr ""
 msgid "Your sign-in has expired, please sign in again."
 msgstr ""
 
-#: ./src/Portal/ChangeRequest.php:40
-#: ./src/Portal/ChangeRequest.php:95
+#: ./src/Portal/ChangeRequest.php:46
+#: ./src/Portal/ChangeRequest.php:127
 msgid "{0}: {1} → {2}"
 msgstr ""
 
-#: ./src/Portal/ChangeRequest.php:52
+#: ./src/Portal/ChangeRequest.php:67
 msgid "E-mail removed: {0}"
 msgstr ""
 
-#: ./src/Portal/ChangeRequest.php:57
+#: ./src/Portal/ChangeRequest.php:72
 msgid "E-mail: {0} → {1}"
 msgstr ""
 
-#: ./src/Portal/ChangeRequest.php:61
+#: ./src/Portal/ChangeRequest.php:79
 msgid "E-mail added: {0}"
 msgstr ""
 
-#: ./src/Portal/ChangeRequest.php:71
+#: ./src/Portal/ChangeRequest.php:92
 msgid "Phone removed: {0}"
 msgstr ""
 
-#: ./src/Portal/ChangeRequest.php:73
+#: ./src/Portal/ChangeRequest.php:97
 msgid "Phone: {0} → {1}"
 msgstr ""
 
-#: ./src/Portal/ChangeRequest.php:78
+#: ./src/Portal/ChangeRequest.php:104
 msgid "Phone added: {0}"
 msgstr ""
 
-#: ./src/Portal/ChangeRequest.php:90
+#: ./src/Portal/ChangeRequest.php:118
 msgid "{0} removed: {1}"
 msgstr ""
 
-#: ./src/Portal/ChangeRequest.php:101
+#: ./src/Portal/ChangeRequest.php:135
 msgid "{0} added: {1}"
 msgstr ""
 
@@ -221,7 +228,7 @@ msgid "VAT number"
 msgstr ""
 
 #: ./src/Portal/Labels.php:33
-#: ./templates/Overview/index.php:194
+#: ./templates/Overview/index.php:197
 msgid "Website"
 msgstr ""
 
@@ -261,47 +268,48 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: ./src/Portal/Labels.php:53
-#: ./templates/Overview/index.php:154
-msgid "Installation address"
-msgstr ""
-
-#: ./src/Portal/Labels.php:54
+#: ./src/Portal/Labels.php:56
 msgid "Billing address"
 msgstr ""
 
-#: ./src/Portal/Labels.php:55
-msgid "Delivery address"
-msgstr ""
-
-#: ./src/Portal/Labels.php:56
+#: ./src/Portal/Labels.php:57
 msgid "Permanent address"
 msgstr ""
 
-#: ./src/Portal/Labels.php:68
+#: ./src/Portal/Labels.php:58
+#: ./templates/Details/index.php:125
+#: ./templates/Overview/index.php:155
+msgid "Installation address"
+msgstr ""
+
+#: ./src/Portal/Labels.php:59
+msgid "Delivery address"
+msgstr ""
+
+#: ./src/Portal/Labels.php:73
 msgid "Address"
 msgstr ""
 
-#: ./src/Portal/Labels.php:77
+#: ./src/Portal/Labels.php:82
 msgid "Not sent"
 msgstr ""
 
-#: ./src/Portal/Labels.php:78
+#: ./src/Portal/Labels.php:83
 msgid "By e-mail"
 msgstr ""
 
-#: ./src/Portal/Labels.php:99
-#: ./templates/Details/change.php:17
+#: ./src/Portal/Labels.php:104
+#: ./templates/Details/change.php:44
 msgid "billing"
 msgstr ""
 
-#: ./src/Portal/Labels.php:100
-#: ./templates/Details/change.php:18
+#: ./src/Portal/Labels.php:105
+#: ./templates/Details/change.php:45
 msgid "outages"
 msgstr ""
 
-#: ./src/Portal/Labels.php:101
-#: ./templates/Details/change.php:19
+#: ./src/Portal/Labels.php:106
+#: ./templates/Details/change.php:46
 msgid "commercial messages"
 msgstr ""
 
@@ -323,103 +331,163 @@ msgstr ""
 msgid "Due"
 msgstr ""
 
-#: ./templates/Details/change.php:54
+#: ./templates/Details/change.php:14
+#: ./templates/Details/change.php:106
+#: ./templates/Details/index.php:40
+msgid "Customer details"
+msgstr ""
+
+#: ./templates/Details/change.php:15
+#: ./templates/Details/index.php:64
+msgid "Contacts"
+msgstr ""
+
+#: ./templates/Details/change.php:16
+#: ./templates/Details/index.php:88
+msgid "Billing and correspondence"
+msgstr ""
+
+#: ./templates/Details/change.php:17
+#: ./templates/Details/index.php:112
+msgid "Installation addresses"
+msgstr ""
+
+#: ./templates/Details/change.php:18
+#: ./templates/Details/index.php:35
+msgid "Another request"
+msgstr ""
+
+#: ./templates/Details/change.php:95
+msgid "Write to us what you would like to change. We will deal with it and let you know."
+msgstr ""
+
+#: ./templates/Details/change.php:96
 msgid "Correct or complete your details and send them. They change once they have been checked."
 msgstr ""
 
-#: ./templates/Details/change.php:62
-#: ./templates/Details/index.php:15
-#: ./templates/Details/index.php:25
-#: ./templates/email/text/change_request.php:15
-msgid "Customer"
-msgstr ""
-
-#: ./templates/Details/change.php:72
-#: ./templates/Details/index.php:41
-#: ./templates/Overview/index.php:190
+#: ./templates/Details/change.php:129
+#: ./templates/Details/index.php:66
+#: ./templates/Overview/index.php:193
 msgid "E-mail"
 msgstr ""
 
-#: ./templates/Details/change.php:73
-msgid "Clear an address to have it removed, and tick what each one is used for."
-msgstr ""
-
-#: ./templates/Details/change.php:85
-msgid "Another e-mail address"
-msgstr ""
-
-#: ./templates/Details/change.php:93
-#: ./templates/Details/index.php:50
-#: ./templates/Overview/index.php:186
-msgid "Phone"
-msgstr ""
-
-#: ./templates/Details/change.php:105
-msgid "Another phone number"
-msgstr ""
-
-#: ./templates/Details/change.php:113
-msgid "Billing details"
-msgstr ""
-
-#: ./templates/Details/change.php:134
-msgid "Remove this address"
+#: ./templates/Details/change.php:130
+msgid "Clear an e-mail to have it removed, and tick what each one is used for."
 msgstr ""
 
 #: ./templates/Details/change.php:141
-msgid "Another address"
+#: ./templates/Details/change.php:145
+msgid "Add an e-mail"
 msgstr ""
 
-#: ./templates/Details/change.php:144
+#: ./templates/Details/change.php:154
+#: ./templates/Details/index.php:75
+#: ./templates/Overview/index.php:189
+msgid "Phone"
+msgstr ""
+
+#: ./templates/Details/change.php:155
+msgid "Clear a number to have it removed, and tick what each one is used for."
+msgstr ""
+
+#: ./templates/Details/change.php:166
+#: ./templates/Details/change.php:170
+msgid "Add a phone number"
+msgstr ""
+
+#: ./templates/Details/change.php:182
+msgid "Billing details"
+msgstr ""
+
+#: ./templates/Details/change.php:204
+#: ./templates/Details/index.php:120
+msgid "Contracts: {0}"
+msgstr ""
+
+#: ./templates/Details/change.php:208
+msgid "Remove this address"
+msgstr ""
+
+#: ./templates/Details/change.php:212
+msgid "Name on the address"
+msgstr ""
+
+#: ./templates/Details/change.php:222
+msgid "Add an address"
+msgstr ""
+
+#: ./templates/Details/change.php:226
 msgid "Kind of address"
 msgstr ""
 
-#: ./templates/Details/change.php:152
+#: ./templates/Details/change.php:237
+#: ./templates/Details/confirm.php:24
 #: ./templates/email/text/change_request.php:23
 msgid "Note"
 msgstr ""
 
-#: ./templates/Details/change.php:162
-msgid "Send for processing"
+#: ./templates/Details/change.php:247
+msgid "Check the request"
 msgstr ""
 
-#: ./templates/Details/change.php:163
+#: ./templates/Details/change.php:248
 msgid "Back to my details"
 msgstr ""
 
-#: ./templates/Details/index.php:17
+#: ./templates/Details/confirm.php:11
+msgid "This is what we will receive. Your details change once we have checked it."
+msgstr ""
+
+#: ./templates/Details/confirm.php:16
+msgid "Changes"
+msgstr ""
+
+#: ./templates/Details/confirm.php:29
+msgid "Send for processing"
+msgstr ""
+
+#: ./templates/Details/confirm.php:30
+msgid "Edit"
+msgstr ""
+
+#: ./templates/Details/index.php:27
+#: ./templates/email/text/change_request.php:15
+msgid "Customer"
+msgstr ""
+
+#: ./templates/Details/index.php:30
 msgid "Changes of your details are checked before they apply. Your consents are saved straight away."
 msgstr ""
 
-#: ./templates/Details/index.php:29
+#: ./templates/Details/index.php:43
 msgid "Name"
 msgstr ""
 
-#: ./templates/Details/index.php:35
+#: ./templates/Details/index.php:50
 msgid "Customer number"
 msgstr ""
 
-#: ./templates/Details/index.php:61
-msgid "Billing and addresses"
+#: ./templates/Details/index.php:106
+msgid "Without a billing address, invoices go to the installation address."
 msgstr ""
 
-#: ./templates/Details/index.php:91
+#: ./templates/Details/index.php:132
 msgid "Consents and messages"
 msgstr ""
 
-#: ./templates/Details/index.php:102
+#: ./templates/Details/index.php:143
 msgid "I want to receive correspondence about the monthly billing"
 msgstr ""
 
-#: ./templates/Details/index.php:109
+#: ./templates/Details/index.php:150
 msgid "I want to receive information about outages and faults"
 msgstr ""
 
-#: ./templates/Details/index.php:116
+#: ./templates/Details/index.php:157
 msgid "I agree to receive commercial communications"
 msgstr ""
 
-#: ./templates/Details/index.php:120
+#: ./templates/Details/index.php:161
 msgid "Save consents"
 msgstr ""
 
@@ -466,7 +534,7 @@ msgstr ""
 
 #: ./templates/Invoices/index.php:23
 #: ./templates/Invoices/index.php:40
-#: ./templates/Overview/index.php:47
+#: ./templates/Overview/index.php:53
 msgid "Variable symbol"
 msgstr ""
 
@@ -497,6 +565,7 @@ msgid "Hello, {0}"
 msgstr ""
 
 #: ./templates/Overview/index.php:27
+#: ./templates/layout/default.php:73
 msgid "Customer number {0}"
 msgstr ""
 
@@ -505,16 +574,16 @@ msgstr ""
 msgid "To pay"
 msgstr ""
 
-#: ./templates/Overview/index.php:48
+#: ./templates/Overview/index.php:45
+msgid "Pay to account"
+msgstr ""
+
+#: ./templates/Overview/index.php:54
 msgid "Debt"
 msgstr ""
 
-#: ./templates/Overview/index.php:56
+#: ./templates/Overview/index.php:62
 msgid "due {0}"
-msgstr ""
-
-#: ./templates/Overview/index.php:66
-msgid "Pay to account"
 msgstr ""
 
 #: ./templates/Overview/index.php:73
@@ -546,19 +615,19 @@ msgid "Contract"
 msgstr ""
 
 #: ./templates/Overview/index.php:136
-#: ./templates/Overview/index.php:170
+#: ./templates/Overview/index.php:173
 msgid "Subscriber verification code"
 msgstr ""
 
-#: ./templates/Overview/index.php:158
+#: ./templates/Overview/index.php:161
 msgid "Services"
 msgstr ""
 
-#: ./templates/Overview/index.php:164
+#: ./templates/Overview/index.php:167
 msgid "IP addresses"
 msgstr ""
 
-#: ./templates/Overview/index.php:183
+#: ./templates/Overview/index.php:186
 msgid "Need help?"
 msgstr ""
 
@@ -614,11 +683,11 @@ msgstr ""
 msgid "Back to {0}"
 msgstr ""
 
-#: ./templates/layout/default.php:75
+#: ./templates/layout/default.php:79
 msgid "Sign out"
 msgstr ""
 
-#: ./templates/layout/default.php:91
+#: ./templates/layout/default.php:95
 msgid "Privacy policy"
 msgstr ""
 

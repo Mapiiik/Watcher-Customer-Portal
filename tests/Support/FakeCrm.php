@@ -65,7 +65,7 @@ final class FakeCrm implements CustomerPortalApi
             ]),
             new Consents(true, true, false),
             [new Email('e1', 'jan@example.com', true, true, false)],
-            [new Phone('p1', '+420 777 123 456')],
+            [new Phone('p1', '+420 777 123 456', true, true, false)],
             [new Address('a1', Address::INSTALLATION, [
                 'company' => '', 'title' => '', 'first_name' => '', 'last_name' => '', 'suffix' => '',
                 'street' => 'Main street', 'number' => '299', 'city' => 'Springfield', 'zip' => '512 43', 'country_id' => '1',

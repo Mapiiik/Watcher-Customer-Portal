@@ -18,6 +18,7 @@ return function (RouteBuilder $routes): void {
         $builder->connect('/details', ['controller' => 'Details', 'action' => 'index']);
         $builder->connect('/details/consents', ['controller' => 'Details', 'action' => 'consents']);
         $builder->connect('/details/change', ['controller' => 'Details', 'action' => 'change']);
+        $builder->connect('/details/change/send', ['controller' => 'Details', 'action' => 'send']);
         $builder->connect('/password', ['controller' => 'Password', 'action' => 'index']);
         // the logos, icons and colours of the operator's profile, which lives outside the web root
         $builder->connect('/branding/{file}', ['controller' => 'Branding', 'action' => 'asset'])

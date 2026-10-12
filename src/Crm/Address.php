@@ -14,6 +14,12 @@ final readonly class Address
     public const PERMANENT = 3;
 
     /**
+     * The types in the order the CRM looks for an invoice address in, the delivery address last,
+     * which it never takes for one.
+     */
+    public const ORDER = [self::BILLING, self::PERMANENT, self::INSTALLATION, self::DELIVERY];
+
+    /**
      * The fields a customer may ask to change, as the form and the CRM name them.
      */
     public const FIELDS = [

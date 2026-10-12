@@ -5,69 +5,96 @@
  * @var \App\Portal\Profile $profile
  * @var \App\Crm\CustomerDetails $details
  */
+use App\Crm\Address;
 use App\Portal\Labels;
 
-$value = static fn(string $field): string => $details->value($field) !== '' ? $details->value($field) : '–';
+// an address in lines: the name on it, the street, the town and the country
+$addressLines = static fn(Address $address): string => implode('<br>', array_map('h', array_filter([
+    $address->name(),
+    $address->street(),
+    $address->town(),
+    $details->country($address->value('country_id')),
+])));
 $bankCode = $details->value('bank_code');
 $bankAccount = trim($details->value('bank_account') . ($bankCode !== '' ? '/' . $bankCode : ''));
+// the company the customer is, if any: set apart from the person
+$business = array_filter(
+    ['company', 'identity_number', 'vat_number'],
+    static fn(string $field): bool => $details->value($field) !== '',
+);
+// the head of a card, with the link to ask for a change of what it shows
+$head = static fn(string $title, string $part): string => '<div class="head"><h2>' . h($title) . '</h2>'
+    . '<a class="button small next" href="/details/change?part=' . h($part) . '">'
+    . h(__('Request a change')) . '</a></div>';
 ?>
-<div class="title">
-    <div class="kicker"><?= h(__('Customer')) ?></div>
-    <h1><?= h(__('My details')) ?></h1>
-    <div class="muted"><?= h(__(
-        'Changes of your details are checked before they apply. Your consents are saved straight away.',
-    )) ?></div>
+<div class="title with-action">
+    <div>
+        <div class="kicker"><?= h(__('Customer')) ?></div>
+        <h1><?= h(__('My details')) ?></h1>
+        <div class="muted">
+            <?= h(__(
+                'Changes of your details are checked before they apply. Your consents are saved straight away.',
+            )) ?>
+        </div>
+    </div>
+    <a class="button small next" href="/details/change?part=other"><?= h(__('Another request')) ?></a>
 </div>
 
 <div class="grid">
     <div class="card">
-        <div class="head">
-            <h2><?= h(__('Customer')) ?></h2>
-            <a href="/details/change"><?= h(__('Request a change')) ?> →</a>
-        </div>
+        <?= $head(__('Customer details'), 'customer') ?>
         <dl class="facts">
-            <dt><?= h(__('Name')) ?></dt>
-            <dd><?= h($details->personName() !== '' ? $details->personName() : '–') ?></dd>
-<?php if ($details->value('company') !== '') : ?>
-            <dt><?= h(Labels::field('company')) ?></dt>
-            <dd><?= h($details->value('company')) ?></dd>
-<?php endif; ?>
             <dt><?= h(__('Customer number')) ?></dt>
             <dd><?= h($details->number) ?></dd>
-            <dt><?= h(Labels::field('date_of_birth')) ?></dt>
-            <dd><?= h($this->Format->date($details->value('date_of_birth'))) ?></dd>
-            <dt><?= h(Labels::field('identity_card_number')) ?></dt>
-            <dd><?= h($value('identity_card_number')) ?></dd>
+<?php if ($details->personName() !== '' || $details->value('company') === '') : ?>
+            <dt><?= h(__('Name')) ?></dt>
+            <dd><?= h($details->personName() !== '' ? $details->personName() : '–') ?></dd>
+<?php endif; ?>
+<?php foreach (['date_of_birth', 'identity_card_number', 'www'] as $field) : ?>
+    <?php if ($details->value($field) !== '') : ?>
+            <dt><?= h(Labels::field($field)) ?></dt>
+            <dd><?= h($field === 'date_of_birth'
+                ? $this->Format->date($details->value($field))
+                : $details->value($field)) ?></dd>
+    <?php endif; ?>
+<?php endforeach; ?>
+<?php foreach (array_values($business) as $i => $field) : ?>
+    <?php $apart = $i === 0 ? ' class="apart"' : ''; ?>
+            <dt<?= $apart ?>><?= h(Labels::field($field)) ?></dt>
+            <dd<?= $apart ?>><?= h($details->value($field)) ?></dd>
+<?php endforeach; ?>
+        </dl>
+    </div>
+
+    <div class="card">
+        <?= $head(__('Contacts'), 'contacts') ?>
+        <dl class="facts">
             <dt><?= h(__('E-mail')) ?></dt>
             <dd>
 <?php foreach ($details->emails as $email) : ?>
                 <?= h($email->email) ?>
-    <?php $uses = Labels::emailUses($email->billing, $email->outages, $email->commercial); ?>
+    <?php $uses = Labels::uses($email->billing, $email->outages, $email->commercial); ?>
                 <?= $uses !== '' ? '<span class="muted">(' . h($uses) . ')</span>' : '' ?><br>
 <?php endforeach; ?>
                 <?= $details->emails === [] ? '–' : '' ?>
             </dd>
             <dt><?= h(__('Phone')) ?></dt>
-            <dd><?= $details->phones === []
-                ? '–'
-                : implode('<br>', array_map(static fn($phone): string => h($phone->phone), $details->phones)) ?></dd>
-            <dt><?= h(Labels::field('www')) ?></dt>
-            <dd><?= h($value('www')) ?></dd>
+            <dd>
+<?php foreach ($details->phones as $phone) : ?>
+                <?= h($phone->phone) ?>
+    <?php $uses = Labels::uses($phone->billing, $phone->outages, $phone->commercial); ?>
+                <?= $uses !== '' ? '<span class="muted">(' . h($uses) . ')</span>' : '' ?><br>
+<?php endforeach; ?>
+                <?= $details->phones === [] ? '–' : '' ?>
+            </dd>
         </dl>
     </div>
 
     <div class="card">
-        <div class="head">
-            <h2><?= h(__('Billing and addresses')) ?></h2>
-            <a href="/details/change"><?= h(__('Request a change')) ?> →</a>
-        </div>
+        <?= $head(__('Billing and correspondence'), 'billing') ?>
         <dl class="facts">
             <dt><?= h(Labels::field('invoice_delivery_type')) ?></dt>
             <dd><?= h(Labels::invoiceDelivery($details->value('invoice_delivery_type'))) ?></dd>
-            <dt><?= h(Labels::field('identity_number')) ?></dt>
-            <dd><?= h($value('identity_number')) ?></dd>
-            <dt><?= h(Labels::field('vat_number')) ?></dt>
-            <dd><?= h($value('vat_number')) ?></dd>
             <dt><?= h(Labels::field('bank_account')) ?></dt>
             <dd>
                 <?= h($bankAccount !== '' ? $bankAccount : '–') ?>
@@ -75,15 +102,38 @@ $bankAccount = trim($details->value('bank_account') . ($bankCode !== '' ? '/' . 
                     ? '<br><span class="muted">' . h($details->value('bank_name')) . '</span>'
                     : '' ?>
             </dd>
-<?php foreach ($details->addresses as $address) : ?>
-            <dt><?= h(Labels::addressType($address->type)) ?></dt>
-            <dd><?= implode('<br>', array_map('h', array_filter([
-                $address->name(),
-                $address->street(),
-                $address->town(),
-                $details->country($address->value('country_id')),
-            ]))) ?></dd>
+<?php foreach ($details->addressesOf(Address::BILLING, Address::PERMANENT, Address::DELIVERY) as $address) : ?>
+            <dt class="apart"><?= h(Labels::addressType($address->type)) ?></dt>
+            <dd class="apart"><?= $addressLines($address) ?></dd>
 <?php endforeach; ?>
+        </dl>
+<?php if ($details->addressesOf(Address::BILLING, Address::PERMANENT) === []) : ?>
+        <p class="muted small actions">
+            <?= h(__('Without a billing address, invoices go to the installation address.')) ?>
+        </p>
+<?php endif; ?>
+    </div>
+
+    <div class="card">
+        <?= $head(__('Installation addresses'), 'installation') ?>
+        <dl class="facts">
+<?php foreach ($details->addressesOf(Address::INSTALLATION) as $i => $address) : ?>
+    <?php
+    $contracts = $details->contractsAt($address);
+    $apart = $i > 0 ? ' class="apart"' : '';
+    ?>
+            <dt<?= $apart ?>><?= h(Labels::addressType($address->type)) ?></dt>
+            <dd<?= $apart ?>>
+                <?= $addressLines($address) ?>
+    <?php if ($contracts !== []) : ?>
+                <div class="muted small"><?= h(__('Contracts: {0}', implode(', ', $contracts))) ?></div>
+    <?php endif; ?>
+            </dd>
+<?php endforeach; ?>
+<?php if ($details->addressesOf(Address::INSTALLATION) === []) : ?>
+            <dt><?= h(__('Installation address')) ?></dt>
+            <dd>–</dd>
+<?php endif; ?>
         </dl>
     </div>
 

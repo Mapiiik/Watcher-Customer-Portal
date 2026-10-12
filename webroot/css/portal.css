@@ -84,6 +84,8 @@ header.top .cta:hover { background: var(--brand-hover); }
 /* the title of a page, as the sections of the website start */
 .title { padding: 48px 0 28px; }
 .title .muted { margin-top: .3rem; }
+/* a title with what the page offers beside it, at the right */
+.title.with-action { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1rem 2rem; }
 .kicker { display: inline-flex; align-items: center; gap: .45rem; margin-bottom: .4rem; color: var(--brand-accent); font-weight: 700; }
 .kicker::after { content: "✓"; display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--brand-accent); color: #fff; font-size: .7rem; }
 /* as an item of the body's column, auto margins would shrink it to its content, hence the width */
@@ -95,7 +97,7 @@ main.wrap { padding-bottom: 64px; flex: 1 0 auto; width: 100%; }
 .card.narrow { max-width: 540px; }
 .card.due { border-top: 4px solid var(--danger); }
 .card.settled { border-top: 4px solid var(--ok); }
-.card .head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 1rem; }
+.card .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .6rem 1rem; margin-bottom: 1rem; }
 .card .head h2 { margin: 0; }
 /* under the head of a card, as the operator's website has it: a thin line across, and on it
    a short thick one in the operator's colour; drawn as backgrounds, since a head with a
@@ -103,6 +105,10 @@ main.wrap { padding-bottom: 64px; flex: 1 0 auto; width: 100%; }
 .card > h2, .card > .head { padding-bottom: .85rem; margin-bottom: 1.2rem;
     background: linear-gradient(var(--brand-accent), var(--brand-accent)) left bottom / 40px 3px no-repeat,
         linear-gradient(var(--line), var(--line)) left bottom 1px / 100% 1px no-repeat; }
+/* the line under the heading of a form takes the place of its first section's */
+.card > form > fieldset:first-of-type { border-top: 0; margin-top: 1rem; padding-top: 0; }
+.card .head:has(.button) { align-items: center; }
+.card .head .button { flex: none; }
 .stack > * + * { margin-top: 30px; }
 
 .amount { font-size: 2.6rem; font-weight: 700; line-height: 1.1; white-space: nowrap; }
@@ -126,10 +132,12 @@ table.contracts td { vertical-align: top; }
 table.contracts td > div { margin-top: .2rem; }
 table.contracts .small { font-size: .9rem; overflow-wrap: anywhere; }
 
-dl.facts { display: grid; grid-template-columns: minmax(130px, auto) 1fr; gap: .45rem 1.25rem; margin: 0; }
+dl.facts { display: grid; grid-template-columns: minmax(130px, auto) 1fr; gap: .45rem 0; margin: 0; }
 dl.facts.pay-to { margin: .6rem 0 1.25rem; }
+/* a row set apart from those above by a line across both columns */
+dl.facts > .apart { margin-top: .4rem; padding-top: .85rem; border-top: 1px solid var(--line); }
 dl.facts dt { color: var(--muted); }
-dl.facts dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
+dl.facts dd { margin: 0; padding-left: 1.25rem; font-weight: 500; overflow-wrap: anywhere; }
 
 /* the codes are drawn at twice their size, and their modules have to stay sharp */
 .pay-codes { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.5rem 2rem; margin-top: 1.5rem; }
@@ -144,6 +152,7 @@ dl.facts dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
 .button:hover { color: #fff; background: var(--brand-dark); }
 .button.small { padding: .45rem .9rem; font-size: .78rem; }
 .button.small::after { content: "↓"; }
+.button.small.next::after { content: "→"; }
 .button.wide { width: 100%; justify-content: center; }
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem; margin-top: 1.5rem; }
 
@@ -157,9 +166,21 @@ input[type=checkbox] { width: 1.2rem; height: 1.2rem; margin: .2rem 0 0; flex: n
 .hint { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
 fieldset { border: 0; border-top: 1px solid var(--line); margin: 1.5rem 0 0; padding: .5rem 0 0; }
 legend { font-weight: 700; font-size: 1.05rem; padding: 0 .5rem 0 0; }
-.columns { display: grid; gap: 0 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.columns { display: grid; gap: 0 1.5rem; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.columns .wide { grid-column: span 2; }
+.columns .wider { grid-column: span 3; }
 .uses { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin-top: .5rem; }
 .uses label { font-weight: 400; margin: 0; }
+
+/* parts of a form shown only when asked for, without a script */
+details.more { margin-top: 1rem; }
+details.more > summary { cursor: pointer; color: var(--brand-accent); font-weight: 600; }
+details.more[open] > summary { margin-bottom: .4rem; }
+details.add { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+details.add fieldset { border: 0; margin: 0; padding: 0; }
+.small { font-size: .9rem; }
+ul.changes { margin: 0 0 1.5rem; padding-left: 1.2rem; }
+ul.changes li { margin: .35rem 0; }
 
 /* the consents: the operator's text, then a choice in each row */
 .consent-text { color: var(--muted); }
@@ -212,4 +233,12 @@ footer.site a { color: #fff; }
     table.contracts td { display: block; border: 0; padding: .1rem 0; }
     table.contracts td[data-label]::before { content: attr(data-label) ": "; color: var(--muted); }
     .signin { padding: 24px 0; }
+    .columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .columns .wider { grid-column: 1 / -1; }
+}
+
+/* a narrow phone: a field a row */
+@media (max-width: 560px) {
+    .columns { grid-template-columns: minmax(0, 1fr); }
+    .columns .wide, .columns .wider { grid-column: auto; }
 }

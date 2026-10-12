@@ -8,10 +8,16 @@ final readonly class Phone
     /**
      * @param string $id
      * @param string $phone
+     * @param bool $billing For invoices and reminders.
+     * @param bool $outages For outages and faults.
+     * @param bool $commercial For commercial messages.
      */
     public function __construct(
         public string $id,
         public string $phone,
+        public bool $billing,
+        public bool $outages,
+        public bool $commercial,
     ) {
     }
 
@@ -23,6 +29,12 @@ final readonly class Phone
      */
     public static function fromFields(Fields $fields): self
     {
-        return new self($fields->text('id'), $fields->text('phone'));
+        return new self(
+            $fields->text('id'),
+            $fields->text('phone'),
+            $fields->flag('use_for_billing'),
+            $fields->flag('use_for_outages'),
+            $fields->flag('use_for_commercial'),
+        );
     }
 }

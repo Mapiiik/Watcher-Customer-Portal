@@ -16,7 +16,7 @@ $lines = [
     __('Login') . ': ' . $customer->login,
     '',
 ];
-foreach ($request->changes as $change) {
+foreach ($request->lines() as $change) {
     $lines[] = '- ' . $change;
 }
 if ($request->note !== '') {
