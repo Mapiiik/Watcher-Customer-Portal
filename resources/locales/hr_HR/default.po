@@ -14,19 +14,19 @@ msgstr "Privola za obradu osobnih podataka"
 
 #: profiles/default/consent.php:14
 msgid "By ticking below I choose which messages I want to receive from {0} (the \"Controller\") at my contact details. For commercial communications I also give the Controller my consent to sending them and to processing my contact details for this purpose."
-msgstr "Označavanjem u nastavku biram koje poruke želim primati od {0} (u daljnjem tekstu „Voditelj obrade“) na svoje kontaktne podatke. Za komercijalne poruke Voditelju obrade ujedno dajem privolu za njihovo slanje i za obradu svojih kontaktnih podataka u tu svrhu."
+msgstr "Označavanjem u nastavku biram koje poruke želim primati od {0} (u daljnjem tekstu „Voditelj obrade“) na svoje kontaktne podatke. Za poslovne obavijesti time Voditelju obrade ujedno dajem privolu za njihovo slanje i za obradu svojih kontaktnih podataka u tu svrhu."
 
 #: profiles/default/consent.php:15
 msgid "I can change or withdraw my choice and consent at any time, here in the customer portal or through the contact details of the Controller. Withdrawing does not affect the lawfulness of the processing before it."
-msgstr "Izbor i privolu mogu u bilo kojem trenutku promijeniti ili povući, ovdje u korisničkom portalu ili putem kontaktnih podataka Voditelja obrade. Povlačenje ne utječe na zakonitost obrade prije njega."
+msgstr "Izbor i privolu mogu u bilo kojem trenutku promijeniti ili povući, ovdje na Korisničkom portalu ili putem kontaktnih podataka Voditelja obrade. Povlačenje privole ne utječe na zakonitost obrade na temelju privole prije njezina povlačenja."
 
 #: profiles/default/consent.php:17
 msgid "How the Controller processes personal data is described in its {0}."
-msgstr "Kako Voditelj obrade obrađuje osobne podatke, opisuje njegova {0}."
+msgstr "Kako Voditelj obrade obrađuje osobne podatke, opisuju njegova {0}."
 
 #: profiles/default/consent.php:17
 msgid "privacy policy"
-msgstr "politika privatnosti"
+msgstr "načela zaštite osobnih podataka"
 
 #: profiles/default/profile.php:15 profiles/default/profile.php:16
 msgid "Customer portal"
@@ -43,7 +43,7 @@ msgstr "Moji podaci"
 
 #: src/Controller/DetailsController.php:49
 msgid "Your consents have been saved."
-msgstr "Vaše suglasnosti su spremljene."
+msgstr "Privole su spremljene."
 
 #: src/Controller/DetailsController.php:68
 msgid "Nothing has changed, there is nothing to send."
@@ -361,7 +361,7 @@ msgstr "Natrag na moje podatke"
 
 #: templates/Details/index.php:17
 msgid "Changes of your details are checked before they apply. Your consents are saved straight away."
-msgstr "Izmjene podataka provjeravamo prije nego što stupe na snagu. Suglasnosti se spremaju odmah."
+msgstr "Izmjene podataka provjeravamo prije nego što stupe na snagu. Privole se spremaju odmah."
 
 #: templates/Details/index.php:29
 msgid "Name"
@@ -377,23 +377,23 @@ msgstr "Naplata i adrese"
 
 #: templates/Details/index.php:91
 msgid "Consents and messages"
-msgstr "Suglasnosti i poruke"
+msgstr "Privole i poruke"
 
 #: templates/Details/index.php:102
 msgid "I want to receive correspondence about the monthly billing"
-msgstr "Slažem se primati svu korespondenciju vezanu uz mjesečno naplaćivanje"
+msgstr "Želim primati korespondenciju povezanu s mjesečnim obračunom"
 
 #: templates/Details/index.php:109
 msgid "I want to receive information about outages and faults"
-msgstr "Slažem se primati obavijesti o prekidima i kvarovima."
+msgstr "Želim primati informacije o prekidima i kvarovima"
 
 #: templates/Details/index.php:116
 msgid "I agree to receive commercial communications"
-msgstr "Slažem se primati komercijalne komunikacije"
+msgstr "Pristajem na primanje poslovnih obavijesti"
 
 #: templates/Details/index.php:120
 msgid "Save consents"
-msgstr "Spremi suglasnosti"
+msgstr "Spremi privole"
 
 #: templates/Error/error400.php:8
 msgid "This page does not exist."
@@ -581,4 +581,4 @@ msgstr "Odjava"
 
 #: templates/layout/default.php:91
 msgid "Privacy policy"
-msgstr "Pravila privatnosti"
+msgstr "Načela zaštite osobnih podataka"
