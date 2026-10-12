@@ -68,6 +68,10 @@ $branding = fn(string $file): string => $this->Url->build('/branding/' . rawurle
 <?php endif; ?>
     </nav>
 <?php if ($customer !== null) : ?>
+    <div class="who" title="<?= h($customer->customerName) ?>">
+        <strong><?= h($customer->customerName) ?></strong>
+        <span><?= h(__('Customer number {0}', $customer->customerNumber)) ?></span>
+    </div>
     <?= $this->Form->create(null, [
         'url' => ['controller' => 'SignIn', 'action' => 'signOut'],
         'class' => 'sign-out',
