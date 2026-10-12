@@ -12,9 +12,12 @@ RUN composer install \
     --no-interaction \
     --no-progress \
     --no-scripts \
-    --classmap-authoritative \
+    --no-autoloader \
     --ignore-platform-req=php \
     --ignore-platform-req=ext-intl
+# the classmap is built from the code, so the code has to be there first
+COPY src/ ./src/
+RUN composer dump-autoload --no-dev --classmap-authoritative
 
 ############################
 # Runtime
@@ -49,16 +52,20 @@ RUN cp $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini \
 ############################
 COPY --from=vendor /app/vendor /app/vendor
 COPY composer.json /app/
+COPY bin/ /app/bin/
+COPY config/ /app/config/
 COPY src/ /app/src/
-COPY profiles/ /app/profiles/
-COPY public/ /app/public/
+COPY templates/ /app/templates/
+COPY webroot/ /app/webroot/
 COPY resources/ /app/resources/
+COPY profiles/ /app/profiles/
 
 ############################
 # Caddy configuration
 ############################
 # Shared by all our Caddy servers: PROXY protocol always on, LISTENER_MODE direct or behind-proxy
 COPY caddy/ /etc/frankenphp/
+ENV SERVER_ROOT=webroot/
 
 ############################
 # Non-root runtime
@@ -69,9 +76,9 @@ RUN \
     setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/frankenphp; \
     # Give write access to /config/caddy and /data/caddy
     chown -R ${APPLICATION_USER}:${APPLICATION_USER} /config/caddy /data/caddy; \
-    # Sessions, in a volume that outlives the container
-    mkdir -p /app/sessions; \
-    chown ${APPLICATION_USER}:${APPLICATION_USER} /app/sessions; \
+    # The framework's cache, and the sessions in a volume that outlives the container
+    mkdir -p /app/tmp/cache /app/logs /app/sessions; \
+    chown -R ${APPLICATION_USER}:${APPLICATION_USER} /app/tmp /app/logs /app/sessions; \
     chmod 700 /app/sessions
 
 USER ${APPLICATION_USER}

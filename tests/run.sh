@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 # Runs the production image of the portal against the development Watcher CRM, once with the
-# default profile and once with every profile in data/*/profile: lint, undefined constants,
-# attacks on signing in, every page with all errors shown, sending the customer data form.
-# Everything it creates is removed again.
+# default profile and once with every profile in data/*/profile: signing in and out, attacks on
+# the forms, every page with all errors shown, the consents, a change request (caught by Mailpit),
+# the password and the old addresses. Everything it creates is removed again.
 #
 # Usage: tests/run.sh
 # Needs the Watcher CRM development containers (web server, database and their network) running.
 set -u
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 DB_CONTAINER=${DEV_DB_CONTAINER:-watcher-crm-database-dev-1}
+CRM_CONTAINER=${DEV_CRM_CONTAINER:-watcher-crm-webserver-dev-1}
 NETWORK=${DEV_NETWORK:-watcher-crm_default}
 # the database the development CRM works with, where its test login and API user go
 DEV_DB=${DEV_DB:-watcher_crm}
@@ -16,23 +17,26 @@ DEV_DB=${DEV_DB:-watcher_crm}
 CRM_HOST=${DEV_CRM_HOST:-webserver-dev:443}
 PORT=${PORT:-18443}
 RUN=customer-portal-test
+MAIL=customer-portal-mailpit
 TMP="$ROOT/tests/.tmp"
+PASSWORD=Test-Password-2026
 dk() { MSYS_NO_PATHCONV=1 docker "$@"; }
 psql() { dk exec -i "$DB_CONTAINER" psql -U postgres -q -v ON_ERROR_STOP=1 "$@"; }
 random() { head -c "$1" /dev/urandom | od -An -tx1 | tr -d ' \n'; }
 host_path() { if command -v cygpath >/dev/null; then cygpath -w "$1"; else echo "$1"; fi; }
 
 cd "$ROOT" || exit 1
-PW=$(dk inspect "$DB_CONTAINER" --format '{{range .Config.Env}}{{println .}}{{end}}' | sed -n 's/^POSTGRES_PASSWORD=//p')
 API_KEY=$(random 24)
-SHA=$(printf 'Test-Password-2026' | sha1sum | cut -c1-40)
+SHA=$(printf '%s' "$PASSWORD" | sha1sum | cut -c1-40)
 FAILED=0
+ok() { printf "  %-60s %s\n" "$1" "$2"; }
+fail() { printf "FAIL %-56s %s\n" "$1" "$2"; FAILED=1; }
 
 cleanup() {
-  dk rm -f $RUN >/dev/null 2>&1
+  dk rm -f $RUN $MAIL >/dev/null 2>&1
   # the API user stays, as what it changed names it, but without a key that works
   psql -d "$DEV_DB" -c "DELETE FROM logins WHERE login = 'zz-portal-test'" \
-    -c "UPDATE users SET active = false, api_token = NULL WHERE username = 'zz-portal-test'"
+    -c "UPDATE users SET active = false, api_token = NULL WHERE username = 'zz-portal-test'" >/dev/null
   rm -rf "$TMP"
 }
 trap cleanup EXIT
@@ -46,150 +50,152 @@ dk build -q -t watcher-customer-portal:test tests >/dev/null || exit 1
 psql -d "$DEV_DB" -c "INSERT INTO users (username, password, active, role, created, modified)
   SELECT 'zz-portal-test', '!', false, 'customer-portal', now(), now()
   WHERE NOT EXISTS (SELECT 1 FROM users WHERE username = 'zz-portal-test')" \
-  -c "UPDATE users SET active = true, role = 'customer-portal', api_token = '$API_KEY' WHERE username = 'zz-portal-test'"
+  -c "UPDATE users SET active = true, role = 'customer-portal', api_token = '$API_KEY' WHERE username = 'zz-portal-test'" >/dev/null
+dk run -d --name $MAIL --network "$NETWORK" axllent/mailpit:v1.27 >/dev/null || exit 1
 
 # the default profile, then each one an operator keeps in data/
 PROFILES="default $(ls -d data/*/profile 2>/dev/null | cut -d/ -f2 | tr '\n' ' ')"
 for PROFILE in $PROFILES; do
   echo "== profile $PROFILE"
   dk rm -f $RUN >/dev/null 2>&1
+  # the CRM counts the failed sign-ins this walk makes on purpose, and would block the next ones
+  dk exec "$CRM_CONTAINER" bin/cake cache clear default >/dev/null
   psql -d "$DEV_DB" -c "DELETE FROM logins WHERE login = 'zz-portal-test'" -c "INSERT INTO logins (id, login, password, rights, locked, customer_id, created, modified)
     SELECT uuid_generate_v4(), 'zz-portal-test', '$SHA', 1, false,
-      (SELECT customer_id FROM invoices GROUP BY customer_id ORDER BY count(*) DESC LIMIT 1), now(), now()"
+      (SELECT customer_id FROM invoices GROUP BY customer_id ORDER BY count(*) DESC LIMIT 1), now(), now()" >/dev/null
+  CUSTOMER="(SELECT customer_id FROM logins WHERE login = 'zz-portal-test')"
   MOUNT=()
   [ "$PROFILE" != default ] && MOUNT=(-v "$(host_path "$ROOT/data/$PROFILE/profile"):/app/profile:ro")
   # the language and currency an operator's deployment sets, the defaults (en_US, EUR) otherwise
   [ -f "data/$PROFILE/test.env" ] && MOUNT+=(--env-file "data/$PROFILE/test.env")
   dk run -d --name $RUN --network "$NETWORK" -p $PORT:443 "${MOUNT[@]}" \
     -e SERVER_NAME=localhost -e OPERATOR_NAME="Test Operator, s.r.o." -e OPERATOR_WEBSITE=https://www.example.net \
-    -e PRIVACY_POLICY_URL=https://www.example.net/privacy -e PORTAL_DEBUG=true \
+    -e PRIVACY_POLICY_URL=https://www.example.net/privacy -e SUPPORT_PHONE="+420 000 000 000" -e SUPPORT_EMAIL=support@example.net \
+    -e PAYMENT_ACCOUNT=123456789/0100 \
     -e CRM_API_URL=https://localhost:8443/api/customer-portal -e CRM_API_KEY="$API_KEY" -e CRM_API_VERIFY_TLS=false \
-    -e SMTP_HOST=127.0.0.1 -e SMTP_PORT=2525 -e SMTP_SECURE=none -e MAIL_FROM=portal@example.net \
-    -e CHANGE_REQUESTS_TO=nobody@example.invalid \
+    -e SMTP_HOST=$MAIL -e SMTP_PORT=1025 -e SMTP_SECURE=none -e MAIL_FROM=portal@example.net \
+    -e CHANGE_REQUESTS_TO=contracts@example.invalid \
     watcher-customer-portal:test >/dev/null || exit 1
   dk exec -d $RUN socat TCP-LISTEN:8443,fork,reuseaddr TCP:$CRM_HOST
-  dk cp tests/security-test.php $RUN:/tmp/security-test.php
-  dk cp tests/undefined-constants.php $RUN:/tmp/undefined-constants.php
   sleep 3
 
-  echo "-- lint"
-  LINT=$(dk exec $RUN sh -c "find /app/src /app/public /app/profiles /app/profile -name '*.php' -exec php -l {} \; 2>/dev/null | grep -v '^No syntax errors'")
-  [ -n "$LINT" ] && { echo "$LINT"; FAILED=1; }
+  B=https://localhost:$PORT
+  J="$TMP/cookies"
+  H="$TMP/headers"
+  rm -f "$J"
+  c() { curl -sk -b "$J" -c "$J" "$@"; }
+  page() { c -D "$H" -o "$TMP/body" -w '%{http_code}' "$B$1"; }
+  token() { grep -o 'name="_csrfToken"[^>]*value="[^"]*"' "$TMP/body" | head -1 | sed 's/.*value="//; s/"$//'; }
+  problems() { sed -e 's/<[^>]*>//g' "$TMP/body" | grep -c -i -E "warning|fatal|deprecated|notice|uncaught|not available right now|nije dostupan|není dostupný"; }
 
-  echo "-- constants"
-  dk exec $RUN php /tmp/undefined-constants.php 2>&1 | tee "$TMP/constants.txt"
-  grep -q '^0 undefined' "$TMP/constants.txt" || FAILED=1
-
-  echo "-- attacks on signing in and on the CRM's answers"
-  dk exec -e "ADMIN_DSN=host=$DB_CONTAINER user=postgres password=$PW dbname=$DEV_DB" -e "TEST_IP=192.0.2.$((RANDOM % 250 + 1))" \
-    $RUN php -d error_reporting=-1 /tmp/security-test.php | grep -E '^(FAIL|ALL|[0-9]+ FAILED)|Deprecated|Fatal|Warning' \
-    | tee "$TMP/security.txt"
-  grep -q '^ALL PASSED' "$TMP/security.txt" || FAILED=1
+  echo "-- signing in"
+  code=$(page /invoices)
+  [ "$code" = 302 ] && grep -qi '^location: .*/sign-in' "$H" && ok "a page without signing in" "sends to signing in" || fail "a page without signing in" "$code"
+  grep -qi "^set-cookie: __Host-portal=.*path=/; secure; HttpOnly; SameSite=Lax" "$H" && ok "the session cookie" "__Host-, Secure, HttpOnly, Lax" || fail "the session cookie" "flags"
+  code=$(page /sign-in)
+  grep -qi "^content-security-policy: default-src 'self'; img-src" "$H" && ok "the content security policy" "no inline" || fail "the content security policy" "missing"
+  grep -qi '^cache-control: no-store' "$H" && ok "the sign-in page" "no-store" || fail "the sign-in page" "is cacheable"
+  grep -q '<script\|style="' "$TMP/body" && fail "the sign-in page" "has inline script or style"
+  T=$(token)
+  code=$(c -o /dev/null -w '%{http_code}' -H "Origin: https://attacker.example" --data-urlencode "_csrfToken=$T" \
+    --data-urlencode login=zz-portal-test --data-urlencode password=$PASSWORD "$B/sign-in")
+  [ "$code" = 403 ] && ok "a sign-in from another site" "403" || fail "a sign-in from another site" "$code"
+  code=$(c -o /dev/null -w '%{http_code}' --data-urlencode login=zz-portal-test --data-urlencode password=$PASSWORD "$B/sign-in")
+  [ "$code" = 403 ] && ok "a sign-in without the session token" "403" || fail "a sign-in without the session token" "$code"
+  code=$(c -o "$TMP/body" -w '%{http_code}' --data-urlencode "_csrfToken=$T" --data-urlencode login=zz-portal-test \
+    --data-urlencode password=wrong "$B/sign-in")
+  [ "$code" = 200 ] && grep -q 'class="alert error"' "$TMP/body" && ok "a wrong password" "refused" || fail "a wrong password" "$code"
+  BEFORE=$(grep __Host-portal "$J" | awk '{print $NF}')
+  code=$(c -D "$H" -o /dev/null -w '%{http_code}' --data-urlencode "_csrfToken=$T" --data-urlencode login=zz-portal-test \
+    --data-urlencode password=$PASSWORD "$B/sign-in")
+  AFTER=$(grep __Host-portal "$J" | awk '{print $NF}')
+  [ "$code" = 302 ] || [ "$code" = 303 ] && ok "the right password" "signed in ($code)" || fail "the right password" "$code"
+  [ "$BEFORE" != "$AFTER" ] && ok "the session id" "renewed on signing in" || fail "the session id" "kept on signing in"
+  [ "$(psql -d "$DEV_DB" -Atc "SELECT left(password, 10) FROM logins WHERE login = 'zz-portal-test'")" = '$argon2id$' ] \
+    && ok "the stored password" "Argon2id" || fail "the stored password" "not Argon2id"
 
   echo "-- pages"
-  B=https://localhost:$PORT
-  H="$TMP/http"
-  c() { curl -sk "$@"; }
-  c -D "$H" -o /dev/null "$B/index.php?sid=attackerchosen123"
-  C1=$(grep -i "^set-cookie: __Host-portal" "$H" | head -1 | sed -E 's/.*__Host-portal=([^;]+).*/\1/')
-  grep -qi "^set-cookie: __Host-portal=.*path=/; secure; HttpOnly; SameSite=Lax" "$H" || { echo "FAIL cookie flags"; FAILED=1; }
-  [ "$C1" != attackerchosen123 ] || { echo "FAIL session id from the address accepted"; FAILED=1; }
-  c -D "$H" -o /dev/null -H "Cookie: __Host-portal=$C1" --data-urlencode login_me=yes \
-    --data-urlencode login=zz-portal-test --data-urlencode password=Test-Password-2026 "$B/index.php"
-  C2=$(grep -i "^set-cookie: __Host-portal" "$H" | tail -1 | sed -E 's/.*__Host-portal=([^;]+).*/\1/')
-  [ -n "$C2" ] && [ "$C2" != "$C1" ] || { echo "FAIL no new session id after signing in"; FAILED=1; }
-
-  for p in index.php menu.php introduction.php/2026/10/ reports/invoices.php reports/customer-data.php \
-           administration/password.php "reports/invoices.php?invoice=00000000-0000-0000-0000-000000000000"; do
-    code=$(c -o "$H.body" -w '%{http_code}' -H "Cookie: __Host-portal=$C2" "$B/$p")
-    # the system error is what the portal says when the CRM did not answer
-    bad=$(sed -e 's/<[^>]*>//g' "$H.body" | grep -c -i -E "warning|fatal|deprecated|notice|uncaught|System error|Chyba systému|Greška sustava")
-    printf "  %-66s %s problems=%s bytes=%s\n" "$p" "$code" "$bad" "$(wc -c < "$H.body")"
-    sed -e 's/<[^>]*>//g' "$H.body" | grep -o -i -E "(warning|fatal error|deprecated|notice|uncaught)[^:]*:.{0,170}" | sort -u | head -5 | sed 's/^/      /'
+  for p in / /invoices /details /details/change /password; do
+    code=$(page "$p")
+    bad=$(problems)
+    printf "  %-60s %s problems=%s\n" "$p" "$code" "$bad"
     [ "$code" = 200 ] && [ "$bad" = 0 ] || FAILED=1
+    grep -q '<script\|style="' "$TMP/body" && fail "$p" "has inline script or style"
   done
+  page /details >/dev/null
+  grep -q 'name="agree_mailing_billing"' "$TMP/body" && ok "/details" "shows the consents" || fail "/details" "has no consents"
+  case "$PROFILE" in
+    netair) page / >/dev/null; grep -q 'Přehled' "$TMP/body" && grep -q 'Kč' "$TMP/body" && ok "/" "Czech, CZK" || fail "/" "not Czech or not CZK" ;;
+    multikomunikacije) page / >/dev/null; grep -q 'Pregled' "$TMP/body" && grep -q '€' "$TMP/body" && ok "/" "Croatian, EUR" || fail "/" "not Croatian or not EUR" ;;
+    default) page / >/dev/null; grep -q 'Overview' "$TMP/body" && ok "/" "English" || fail "/" "not English" ;;
+  esac
 
-  # every page: kept by no cache, framed by nobody else, nothing loaded from elsewhere
-  c -D "$H" -o /dev/null -H "Cookie: __Host-portal=$C2" "$B/reports/invoices.php"
-  for header in "cache-control: no-store" "content-security-policy: default-src 'self'.*frame-ancestors 'self'" \
-                "strict-transport-security: max-age=" "x-content-type-options: nosniff" "referrer-policy: same-origin"; do
-    grep -qi "^$header" "$H" && printf "  %-66s %s\n" "reports/invoices.php" "${header%%:*}" \
-      || { echo "FAIL reports/invoices.php has no $header"; FAILED=1; }
-  done
-  grep -qi "^server:" "$H" && { echo "FAIL the server names itself"; FAILED=1; }
-  # an invoice of the customer, if the development CRM has its PDF
-  INVOICE=$(c -H "Cookie: __Host-portal=$C2" "$B/reports/invoices.php" | grep -o 'invoices.php?invoice=[0-9a-f-]\{36\}' | head -1)
-  code=$(c -D "$H" -o "$H.body" -w '%{http_code}' -H "Cookie: __Host-portal=$C2" "$B/reports/$INVOICE")
-  if head -c 4 "$H.body" | grep -q '%PDF'; then
+  echo "-- an invoice"
+  page /invoices >/dev/null
+  INVOICE=$(grep -o 'href="/invoices/[0-9a-f-]\{36\}"' "$TMP/body" | head -1 | cut -d'"' -f2)
+  code=$(page "$INVOICE")
+  if head -c 4 "$TMP/body" | grep -q '%PDF'; then
     grep -qi '^content-type: application/pdf' "$H" && grep -qi '^cache-control: private, no-store' "$H" \
-      && grep -qi '^content-disposition: attachment' "$H" \
-      && echo "  invoice PDF                                                        pdf, private, no-store, attachment" \
-      || { echo "FAIL the invoice PDF headers"; grep -i '^content-\|^cache' "$H"; FAILED=1; }
+      && grep -qi '^content-disposition: attachment' "$H" && ok "$INVOICE" "PDF, private, attachment" || fail "$INVOICE" "headers"
   else
-    echo "  invoice PDF                                                        not in the development CRM ($code), headers not checked"
+    ok "$INVOICE" "no PDF in the development CRM ($code)"
   fi
-  # a form sent from another site is refused, one from the portal's own page is taken
-  for h in "Origin: https://attacker.example" "Sec-Fetch-Site: cross-site" "Sec-Fetch-Site: same-site" "Origin: null"; do
-    code=$(c -o /dev/null -w '%{http_code}' -H "Cookie: __Host-portal=$C2" -H "$h" --data-urlencode set_password=yes "$B/administration/password.php")
-    [ "$code" = 403 ] && printf "  %-66s %s\n" "POST with $h" "403" || { echo "FAIL POST with $h answered $code"; FAILED=1; }
-  done
-  code=$(c -o /dev/null -w '%{http_code}' -H "Cookie: __Host-portal=$C2" -H "Origin: $B" -H "Sec-Fetch-Site: same-origin" "$B/administration/password.php" --data-urlencode set_password=no)
-  [ "$code" = 200 ] && printf "  %-66s %s\n" "POST from the portal itself" "200" \
-    || { echo "FAIL POST from the portal itself answered $code"; FAILED=1; }
+  code=$(page /invoices/00000000-0000-0000-0000-000000000000)
+  [ "$code" = 404 ] && ok "an invoice of nobody" "404" || fail "an invoice of nobody" "$code"
 
-  # sending the customer data form saves the consents and compares what was typed with what the CRM
-  # holds; both are put back as they were afterwards
-  CUSTOMER="(SELECT customer_id FROM logins WHERE login = 'zz-portal-test')"
+  echo "-- the consents and a change request"
   CONSENTS=$(psql -d "$DEV_DB" -Atc "SELECT concat_ws(',', agree_gdpr, agree_mailing_billing, agree_mailing_outages, agree_mailing_commercial, modified_by) FROM customers WHERE id = $CUSTOMER")
   LABELLED=$(psql -d "$DEV_DB" -Atc "SELECT count(*) FROM customer_labels JOIN labels ON (labels.id = label_id) WHERE customer_id = $CUSTOMER AND labels.name = 'GDPR'")
-  code=$(c -o "$H.body" -w '%{http_code}' -H "Cookie: __Host-portal=$C2" --data-urlencode agree_gdpr=yes \
-    --data-urlencode agree_mailing_billing=yes --data-urlencode company=Changed --data-urlencode 'email[new][email]=' \
-    --data-urlencode 'phone[new][phone]=' --data-urlencode 'address[new][street]=Somewhere' "$B/reports/customer-data.php")
-  bad=$(sed -e 's/<[^>]*>//g' "$H.body" | grep -c -i -E "warning|fatal|deprecated|notice|uncaught|System error|Chyba systému|Greška sustava")
-  printf "  %-66s %s problems=%s\n" "POST reports/customer-data.php" "$code" "$bad"
-  [ "$code" = 200 ] && [ "$bad" = 0 ] && grep -q ' OK' "$H.body" || FAILED=1
+  page /details >/dev/null
+  code=$(c -o /dev/null -w '%{http_code}' --data-urlencode "_csrfToken=$(token)" --data-urlencode agree_mailing_billing=1 \
+    --data-urlencode agree_mailing_outages=0 --data-urlencode agree_mailing_commercial=0 "$B/details/consents")
+  [ "$(psql -d "$DEV_DB" -Atc "SELECT concat_ws(',', agree_mailing_billing, agree_mailing_outages) FROM customers WHERE id = $CUSTOMER")" = "t,f" ] \
+    && ok "/details/consents ($code)" "saved in the CRM" || fail "/details/consents" "$code, not saved"
   IFS=, read -r G B1 O C M <<< "$CONSENTS"
-  psql -d "$DEV_DB" -c "UPDATE customers SET agree_gdpr = '$G', agree_mailing_billing = '$B1', agree_mailing_outages = '$O', agree_mailing_commercial = '$C', modified_by = NULLIF('$M', '')::uuid WHERE id = $CUSTOMER" || FAILED=1
-  [ "$LABELLED" = 0 ] && psql -d "$DEV_DB" -c "DELETE FROM customer_labels WHERE customer_id = $CUSTOMER AND note = 'form' AND label_id IN (SELECT id FROM labels WHERE name = 'GDPR')"
+  psql -d "$DEV_DB" -c "UPDATE customers SET agree_gdpr = '$G', agree_mailing_billing = '$B1', agree_mailing_outages = '$O', agree_mailing_commercial = '$C', modified_by = NULLIF('$M', '')::uuid WHERE id = $CUSTOMER" >/dev/null || FAILED=1
+  [ "$LABELLED" = 0 ] && psql -d "$DEV_DB" -c "DELETE FROM customer_labels WHERE customer_id = $CUSTOMER AND note = 'form' AND label_id IN (SELECT id FROM labels WHERE name = 'GDPR')" >/dev/null
+  dk exec $MAIL wget -q -O - --method=DELETE http://localhost:8025/api/v1/messages >/dev/null 2>&1
+  page /details/change >/dev/null
+  code=$(c -o /dev/null -w '%{http_code}' --data-urlencode "_csrfToken=$(token)" --data-urlencode company="Nested Change Ltd" \
+    --data-urlencode note="A test of the portal." "$B/details/change")
+  sleep 1
+  dk exec $MAIL wget -q -O - http://localhost:8025/api/v1/messages > "$TMP/mail.json" 2>/dev/null
+  grep -q 'contracts@example.invalid' "$TMP/mail.json" && grep -q 'Nested Change Ltd' "$TMP/mail.json" \
+    && ok "/details/change ($code)" "mailed with the change" || fail "/details/change" "$code, no mail with the change"
 
-  # and they show what the CRM answered, not just no error
-  expect() {
-    c -H "Cookie: __Host-portal=$C2" "$B/$1" | grep -q "$2" && printf "  %-66s shows %s\n" "$1" "$3" \
-      || { printf "FAIL %-61s shows no %s\n" "$1" "$3"; FAILED=1; }
-  }
-  expect reports/customer-data.php 'name="varsym" type="text" value="[0-9]' "the customer number"
-  expect reports/invoices.php 'invoices.php?invoice=[0-9a-f-]\{36\}' "invoices"
-  case "$PROFILE" in
-    # ICU puts a no-break space between the amount and the currency
-    netair) expect menu.php 'Uživatelské údaje' "Czech"; expect reports/invoices.php '[0-9],[0-9][0-9].\{1,3\}Kč' "prices in CZK" ;;
-    multikomunikacije) expect menu.php 'Korisnički podaci' "Croatian"; expect reports/invoices.php '[0-9],[0-9][0-9].\{1,3\}€' "prices in EUR" ;;
-    default) expect menu.php 'Customer data' "English"; expect reports/invoices.php '€[0-9]' "prices in EUR" ;;
-  esac
-  # the sign-in page, the one with the footer
-  c "$B/index.php" | grep -q 'www.example.net">Test Operator, s.r.o.</a>' && echo "  index.php signed out                                               shows the operator in the footer" \
-    || { echo "FAIL index.php signed out shows no operator in the footer"; FAILED=1; }
-  if [ "$PROFILE" = default ]; then
-    expect reports/customer-data.php 'Test Operator, s.r.o.' "the operator in the consents"
-  else
-    expect menu.php 'branding.php?file=logo' "the profile's logo"
-    expect index.php 'rel="icon" href="/branding.php?file=favicon-32.png" type="image/png" sizes="32x32"' "the favicon"
-    expect menu.php 'rel="apple-touch-icon"' "the home screen icon"
-    c "$B/index.php" | grep -q 'rel="icon"' && echo "  index.php signed out                                               shows the favicon" \
-      || { echo "FAIL index.php signed out shows no favicon"; FAILED=1; }
-  fi
+  echo "-- the password"
+  page /password >/dev/null
+  code=$(c -o "$TMP/body" -w '%{http_code}' --data-urlencode "_csrfToken=$(token)" --data-urlencode current_password=wrong \
+    --data-urlencode new_password=$PASSWORD --data-urlencode new_password_again=$PASSWORD "$B/password")
+  grep -q 'class="alert error"' "$TMP/body" && ok "a wrong current password" "refused" || fail "a wrong current password" "$code"
+  page /password >/dev/null
+  code=$(c -o /dev/null -w '%{http_code}' --data-urlencode "_csrfToken=$(token)" --data-urlencode current_password=$PASSWORD \
+    --data-urlencode new_password=$PASSWORD --data-urlencode new_password_again=$PASSWORD "$B/password")
+  [ "$code" = 302 ] || [ "$code" = 303 ] && ok "the right current password" "changed ($code)" || fail "the right current password" "$code"
 
-  echo "-- branding"
-  [ "$(c -o /dev/null -w '%{http_code}' "$B/branding.php?file=../profile.php")" = 404 ] || { echo "FAIL a path outside assets/ is served"; FAILED=1; }
-  [ "$(c -o /dev/null -w '%{http_code}' "$B/branding.php?file=profile.php")" = 404 ] || { echo "FAIL a PHP file is served"; FAILED=1; }
+  echo "-- branding and old addresses"
   if [ "$PROFILE" != default ]; then
-    for f in colors.css favicon-32.png; do
-      code=$(c -o /dev/null -w '%{http_code} %{content_type}' "$B/branding.php?file=$f")
-      echo "  $f $code"
-      [ "${code%% *}" = 200 ] || FAILED=1
-    done
+    code=$(c -D "$H" -o /dev/null -w '%{http_code}' "$B/branding/colors.css")
+    [ "$code" = 200 ] && grep -qi '^content-security-policy: default-src .none.' "$H" && ok "/branding/colors.css" "200, sandboxed" || fail "/branding/colors.css" "$code"
+    page / >/dev/null
+    grep -q 'rel="icon" href="/branding/favicon-32.png"' "$TMP/body" && ok "/" "the profile's favicon" || fail "/" "no favicon"
   fi
-  [ "$(c -o /dev/null -w '%{http_code}' "$B/fonts/jost-latin.woff2")" = 200 ] || { echo "FAIL the font is not served"; FAILED=1; }
-  c "$B/style/portal.css" | grep -q "googleapis" && { echo "FAIL the CSS still loads from Google"; FAILED=1; }
+  for p in "/branding/..%2Fprofile.php" /branding/profile.php; do
+    code=$(c -o /dev/null -w '%{http_code}' "$B$p")
+    [ "$code" = 404 ] && ok "$p" "404" || fail "$p" "$code"
+  done
+  for p in "/index.php /" "/menu.php /" "/reports/customer-data.php /details" "/administration/password.php /password"; do
+    set -- $p
+    loc=$(c -o /dev/null -w '%{http_code} %{redirect_url}' "$B$1")
+    [ "$loc" = "301 $B$2" ] && ok "$1" "→ $2" || fail "$1" "$loc"
+  done
+  c -o /dev/null "$B/vendor/jost/jost-latin.woff2" -w '%{http_code}' | grep -q 200 && ok "the font" "served from webroot/vendor" || fail "the font" "not served"
+
+  echo "-- signing out"
+  before=$(page /)
+  out=$(c -o /dev/null -w '%{http_code}' --data-urlencode "_csrfToken=$(token)" "$B/sign-out")
+  code=$(page /)
+  [ "$code" = 302 ] && ok "after signing out" "signed in no more" || fail "after signing out" "/ $before, sign-out $out, / $code"
 done
 
 [ $FAILED = 0 ] && echo "== ALL PASSED" || echo "== FAILED"

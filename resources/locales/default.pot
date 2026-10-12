@@ -1,286 +1,608 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Watcher Customer Portal\n"
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2026-10-12 08:01+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-msgid "Access denied"
-msgstr ""
-
-msgid "Access granted"
-msgstr ""
-
-msgid "Account locked"
-msgstr ""
-
-msgid "Account number"
-msgstr ""
-
-msgid "Additional settings"
-msgstr ""
-
-msgid "Bank"
-msgstr ""
-
-msgid "Bank code"
-msgstr ""
-
-msgid "Bank details"
-msgstr ""
-
-msgid "Billing address"
-msgstr ""
-
-msgid "Billing details"
-msgstr ""
-
-msgid "By ticking below I choose which messages I want to receive from %s (the \"Controller\") at my contact details. For commercial communications I also give the Controller my consent to sending them and to processing my contact details for this purpose."
-msgstr ""
-
-msgid "Change password"
-msgstr ""
-
-msgid "City"
-msgstr ""
-
-msgid "Click an invoice number to show the invoice"
-msgstr ""
-
-msgid "Company"
-msgstr ""
-
-msgid "Company ID"
-msgstr ""
-
-msgid "Confirm password"
-msgstr ""
-
-msgid "Confirm sending"
-msgstr ""
-
-msgid "Confirm the change?"
-msgstr ""
-
+#: ./profiles/default/consent.php:12
 msgid "Consent to the processing of personal data"
 msgstr ""
 
-msgid "Consent to the processing of personal data is required. Without it no contract can be concluded and no service provided."
+#: ./profiles/default/consent.php:14
+msgid "By ticking below I choose which messages I want to receive from {0} (the \"Controller\") at my contact details. For commercial communications I also give the Controller my consent to sending them and to processing my contact details for this purpose."
 msgstr ""
 
-msgid "Contract"
-msgstr ""
-
-msgid "Country"
-msgstr ""
-
-msgid "Customer"
-msgstr ""
-
-msgid "Customer data"
-msgstr ""
-
-msgid "Customer portal"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Date of birth"
-msgstr ""
-
-msgid "Debt"
-msgstr ""
-
-msgid "Delivery address"
-msgstr ""
-
-msgid "Due date"
-msgstr ""
-
-msgid "E-mail"
-msgstr ""
-
-msgid "File not found!"
-msgstr ""
-
-msgid "First name"
-msgstr ""
-
-msgid "Here are your details. You can correct them and send them for processing: they change only after they have been checked."
-msgstr ""
-
-msgid "Here you can change the password you sign in with."
-msgstr ""
-
-msgid "Here you can correct or complete your details and send them for processing."
-msgstr ""
-
-msgid "Here you see all invoices issued to you: the variable symbol, the date of issue, the due date, the date of payment and the amount. An amount in the Debt column means the invoice has not been paid."
-msgstr ""
-
-msgid "Home page"
-msgstr ""
-
-msgid "House number"
-msgstr ""
-
-msgid "How the Controller processes personal data is described in its %s."
-msgstr ""
-
-msgid "I agree to receive commercial communications"
-msgstr ""
-
+#: ./profiles/default/consent.php:15
 msgid "I can change or withdraw my choice and consent at any time, here in the customer portal or through the contact details of the Controller. Withdrawing does not affect the lawfulness of the processing before it."
 msgstr ""
 
-msgid "I want to receive correspondence about the monthly billing"
+#: ./profiles/default/consent.php:17
+msgid "How the Controller processes personal data is described in its {0}."
 msgstr ""
 
-msgid "I want to receive information about outages and faults"
-msgstr ""
-
-msgid "ID card number"
-msgstr ""
-
-msgid "IP address"
-msgstr ""
-
-msgid "Installation address"
-msgstr ""
-
-msgid "Invoice"
-msgstr ""
-
-msgid "Invoice delivery"
-msgstr ""
-
-msgid "Invoice number"
-msgstr ""
-
-msgid "Invoices"
-msgstr ""
-
-msgid "Last name"
-msgstr ""
-
-msgid "Login"
-msgstr ""
-
-msgid "New password"
-msgstr ""
-
-msgid "Not found"
-msgstr ""
-
-msgid "Paid"
-msgstr ""
-
-msgid "Password"
-msgstr ""
-
-msgid "Permanent address"
-msgstr ""
-
-msgid "Phone"
-msgstr ""
-
-msgid "Postcode"
-msgstr ""
-
-msgid "Really remove?"
-msgstr ""
-
-msgid "Saving the new settings"
-msgstr ""
-
-msgid "Security error"
-msgstr ""
-
-msgid "Show on map"
-msgstr ""
-
-msgid "Sign out"
-msgstr ""
-
-msgid "Signed in"
-msgstr ""
-
-msgid "Street"
-msgstr ""
-
-msgid "Suffix"
-msgstr ""
-
-msgid "System error!"
-msgstr ""
-
-msgid "Text"
-msgstr ""
-
-msgid "The menu offers the following:"
-msgstr ""
-
-msgid "The passwords do not match!"
-msgstr ""
-
-msgid "This page uses frames, which your browser does not support."
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Too many failed attempts, please try again in a while"
-msgstr ""
-
-msgid "Total"
-msgstr ""
-
-msgid "Use for billing"
-msgstr ""
-
-msgid "Use for commercial messages"
-msgstr ""
-
-msgid "Use for outages"
-msgstr ""
-
-msgid "VAT number"
-msgstr ""
-
-msgid "Variable symbol"
-msgstr ""
-
-msgid "Website"
-msgstr ""
-
-msgid "You also see the IP addresses assigned to you."
-msgstr ""
-
-msgid "You are not signed in, please sign in"
-msgstr ""
-
-msgid "You can also give your consent to the processing of personal data here."
-msgstr ""
-
-msgid "You can download an invoice as a PDF by clicking its number."
-msgstr ""
-
-msgid "You have signed in to the customer portal."
-msgstr ""
-
-msgid "Your IP address has changed"
-msgstr ""
-
-msgid "Your details have been sent for processing..."
-msgstr ""
-
-msgid "do not send..."
-msgstr ""
-
+#: ./profiles/default/consent.php:17
 msgid "privacy policy"
 msgstr ""
 
-msgid "send by e-mail..."
+#: ./profiles/default/profile.php:15
+#: ./profiles/default/profile.php:16
+msgid "Customer portal"
+msgstr ""
+
+#: ./profiles/default/profile.php:24
+#: ./templates/Overview/index.php:45
+msgid "Invoice"
+msgstr ""
+
+#: ./src/Controller/DetailsController.php:29
+#: ./templates/Details/change.php:52
+#: ./templates/Details/index.php:16
+#: ./templates/layout/default.php:16
+msgid "My details"
+msgstr ""
+
+#: ./src/Controller/DetailsController.php:49
+msgid "Your consents have been saved."
+msgstr ""
+
+#: ./src/Controller/DetailsController.php:68
+msgid "Nothing has changed, there is nothing to send."
+msgstr ""
+
+#: ./src/Controller/DetailsController.php:77
+msgid "Change of customer details: {0}"
+msgstr ""
+
+#: ./src/Controller/DetailsController.php:94
+msgid "Your request could not be sent, please try again later."
+msgstr ""
+
+#: ./src/Controller/DetailsController.php:100
+msgid "Your details have been sent for processing. They change once they have been checked."
+msgstr ""
+
+#: ./src/Controller/DetailsController.php:108
+#: ./templates/Details/change.php:53
+#: ./templates/Details/index.php:26
+#: ./templates/Details/index.php:62
+msgid "Request a change"
+msgstr ""
+
+#: ./src/Controller/InvoicesController.php:29
+#: ./templates/Invoices/index.php:11
+#: ./templates/layout/default.php:15
+msgid "Invoices"
+msgstr ""
+
+#: ./src/Controller/InvoicesController.php:51
+msgid "No such invoice."
+msgstr ""
+
+#: ./src/Controller/OverviewController.php:33
+#: ./templates/layout/default.php:14
+msgid "Overview"
+msgstr ""
+
+#: ./src/Controller/PasswordController.php:30
+msgid "The new passwords do not match."
+msgstr ""
+
+#: ./src/Controller/PasswordController.php:33
+#: ./src/Controller/PasswordController.php:49
+msgid "The new password has to be at least {0} characters long."
+msgstr ""
+
+#: ./src/Controller/PasswordController.php:39
+#: ./src/Controller/SignInController.php:45
+msgid "Too many failed attempts, please try again in a while"
+msgstr ""
+
+#: ./src/Controller/PasswordController.php:40
+msgid "The current password is not right."
+msgstr ""
+
+#: ./src/Controller/PasswordController.php:45
+msgid "Your password has been changed."
+msgstr ""
+
+#: ./src/Controller/PasswordController.php:56
+#: ./templates/Password/index.php:9
+#: ./templates/Password/index.php:41
+msgid "Change password"
+msgstr ""
+
+#: ./src/Controller/SignInController.php:34
+msgid "Fill in your login and password."
+msgstr ""
+
+#: ./src/Controller/SignInController.php:44
+msgid "Account locked"
+msgstr ""
+
+#: ./src/Controller/SignInController.php:46
+msgid "The login or the password is not right."
+msgstr ""
+
+#: ./src/Controller/SignInController.php:52
+#: ./templates/SignIn/index.php:13
+#: ./templates/SignIn/index.php:31
+msgid "Sign in"
+msgstr ""
+
+#: ./src/Controller/SignInController.php:64
+msgid "You have signed out."
+msgstr ""
+
+#: ./src/Error/PortalExceptionRenderer.php:27
+msgid "Your sign-in has expired, please sign in again."
+msgstr ""
+
+#: ./src/Portal/ChangeRequest.php:40
+#: ./src/Portal/ChangeRequest.php:95
+msgid "{0}: {1} → {2}"
+msgstr ""
+
+#: ./src/Portal/ChangeRequest.php:52
+msgid "E-mail removed: {0}"
+msgstr ""
+
+#: ./src/Portal/ChangeRequest.php:57
+msgid "E-mail: {0} → {1}"
+msgstr ""
+
+#: ./src/Portal/ChangeRequest.php:61
+msgid "E-mail added: {0}"
+msgstr ""
+
+#: ./src/Portal/ChangeRequest.php:71
+msgid "Phone removed: {0}"
+msgstr ""
+
+#: ./src/Portal/ChangeRequest.php:73
+msgid "Phone: {0} → {1}"
+msgstr ""
+
+#: ./src/Portal/ChangeRequest.php:78
+msgid "Phone added: {0}"
+msgstr ""
+
+#: ./src/Portal/ChangeRequest.php:90
+msgid "{0} removed: {1}"
+msgstr ""
+
+#: ./src/Portal/ChangeRequest.php:101
+msgid "{0} added: {1}"
+msgstr ""
+
+#: ./src/Portal/Labels.php:24
+msgid "Company"
+msgstr ""
+
+#: ./src/Portal/Labels.php:25
+msgid "Title"
+msgstr ""
+
+#: ./src/Portal/Labels.php:26
+msgid "First name"
+msgstr ""
+
+#: ./src/Portal/Labels.php:27
+msgid "Last name"
+msgstr ""
+
+#: ./src/Portal/Labels.php:28
+msgid "Suffix"
+msgstr ""
+
+#: ./src/Portal/Labels.php:29
+msgid "Date of birth"
+msgstr ""
+
+#: ./src/Portal/Labels.php:30
+msgid "ID card number"
+msgstr ""
+
+#: ./src/Portal/Labels.php:31
+msgid "Company ID"
+msgstr ""
+
+#: ./src/Portal/Labels.php:32
+msgid "VAT number"
+msgstr ""
+
+#: ./src/Portal/Labels.php:33
+#: ./templates/Overview/index.php:148
+msgid "Website"
+msgstr ""
+
+#: ./src/Portal/Labels.php:34
+msgid "Bank"
+msgstr ""
+
+#: ./src/Portal/Labels.php:35
+msgid "Account number"
+msgstr ""
+
+#: ./src/Portal/Labels.php:36
+msgid "Bank code"
+msgstr ""
+
+#: ./src/Portal/Labels.php:37
+msgid "Invoice delivery"
+msgstr ""
+
+#: ./src/Portal/Labels.php:38
+msgid "Street"
+msgstr ""
+
+#: ./src/Portal/Labels.php:39
+msgid "House number"
+msgstr ""
+
+#: ./src/Portal/Labels.php:40
+msgid "City"
+msgstr ""
+
+#: ./src/Portal/Labels.php:41
+msgid "Postcode"
+msgstr ""
+
+#: ./src/Portal/Labels.php:42
+msgid "Country"
+msgstr ""
+
+#: ./src/Portal/Labels.php:53
+msgid "Installation address"
+msgstr ""
+
+#: ./src/Portal/Labels.php:54
+msgid "Billing address"
+msgstr ""
+
+#: ./src/Portal/Labels.php:55
+msgid "Delivery address"
+msgstr ""
+
+#: ./src/Portal/Labels.php:56
+msgid "Permanent address"
+msgstr ""
+
+#: ./src/Portal/Labels.php:68
+msgid "Address"
+msgstr ""
+
+#: ./src/Portal/Labels.php:77
+msgid "Not sent"
+msgstr ""
+
+#: ./src/Portal/Labels.php:78
+msgid "By e-mail"
+msgstr ""
+
+#: ./src/Portal/Labels.php:99
+#: ./templates/Details/change.php:17
+msgid "billing"
+msgstr ""
+
+#: ./src/Portal/Labels.php:100
+#: ./templates/Details/change.php:18
+msgid "outages"
+msgstr ""
+
+#: ./src/Portal/Labels.php:101
+#: ./templates/Details/change.php:19
+msgid "commercial messages"
+msgstr ""
+
+#: ./src/View/Helper/FormatHelper.php:60
+#: ./templates/Invoices/index.php:26
+#: ./templates/Invoices/index.php:43
+msgid "Paid"
+msgstr ""
+
+#: ./src/View/Helper/FormatHelper.php:61
+msgid "Overdue"
+msgstr ""
+
+#: ./src/View/Helper/FormatHelper.php:62
+msgid "Due"
+msgstr ""
+
+#: ./templates/Details/change.php:54
+msgid "Correct or complete your details and send them. They change once they have been checked."
+msgstr ""
+
+#: ./templates/Details/change.php:62
+#: ./templates/Details/index.php:15
+#: ./templates/Details/index.php:25
+#: ./templates/email/text/change_request.php:15
+msgid "Customer"
+msgstr ""
+
+#: ./templates/Details/change.php:72
+#: ./templates/Details/index.php:41
+#: ./templates/Overview/index.php:144
+msgid "E-mail"
+msgstr ""
+
+#: ./templates/Details/change.php:73
+msgid "Clear an address to have it removed, and tick what each one is used for."
+msgstr ""
+
+#: ./templates/Details/change.php:85
+msgid "Another e-mail address"
+msgstr ""
+
+#: ./templates/Details/change.php:93
+#: ./templates/Details/index.php:50
+#: ./templates/Overview/index.php:140
+msgid "Phone"
+msgstr ""
+
+#: ./templates/Details/change.php:105
+msgid "Another phone number"
+msgstr ""
+
+#: ./templates/Details/change.php:113
+msgid "Billing details"
+msgstr ""
+
+#: ./templates/Details/change.php:134
+msgid "Remove this address"
+msgstr ""
+
+#: ./templates/Details/change.php:141
+msgid "Another address"
+msgstr ""
+
+#: ./templates/Details/change.php:144
+msgid "Kind of address"
+msgstr ""
+
+#: ./templates/Details/change.php:152
+#: ./templates/email/text/change_request.php:23
+msgid "Note"
+msgstr ""
+
+#: ./templates/Details/change.php:162
+msgid "Send for processing"
+msgstr ""
+
+#: ./templates/Details/change.php:163
+msgid "Back to my details"
+msgstr ""
+
+#: ./templates/Details/index.php:17
+msgid "Changes of your details are checked before they apply. Your consents are saved straight away."
+msgstr ""
+
+#: ./templates/Details/index.php:29
+msgid "Name"
+msgstr ""
+
+#: ./templates/Details/index.php:35
+msgid "Customer number"
+msgstr ""
+
+#: ./templates/Details/index.php:61
+msgid "Billing and addresses"
+msgstr ""
+
+#: ./templates/Details/index.php:91
+msgid "Consents and messages"
+msgstr ""
+
+#: ./templates/Details/index.php:102
+msgid "I want to receive correspondence about the monthly billing"
+msgstr ""
+
+#: ./templates/Details/index.php:109
+msgid "I want to receive information about outages and faults"
+msgstr ""
+
+#: ./templates/Details/index.php:116
+msgid "I agree to receive commercial communications"
+msgstr ""
+
+#: ./templates/Details/index.php:120
+msgid "Save consents"
+msgstr ""
+
+#: ./templates/Error/error400.php:8
+msgid "This page does not exist."
+msgstr ""
+
+#: ./templates/Error/error400.php:8
+msgid "This request cannot be answered."
+msgstr ""
+
+#: ./templates/Error/error400.php:11
+msgid "Back to the customer portal"
+msgstr ""
+
+#: ./templates/Error/error500.php:11
+msgid "The customer portal is not available right now."
+msgstr ""
+
+#: ./templates/Error/error500.php:14
+msgid "Please try again in a while."
+msgstr ""
+
+#: ./templates/Error/error500.php:16
+msgid "If it does not help, contact us: {0}"
+msgstr ""
+
+#: ./templates/Invoices/index.php:10
+msgid "Billing"
+msgstr ""
+
+#: ./templates/Invoices/index.php:12
+msgid "Download an invoice as a PDF with the button in its row."
+msgstr ""
+
+#: ./templates/Invoices/index.php:17
+#: ./templates/Overview/index.php:84
+msgid "No invoices yet."
+msgstr ""
+
+#: ./templates/Invoices/index.php:22
+msgid "Invoice number"
+msgstr ""
+
+#: ./templates/Invoices/index.php:23
+#: ./templates/Invoices/index.php:40
+#: ./templates/Overview/index.php:46
+msgid "Variable symbol"
+msgstr ""
+
+#: ./templates/Invoices/index.php:24
+#: ./templates/Invoices/index.php:41
+msgid "Date"
+msgstr ""
+
+#: ./templates/Invoices/index.php:25
+#: ./templates/Invoices/index.php:42
+msgid "Due date"
+msgstr ""
+
+#: ./templates/Invoices/index.php:27
+msgid "Total"
+msgstr ""
+
+#: ./templates/Invoices/index.php:28
+msgid "State"
+msgstr ""
+
+#: ./templates/Invoices/index.php:53
+msgid "Left to pay"
+msgstr ""
+
+#: ./templates/Overview/index.php:24
+msgid "Hello, {0}"
+msgstr ""
+
+#: ./templates/Overview/index.php:26
+msgid "Customer number {0}"
+msgstr ""
+
+#: ./templates/Overview/index.php:36
+#: ./templates/Overview/index.php:72
+msgid "To pay"
+msgstr ""
+
+#: ./templates/Overview/index.php:47
+msgid "Debt"
+msgstr ""
+
+#: ./templates/Overview/index.php:55
+msgid "due {0}"
+msgstr ""
+
+#: ./templates/Overview/index.php:65
+msgid "Pay to account"
+msgstr ""
+
+#: ./templates/Overview/index.php:74
+msgid "All your invoices are paid. Thank you."
+msgstr ""
+
+#: ./templates/Overview/index.php:80
+msgid "Latest invoices"
+msgstr ""
+
+#: ./templates/Overview/index.php:81
+msgid "All invoices"
+msgstr ""
+
+#: ./templates/Overview/index.php:109
+msgid "Connections"
+msgstr ""
+
+#: ./templates/Overview/index.php:113
+msgid "IP address"
+msgstr ""
+
+#: ./templates/Overview/index.php:114
+#: ./templates/Overview/index.php:124
+msgid "Contract"
+msgstr ""
+
+#: ./templates/Overview/index.php:116
+#: ./templates/Overview/index.php:126
+msgid "Subscriber verification code"
+msgstr ""
+
+#: ./templates/Overview/index.php:137
+msgid "Need help?"
+msgstr ""
+
+#: ./templates/Overview/index.php:38
+msgid "{0} overdue"
+msgid_plural "{0} overdue"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ./templates/Password/index.php:8
+msgid "Signing in"
+msgstr ""
+
+#: ./templates/Password/index.php:16
+msgid "Current password"
+msgstr ""
+
+#: ./templates/Password/index.php:23
+msgid "New password"
+msgstr ""
+
+#: ./templates/Password/index.php:29
+msgid "At least {0} characters. A few words are easier to remember than a short password with special characters."
+msgstr ""
+
+#: ./templates/Password/index.php:35
+msgid "Confirm password"
+msgstr ""
+
+#: ./templates/SignIn/index.php:17
+#: ./templates/email/text/change_request.php:16
+msgid "Login"
+msgstr ""
+
+#: ./templates/SignIn/index.php:25
+#: ./templates/layout/default.php:17
+msgid "Password"
+msgstr ""
+
+#: ./templates/SignIn/index.php:35
+msgid "Forgot your password? Contact us: {0}"
+msgstr ""
+
+#: ./templates/email/text/change_request.php:13
+msgid "A customer asks for a change of their details in the customer portal."
+msgstr ""
+
+#: ./templates/email/text/change_request.php:25
+msgid "Sent {0} from {1}"
+msgstr ""
+
+#: ./templates/layout/default.php:58
+msgid "Back to {0}"
+msgstr ""
+
+#: ./templates/layout/default.php:75
+msgid "Sign out"
+msgstr ""
+
+#: ./templates/layout/default.php:91
+msgid "Privacy policy"
 msgstr ""
 

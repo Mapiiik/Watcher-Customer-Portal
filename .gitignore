@@ -1,4 +1,7 @@
 /vendor/
+/tmp/
+/logs/
+/.phpunit.cache/
 /data/*
 /profile/
 .env

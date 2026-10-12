@@ -8,11 +8,42 @@
         "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "gettext/gettext": "^5.7",
-        "gettext/translator": "^1.2",
-        "phpmailer/phpmailer": "^7.1"
+        "cakephp/cakephp": "5.4.*"
+    },
+    "require-dev": {
+        "cakedc/cakephp-phpstan": "^4.2",
+        "cakephp/cakephp-codesniffer": "^5.3",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Test\\": "tests/"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@test",
+            "@cs-check",
+            "@stan"
+        ],
+        "cs-check": "phpcs --colors -p",
+        "cs-fix": "phpcbf --colors -p",
+        "stan": "phpstan analyse --memory-limit=512M",
+        "test": "phpunit --colors=always",
+        "texts": "bin/cake i18n extract --paths src,templates,profiles --output resources/locales --merge no --overwrite --extract-core no"
     },
     "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
+        },
         "platform": {
             "php": "8.4.0"
         },

@@ -27,14 +27,15 @@
 {$CADDY_EXTRA_CONFIG}
 
 {$SERVER_NAME:localhost} {
-	root {$SERVER_ROOT:public/}
+	root {$SERVER_ROOT:webroot/}
 	encode zstd br gzip
 
-	# The portal loads nothing from elsewhere and is framed only by itself; a page may set its own
+	# The portal loads nothing from elsewhere, runs no inline scripts or styles and is framed by
+	# nobody; an answer may set its own
 	header {
 		?Strict-Transport-Security "max-age=31536000"
-		?Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'self'"
-		?X-Frame-Options "SAMEORIGIN"
+		?Content-Security-Policy "default-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"
+		?X-Frame-Options "DENY"
 		?X-Content-Type-Options "nosniff"
 		?Referrer-Policy "same-origin"
 		?Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"

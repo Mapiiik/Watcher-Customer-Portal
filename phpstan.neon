@@ -1,0 +1,14 @@
+parameters:
+    level: 8
+    treatPhpDocTypesAsCertain: false
+    bootstrapFiles:
+        - tests/bootstrap.php
+    paths:
+        - src/
+        - templates/
+        - tests/
+        - config/
+        - profiles/
+    excludePaths:
+        # the framework's own loading, with paths phpstan cannot resolve
+        - config/bootstrap.php
