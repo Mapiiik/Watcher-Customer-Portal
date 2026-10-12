@@ -6,6 +6,7 @@
  * @var \App\Crm\CustomerDetails $details
  * @var list<\App\Crm\Invoice> $unpaid
  * @var float $due
+ * @var array<string, \App\Portal\PaymentCode> $codes By the id of the invoice.
  * @var list<\App\Crm\Invoice> $latest
  * @var string $today
  */
@@ -65,6 +66,26 @@ $withCodes = array_filter(
             <dt><?= h(__('Pay to account')) ?></dt>
             <dd><?= h($operator->paymentAccount) ?></dd>
         </dl>
+    <?php endif; ?>
+    <?php if ($codes !== []) : ?>
+        <div class="pay-codes">
+            <p class="muted">
+                <?= h(__('Scan the code of an invoice in your bank\'s app and the payment fills itself in.')) ?>
+            </p>
+        <?php foreach ($unpaid as $invoice) : ?>
+            <?php if (isset($codes[$invoice->id])) : ?>
+            <figure>
+                <img
+                    src="<?= h($codes[$invoice->id]->src) ?>"
+                    width="<?= $codes[$invoice->id]->width ?>"
+                    height="<?= $codes[$invoice->id]->height ?>"
+                    alt="<?= h(__('Payment code for invoice {0}', $invoice->number)) ?>"
+                >
+                <figcaption><?= h($invoice->number) ?> · <?= h($this->Format->money($invoice->debt)) ?></figcaption>
+            </figure>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </div>
     <?php endif; ?>
     </div>
 <?php else : ?>

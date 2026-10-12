@@ -71,7 +71,7 @@ for PROFILE in $PROFILES; do
   dk run -d --name $RUN --network "$NETWORK" -p $PORT:443 "${MOUNT[@]}" \
     -e SERVER_NAME=localhost -e OPERATOR_NAME="Test Operator, s.r.o." -e OPERATOR_WEBSITE=https://www.example.net \
     -e PRIVACY_POLICY_URL=https://www.example.net/privacy -e SUPPORT_PHONE="+420 000 000 000" -e SUPPORT_EMAIL=support@example.net \
-    -e PAYMENT_ACCOUNT=123456789/0100 \
+    -e PAYMENT_ACCOUNT=123456789/0100 -e PAYMENT_CODE=spayd -e PAYMENT_IBAN=CZ6508000000192000145399 \
     -e CRM_API_URL=https://localhost:8443/api/customer-portal -e CRM_API_KEY="$API_KEY" -e CRM_API_VERIFY_TLS=false \
     -e SMTP_HOST=$MAIL -e SMTP_PORT=1025 -e SMTP_SECURE=none -e MAIL_FROM=portal@example.net \
     -e CHANGE_REQUESTS_TO=contracts@example.invalid \

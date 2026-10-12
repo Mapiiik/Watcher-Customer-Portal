@@ -5,10 +5,12 @@
     "license": "AGPL-3.0-or-later",
     "require": {
         "php": ">=8.4",
+        "ext-gd": "*",
         "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "cakephp/cakephp": "5.4.*"
+        "cakephp/cakephp": "5.4.*",
+        "tecnickcom/tc-lib-barcode": "^2.16"
     },
     "require-dev": {
         "cakedc/cakephp-phpstan": "^4.2",

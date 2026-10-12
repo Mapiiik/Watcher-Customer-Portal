@@ -44,6 +44,38 @@ class PagesTest extends PortalTestCase
         $this->assertHeader('Cache-Control', 'no-store');
     }
 
+    public function testTheOverviewHasACodeForEveryUnpaidInvoice(): void
+    {
+        Configure::write('Portal.payment', ['code' => 'spayd', 'iban' => 'CZ6508000000192000145399']);
+        $this->crm->invoices[] = new Invoice(
+            '0b0f0b2c-6a36-4a3c-9f5e-9d1c5d6f1a04',
+            '2026090199',
+            '110009',
+            '2026-09-01',
+            '2026-09-15',
+            '',
+            'Router',
+            990.0,
+            990.0,
+        );
+        $this->signedIn();
+        $this->get('/');
+
+        $this->assertResponseContains('alt="Payment code for invoice 2026100231"');
+        $this->assertResponseContains('alt="Payment code for invoice 2026090199"');
+        $this->assertResponseNotContains('alt="Payment code for invoice 2026090198"');
+        $this->assertResponseContains('src="data:image/png;base64,');
+    }
+
+    public function testTheOverviewHasNoCodesUnlessTheyAreSetUp(): void
+    {
+        $this->signedIn();
+        $this->get('/');
+
+        $this->assertResponseOk();
+        $this->assertResponseNotContains('pay-codes');
+    }
+
     public function testTheOverviewOfACustomerWhoPaidAll(): void
     {
         $this->crm->invoices = [

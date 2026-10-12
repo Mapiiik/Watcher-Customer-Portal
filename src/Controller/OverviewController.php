@@ -5,10 +5,11 @@ namespace App\Controller;
 
 use App\Crm\CustomerPortalApi;
 use App\Crm\Invoice;
+use App\Portal\PaymentCodes;
 
 /**
- * The first page after signing in: what is left to pay, the latest invoices, the connections and
- * where to get help.
+ * The first page after signing in: what is left to pay with the codes to pay it by, the latest
+ * invoices, the connections and where to get help.
  */
 class OverviewController extends AppController
 {
@@ -23,11 +24,20 @@ class OverviewController extends AppController
         $invoices = $crm->invoices($token);
         $unpaid = array_values(array_filter($invoices, static fn(Invoice $invoice): bool => !$invoice->isPaid()));
         $due = array_sum(array_map(static fn(Invoice $invoice): float => $invoice->debt, $unpaid));
+        $paymentCodes = PaymentCodes::fromConfig();
+        $codes = [];
+        foreach ($unpaid as $invoice) {
+            $code = $paymentCodes->image($invoice);
+            if ($code !== null) {
+                $codes[$invoice->id] = $code;
+            }
+        }
 
         $this->set([
             'details' => $details,
             'unpaid' => $unpaid,
             'due' => $due,
+            'codes' => $codes,
             'latest' => array_slice($invoices, 0, 3),
             'today' => date('Y-m-d'),
             'title' => __('Overview'),

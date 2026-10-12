@@ -156,6 +156,11 @@ return [
             'paymentAccount' => $setting('PAYMENT_ACCOUNT'),
         ],
         'currency' => strtoupper($setting('CURRENCY', 'EUR')),
+        // the codes a bank's app scans to pay an invoice, see App\Portal\PaymentCodes
+        'payment' => [
+            'code' => strtolower($setting('PAYMENT_CODE')),
+            'iban' => strtoupper(str_replace(' ', '', $setting('PAYMENT_IBAN'))),
+        ],
         // Watcher CRM, which the portal asks about the customers signed in to it
         'crm' => [
             'url' => rtrim($setting('CRM_API_URL'), '/'),

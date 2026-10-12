@@ -112,6 +112,13 @@ dl.facts { display: grid; grid-template-columns: minmax(130px, auto) 1fr; gap: .
 dl.facts dt { color: var(--muted); }
 dl.facts dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
 
+/* the codes are drawn at twice their size, and their modules have to stay sharp */
+.pay-codes { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.5rem 2rem; margin-top: 1.5rem; }
+.pay-codes p { flex-basis: 100%; margin: 0; }
+.pay-codes figure { margin: 0; max-width: 100%; }
+.pay-codes img { display: block; max-width: 100%; height: auto; image-rendering: pixelated; }
+.pay-codes figcaption { margin-top: .4rem; font-size: .9rem; color: var(--muted); }
+
 /* buttons as the website has them: square, capitals, an arrow */
 .button, button.button, input.button { display: inline-flex; align-items: center; gap: .6rem; font: inherit; font-size: .9rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #fff; background: var(--brand-accent); border: 0; padding: .95rem 1.8rem; cursor: pointer; }
 .button::after { content: "→"; font-size: 1.1rem; }

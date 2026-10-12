@@ -14,7 +14,8 @@ RUN composer install \
     --no-scripts \
     --no-autoloader \
     --ignore-platform-req=php \
-    --ignore-platform-req=ext-intl
+    --ignore-platform-req=ext-intl \
+    --ignore-platform-req=ext-gd
 # the classmap is built from the code, so the code has to be there first
 COPY src/ ./src/
 RUN composer dump-autoload --no-dev --classmap-authoritative
@@ -39,6 +40,7 @@ RUN echo "Based on commit: $gitcommithash"
 # PHP
 ############################
 RUN install-php-extensions \
+    gd \
     intl \
     opcache
 

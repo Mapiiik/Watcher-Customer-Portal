@@ -6,6 +6,7 @@ namespace App;
 use App\Crm\CustomerPortalApi;
 use App\Crm\WatcherCrm;
 use App\Middleware\SameOriginMiddleware;
+use App\Portal\PaymentCodes;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
@@ -24,7 +25,8 @@ use function Cake\Core\env;
 class Application extends BaseApplication
 {
     /**
-     * Loads the configuration, and stops when a setting the portal cannot do without is missing.
+     * Loads the configuration, and stops when a setting the portal cannot do without is missing,
+     * or when the payment codes would not pay the operator.
      *
      * @return void
      */
@@ -42,6 +44,7 @@ class Application extends BaseApplication
         if ($missing !== []) {
             throw new RuntimeException('The customer portal is not configured, set ' . implode(', ', $missing) . '.');
         }
+        PaymentCodes::fromConfig();
     }
 
     /**

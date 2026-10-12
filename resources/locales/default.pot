@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2026-10-12 08:01+0200\n"
+"POT-Creation-Date: 2026-10-12 08:39+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -40,7 +40,7 @@ msgid "Customer portal"
 msgstr ""
 
 #: ./profiles/default/profile.php:24
-#: ./templates/Overview/index.php:45
+#: ./templates/Overview/index.php:46
 msgid "Invoice"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "No such invoice."
 msgstr ""
 
-#: ./src/Controller/OverviewController.php:33
+#: ./src/Controller/OverviewController.php:43
 #: ./templates/layout/default.php:14
 msgid "Overview"
 msgstr ""
@@ -221,7 +221,7 @@ msgid "VAT number"
 msgstr ""
 
 #: ./src/Portal/Labels.php:33
-#: ./templates/Overview/index.php:148
+#: ./templates/Overview/index.php:171
 msgid "Website"
 msgstr ""
 
@@ -304,6 +304,10 @@ msgstr ""
 msgid "commercial messages"
 msgstr ""
 
+#: ./src/Portal/PaymentCodes.php:104
+msgid "Invoice {0}"
+msgstr ""
+
 #: ./src/View/Helper/FormatHelper.php:60
 #: ./templates/Invoices/index.php:26
 #: ./templates/Invoices/index.php:43
@@ -331,7 +335,7 @@ msgstr ""
 
 #: ./templates/Details/change.php:72
 #: ./templates/Details/index.php:41
-#: ./templates/Overview/index.php:144
+#: ./templates/Overview/index.php:167
 msgid "E-mail"
 msgstr ""
 
@@ -345,7 +349,7 @@ msgstr ""
 
 #: ./templates/Details/change.php:93
 #: ./templates/Details/index.php:50
-#: ./templates/Overview/index.php:140
+#: ./templates/Overview/index.php:163
 msgid "Phone"
 msgstr ""
 
@@ -451,7 +455,7 @@ msgid "Download an invoice as a PDF with the button in its row."
 msgstr ""
 
 #: ./templates/Invoices/index.php:17
-#: ./templates/Overview/index.php:84
+#: ./templates/Overview/index.php:105
 msgid "No invoices yet."
 msgstr ""
 
@@ -461,7 +465,7 @@ msgstr ""
 
 #: ./templates/Invoices/index.php:23
 #: ./templates/Invoices/index.php:40
-#: ./templates/Overview/index.php:46
+#: ./templates/Overview/index.php:47
 msgid "Variable symbol"
 msgstr ""
 
@@ -487,66 +491,74 @@ msgstr ""
 msgid "Left to pay"
 msgstr ""
 
-#: ./templates/Overview/index.php:24
+#: ./templates/Overview/index.php:25
 msgid "Hello, {0}"
 msgstr ""
 
-#: ./templates/Overview/index.php:26
+#: ./templates/Overview/index.php:27
 msgid "Customer number {0}"
 msgstr ""
 
-#: ./templates/Overview/index.php:36
-#: ./templates/Overview/index.php:72
+#: ./templates/Overview/index.php:37
+#: ./templates/Overview/index.php:93
 msgid "To pay"
 msgstr ""
 
-#: ./templates/Overview/index.php:47
+#: ./templates/Overview/index.php:48
 msgid "Debt"
 msgstr ""
 
-#: ./templates/Overview/index.php:55
+#: ./templates/Overview/index.php:56
 msgid "due {0}"
 msgstr ""
 
-#: ./templates/Overview/index.php:65
+#: ./templates/Overview/index.php:66
 msgid "Pay to account"
 msgstr ""
 
-#: ./templates/Overview/index.php:74
+#: ./templates/Overview/index.php:73
+msgid "Scan the code of an invoice in your bank's app and the payment fills itself in."
+msgstr ""
+
+#: ./templates/Overview/index.php:82
+msgid "Payment code for invoice {0}"
+msgstr ""
+
+#: ./templates/Overview/index.php:95
 msgid "All your invoices are paid. Thank you."
 msgstr ""
 
-#: ./templates/Overview/index.php:80
+#: ./templates/Overview/index.php:101
 msgid "Latest invoices"
 msgstr ""
 
-#: ./templates/Overview/index.php:81
+#: ./templates/Overview/index.php:102
 msgid "All invoices"
 msgstr ""
 
-#: ./templates/Overview/index.php:109
+#: ./templates/Overview/index.php:130
 msgid "Connections"
 msgstr ""
 
-#: ./templates/Overview/index.php:113
+#: ./templates/Overview/index.php:134
 msgid "IP address"
 msgstr ""
 
-#: ./templates/Overview/index.php:114
-#: ./templates/Overview/index.php:124
+#: ./templates/Overview/index.php:135
+#: ./templates/Overview/index.php:145
 msgid "Contract"
 msgstr ""
 
-#: ./templates/Overview/index.php:116
-#: ./templates/Overview/index.php:126
+#: ./templates/Overview/index.php:137
+#: ./templates/Overview/index.php:147
 msgid "Subscriber verification code"
 msgstr ""
 
-#: ./templates/Overview/index.php:137
+#: ./templates/Overview/index.php:160
 msgid "Need help?"
 msgstr ""
 
-#: ./templates/Overview/index.php:38
+#: ./templates/Overview/index.php:39
 msgid "{0} overdue"
 msgid_plural "{0} overdue"
 msgstr[0] ""

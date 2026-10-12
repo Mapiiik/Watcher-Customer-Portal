@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Watcher Customer Portal\n"
-"POT-Creation-Date: 2026-10-12 08:01+0200\n"
+"POT-Creation-Date: 2026-10-12 08:39+0200\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgstr "zásady zpracování osobních údajů"
 msgid "Customer portal"
 msgstr "Uživatelský portál"
 
-#: profiles/default/profile.php:24 templates/Overview/index.php:45
+#: profiles/default/profile.php:24 templates/Overview/index.php:46
 msgid "Invoice"
 msgstr "Faktura"
 
@@ -75,7 +75,7 @@ msgstr "Faktury"
 msgid "No such invoice."
 msgstr "Taková faktura neexistuje."
 
-#: src/Controller/OverviewController.php:33 templates/layout/default.php:14
+#: src/Controller/OverviewController.php:43 templates/layout/default.php:14
 msgid "Overview"
 msgstr "Přehled"
 
@@ -203,7 +203,7 @@ msgstr "IČ"
 msgid "VAT number"
 msgstr "DIČ"
 
-#: src/Portal/Labels.php:33 templates/Overview/index.php:148
+#: src/Portal/Labels.php:33 templates/Overview/index.php:171
 msgid "Website"
 msgstr "WWW"
 
@@ -283,6 +283,10 @@ msgstr "výpadky"
 msgid "commercial messages"
 msgstr "obchodní sdělení"
 
+#: src/Portal/PaymentCodes.php:104
+msgid "Invoice {0}"
+msgstr "Faktura {0}"
+
 #: src/View/Helper/FormatHelper.php:60 templates/Invoices/index.php:26
 #: templates/Invoices/index.php:43
 msgid "Paid"
@@ -306,7 +310,7 @@ msgid "Customer"
 msgstr "Uživatel"
 
 #: templates/Details/change.php:72 templates/Details/index.php:41
-#: templates/Overview/index.php:144
+#: templates/Overview/index.php:167
 msgid "E-mail"
 msgstr "E-mail"
 
@@ -319,7 +323,7 @@ msgid "Another e-mail address"
 msgstr "Další e-mailová adresa"
 
 #: templates/Details/change.php:93 templates/Details/index.php:50
-#: templates/Overview/index.php:140
+#: templates/Overview/index.php:163
 msgid "Phone"
 msgstr "Telefon"
 
@@ -423,7 +427,7 @@ msgstr "Vyúčtování"
 msgid "Download an invoice as a PDF with the button in its row."
 msgstr "Fakturu stáhnete jako PDF tlačítkem v jejím řádku."
 
-#: templates/Invoices/index.php:17 templates/Overview/index.php:84
+#: templates/Invoices/index.php:17 templates/Overview/index.php:105
 msgid "No invoices yet."
 msgstr "Zatím žádné faktury."
 
@@ -432,7 +436,7 @@ msgid "Invoice number"
 msgstr "Číslo faktury"
 
 #: templates/Invoices/index.php:23 templates/Invoices/index.php:40
-#: templates/Overview/index.php:46
+#: templates/Overview/index.php:47
 msgid "Variable symbol"
 msgstr "Variabilní symbol"
 
@@ -456,63 +460,71 @@ msgstr "Stav"
 msgid "Left to pay"
 msgstr "Zbývá uhradit"
 
-#: templates/Overview/index.php:24
+#: templates/Overview/index.php:25
 msgid "Hello, {0}"
 msgstr "Dobrý den, {0}"
 
-#: templates/Overview/index.php:26
+#: templates/Overview/index.php:27
 msgid "Customer number {0}"
 msgstr "Zákaznické číslo {0}"
 
-#: templates/Overview/index.php:36 templates/Overview/index.php:72
+#: templates/Overview/index.php:37 templates/Overview/index.php:93
 msgid "To pay"
 msgstr "K úhradě"
 
-#: templates/Overview/index.php:47
+#: templates/Overview/index.php:48
 msgid "Debt"
 msgstr "Dluh"
 
-#: templates/Overview/index.php:55
+#: templates/Overview/index.php:56
 msgid "due {0}"
 msgstr "splatná {0}"
 
-#: templates/Overview/index.php:65
+#: templates/Overview/index.php:66
 msgid "Pay to account"
 msgstr "Číslo účtu pro platbu"
 
-#: templates/Overview/index.php:74
+#: templates/Overview/index.php:73
+msgid "Scan the code of an invoice in your bank's app and the payment fills itself in."
+msgstr "Kód faktury naskenujte v aplikaci své banky a platba se vyplní sama."
+
+#: templates/Overview/index.php:82
+msgid "Payment code for invoice {0}"
+msgstr "Platební kód faktury {0}"
+
+#: templates/Overview/index.php:95
 msgid "All your invoices are paid. Thank you."
 msgstr "Všechny vaše faktury jsou zaplacené. Děkujeme."
 
-#: templates/Overview/index.php:80
+#: templates/Overview/index.php:101
 msgid "Latest invoices"
 msgstr "Poslední faktury"
 
-#: templates/Overview/index.php:81
+#: templates/Overview/index.php:102
 msgid "All invoices"
 msgstr "Všechny faktury"
 
-#: templates/Overview/index.php:109
+#: templates/Overview/index.php:130
 msgid "Connections"
 msgstr "Připojení"
 
-#: templates/Overview/index.php:113
+#: templates/Overview/index.php:134
 msgid "IP address"
 msgstr "IP adresa"
 
-#: templates/Overview/index.php:114 templates/Overview/index.php:124
+#: templates/Overview/index.php:135 templates/Overview/index.php:145
 msgid "Contract"
 msgstr "Smlouva"
 
-#: templates/Overview/index.php:116 templates/Overview/index.php:126
+#: templates/Overview/index.php:137 templates/Overview/index.php:147
 msgid "Subscriber verification code"
 msgstr "Ověřovací kód účastníka (OKU)"
 
-#: templates/Overview/index.php:137
+#: templates/Overview/index.php:160
 msgid "Need help?"
 msgstr "Potřebujete pomoc?"
 
-#: templates/Overview/index.php:38
+#: templates/Overview/index.php:39
 msgid "{0} overdue"
 msgid_plural "{0} overdue"
 msgstr[0] "{0} po splatnosti"

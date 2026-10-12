@@ -27,6 +27,9 @@ Actions.
   `Origin` and `Sec-Fetch-Site`), the session cookie is `__Host-portal`, a customer is signed out
   after `SESSION_IDLE_MINUTES` without a request, and the pages carry a content security policy
   that loads nothing from elsewhere and runs no inline scripts or styles.
+- With `PAYMENT_CODE`, every unpaid invoice on the overview has a code to scan in a bank's app:
+  QR Platba (`spayd`) or the barcode of Croatian payment slips (`hub3`). It pays what is left of
+  that invoice under its variable symbol to `PAYMENT_IBAN`, with no due date, so at once.
 
 ## The operator's profile
 
