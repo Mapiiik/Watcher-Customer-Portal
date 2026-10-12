@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2026-10-12 21:16+0200\n"
+"POT-Creation-Date: 2026-10-12 21:51+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -48,7 +48,7 @@ msgstr ""
 #: ./templates/Details/change.php:19
 #: ./templates/Details/change.php:92
 #: ./templates/Details/confirm.php:9
-#: ./templates/Details/index.php:28
+#: ./templates/Details/index.php:33
 #: ./templates/layout/default.php:16
 msgid "My details"
 msgstr ""
@@ -69,7 +69,7 @@ msgstr ""
 
 #: ./src/Controller/DetailsController.php:106
 #: ./templates/Details/change.php:93
-#: ./templates/Details/index.php:23
+#: ./templates/Details/index.php:28
 msgid "Request a change"
 msgstr ""
 
@@ -156,6 +156,7 @@ msgstr ""
 
 #: ./src/Portal/ChangeRequest.php:46
 #: ./src/Portal/ChangeRequest.php:127
+#: ./src/Portal/ChangeRequest.php:134
 msgid "{0}: {1} → {2}"
 msgstr ""
 
@@ -187,7 +188,7 @@ msgstr ""
 msgid "{0} removed: {1}"
 msgstr ""
 
-#: ./src/Portal/ChangeRequest.php:135
+#: ./src/Portal/ChangeRequest.php:143
 msgid "{0} added: {1}"
 msgstr ""
 
@@ -277,7 +278,7 @@ msgid "Permanent address"
 msgstr ""
 
 #: ./src/Portal/Labels.php:58
-#: ./templates/Details/index.php:125
+#: ./templates/Details/index.php:134
 #: ./templates/Overview/index.php:155
 msgid "Installation address"
 msgstr ""
@@ -333,27 +334,27 @@ msgstr ""
 
 #: ./templates/Details/change.php:14
 #: ./templates/Details/change.php:106
-#: ./templates/Details/index.php:40
+#: ./templates/Details/index.php:45
 msgid "Customer details"
 msgstr ""
 
 #: ./templates/Details/change.php:15
-#: ./templates/Details/index.php:64
+#: ./templates/Details/index.php:70
 msgid "Contacts"
 msgstr ""
 
 #: ./templates/Details/change.php:16
-#: ./templates/Details/index.php:88
+#: ./templates/Details/index.php:94
 msgid "Billing and correspondence"
 msgstr ""
 
 #: ./templates/Details/change.php:17
-#: ./templates/Details/index.php:112
+#: ./templates/Details/index.php:118
 msgid "Installation addresses"
 msgstr ""
 
 #: ./templates/Details/change.php:18
-#: ./templates/Details/index.php:35
+#: ./templates/Details/index.php:40
 msgid "Another request"
 msgstr ""
 
@@ -365,72 +366,72 @@ msgstr ""
 msgid "Correct or complete your details and send them. They change once they have been checked."
 msgstr ""
 
-#: ./templates/Details/change.php:129
-#: ./templates/Details/index.php:66
+#: ./templates/Details/change.php:131
+#: ./templates/Details/index.php:72
 #: ./templates/Overview/index.php:193
 msgid "E-mail"
 msgstr ""
 
-#: ./templates/Details/change.php:130
+#: ./templates/Details/change.php:132
 msgid "Clear an e-mail to have it removed, and tick what each one is used for."
 msgstr ""
 
-#: ./templates/Details/change.php:141
-#: ./templates/Details/change.php:145
+#: ./templates/Details/change.php:143
+#: ./templates/Details/change.php:147
 msgid "Add an e-mail"
 msgstr ""
 
-#: ./templates/Details/change.php:154
-#: ./templates/Details/index.php:75
+#: ./templates/Details/change.php:156
+#: ./templates/Details/index.php:81
 #: ./templates/Overview/index.php:189
 msgid "Phone"
 msgstr ""
 
-#: ./templates/Details/change.php:155
+#: ./templates/Details/change.php:157
 msgid "Clear a number to have it removed, and tick what each one is used for."
 msgstr ""
 
-#: ./templates/Details/change.php:166
-#: ./templates/Details/change.php:170
+#: ./templates/Details/change.php:168
+#: ./templates/Details/change.php:172
 msgid "Add a phone number"
 msgstr ""
 
-#: ./templates/Details/change.php:182
+#: ./templates/Details/change.php:184
 msgid "Billing details"
 msgstr ""
 
-#: ./templates/Details/change.php:204
-#: ./templates/Details/index.php:120
+#: ./templates/Details/change.php:206
+#: ./templates/Details/index.php:129
 msgid "Contracts: {0}"
 msgstr ""
 
-#: ./templates/Details/change.php:208
+#: ./templates/Details/change.php:210
 msgid "Remove this address"
 msgstr ""
 
-#: ./templates/Details/change.php:212
+#: ./templates/Details/change.php:214
 msgid "Name on the address"
 msgstr ""
 
-#: ./templates/Details/change.php:222
+#: ./templates/Details/change.php:224
 msgid "Add an address"
 msgstr ""
 
-#: ./templates/Details/change.php:226
+#: ./templates/Details/change.php:228
 msgid "Kind of address"
 msgstr ""
 
-#: ./templates/Details/change.php:237
+#: ./templates/Details/change.php:239
 #: ./templates/Details/confirm.php:24
-#: ./templates/email/text/change_request.php:23
+#: ./templates/email/text/change_request.php:30
 msgid "Note"
 msgstr ""
 
-#: ./templates/Details/change.php:247
+#: ./templates/Details/change.php:249
 msgid "Check the request"
 msgstr ""
 
-#: ./templates/Details/change.php:248
+#: ./templates/Details/change.php:250
 msgid "Back to my details"
 msgstr ""
 
@@ -450,44 +451,48 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ./templates/Details/index.php:27
-#: ./templates/email/text/change_request.php:15
+#: ./templates/Details/index.php:32
 msgid "Customer"
 msgstr ""
 
-#: ./templates/Details/index.php:30
+#: ./templates/email/text/change_request.php:19
+msgctxt "mail"
+msgid "Customer"
+msgstr ""
+
+#: ./templates/Details/index.php:35
 msgid "Changes of your details are checked before they apply. Your consents are saved straight away."
 msgstr ""
 
-#: ./templates/Details/index.php:43
-msgid "Name"
-msgstr ""
-
-#: ./templates/Details/index.php:50
+#: ./templates/Details/index.php:47
 msgid "Customer number"
 msgstr ""
 
-#: ./templates/Details/index.php:106
+#: ./templates/Details/index.php:50
+msgid "Name"
+msgstr ""
+
+#: ./templates/Details/index.php:112
 msgid "Without a billing address, invoices go to the installation address."
 msgstr ""
 
-#: ./templates/Details/index.php:132
+#: ./templates/Details/index.php:141
 msgid "Consents and messages"
 msgstr ""
 
-#: ./templates/Details/index.php:143
+#: ./templates/Details/index.php:152
 msgid "I want to receive correspondence about the monthly billing"
 msgstr ""
 
-#: ./templates/Details/index.php:150
+#: ./templates/Details/index.php:159
 msgid "I want to receive information about outages and faults"
 msgstr ""
 
-#: ./templates/Details/index.php:157
+#: ./templates/Details/index.php:166
 msgid "I agree to receive commercial communications"
 msgstr ""
 
-#: ./templates/Details/index.php:161
+#: ./templates/Details/index.php:170
 msgid "Save consents"
 msgstr ""
 
@@ -658,7 +663,7 @@ msgid "Confirm password"
 msgstr ""
 
 #: ./templates/SignIn/index.php:17
-#: ./templates/email/text/change_request.php:16
+#: ./templates/email/text/change_request.php:20
 msgid "Login"
 msgstr ""
 
@@ -671,11 +676,15 @@ msgstr ""
 msgid "Forgot your password? Contact us: {0}"
 msgstr ""
 
-#: ./templates/email/text/change_request.php:13
+#: ./templates/email/text/change_request.php:17
 msgid "A customer asks for a change of their details in the customer portal."
 msgstr ""
 
-#: ./templates/email/text/change_request.php:25
+#: ./templates/email/text/change_request.php:23
+msgid "In the CRM: {0}"
+msgstr ""
+
+#: ./templates/email/text/change_request.php:32
 msgid "Sent {0} from {1}"
 msgstr ""
 

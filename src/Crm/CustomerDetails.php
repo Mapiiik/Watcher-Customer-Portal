@@ -33,6 +33,7 @@ final readonly class CustomerDetails
      * @param list<\App\Crm\Address> $addresses
      * @param list<\App\Crm\Contract> $contracts With active services.
      * @param array<array-key, string> $countries Names by id.
+     * @param string $id The customer's id in the CRM.
      */
     public function __construct(
         public string $number,
@@ -44,6 +45,7 @@ final readonly class CustomerDetails
         public array $addresses,
         public array $contracts,
         public array $countries,
+        public string $id = '',
     ) {
     }
 
@@ -72,6 +74,7 @@ final readonly class CustomerDetails
             self::inOrder(array_map(Address::fromFields(...), $customer->list('addresses'))),
             array_map(Contract::fromFields(...), $customer->list('contracts')),
             $answer->texts('countries'),
+            $customer->text('id'),
         );
     }
 

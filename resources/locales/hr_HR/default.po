@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Watcher Customer Portal\n"
-"POT-Creation-Date: 2026-10-12 21:16+0200\n"
+"POT-Creation-Date: 2026-10-12 21:51+0200\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgstr "Račun"
 
 #: src/Controller/DetailsController.php:40 templates/Details/change.php:19
 #: templates/Details/change.php:92 templates/Details/confirm.php:9
-#: templates/Details/index.php:28 templates/layout/default.php:16
+#: templates/Details/index.php:33 templates/layout/default.php:16
 msgid "My details"
 msgstr "Moji podaci"
 
@@ -56,7 +56,7 @@ msgid "Check your request"
 msgstr "Provjera zahtjeva"
 
 #: src/Controller/DetailsController.php:106 templates/Details/change.php:93
-#: templates/Details/index.php:23
+#: templates/Details/index.php:28
 msgid "Request a change"
 msgstr "Zatraži izmjenu"
 
@@ -138,6 +138,7 @@ msgid "Your sign-in has expired, please sign in again."
 msgstr "Prijava je istekla, molimo prijavite se ponovno."
 
 #: src/Portal/ChangeRequest.php:46 src/Portal/ChangeRequest.php:127
+#: src/Portal/ChangeRequest.php:134
 msgid "{0}: {1} → {2}"
 msgstr "{0}: {1} → {2}"
 
@@ -169,7 +170,7 @@ msgstr "Dodan telefon: {0}"
 msgid "{0} removed: {1}"
 msgstr "{0} uklonjena: {1}"
 
-#: src/Portal/ChangeRequest.php:135
+#: src/Portal/ChangeRequest.php:143
 msgid "{0} added: {1}"
 msgstr "{0} dodana: {1}"
 
@@ -257,7 +258,7 @@ msgstr "Adresa za naplatu"
 msgid "Permanent address"
 msgstr "Stalna adresa"
 
-#: src/Portal/Labels.php:58 templates/Details/index.php:125
+#: src/Portal/Labels.php:58 templates/Details/index.php:134
 #: templates/Overview/index.php:155
 msgid "Installation address"
 msgstr "Adresa instalacije"
@@ -308,23 +309,23 @@ msgid "Due"
 msgstr "Za plaćanje"
 
 #: templates/Details/change.php:14 templates/Details/change.php:106
-#: templates/Details/index.php:40
+#: templates/Details/index.php:45
 msgid "Customer details"
 msgstr "Podaci o korisniku"
 
-#: templates/Details/change.php:15 templates/Details/index.php:64
+#: templates/Details/change.php:15 templates/Details/index.php:70
 msgid "Contacts"
 msgstr "Kontakti"
 
-#: templates/Details/change.php:16 templates/Details/index.php:88
+#: templates/Details/change.php:16 templates/Details/index.php:94
 msgid "Billing and correspondence"
 msgstr "Naplata i korespondencija"
 
-#: templates/Details/change.php:17 templates/Details/index.php:112
+#: templates/Details/change.php:17 templates/Details/index.php:118
 msgid "Installation addresses"
 msgstr "Adrese instalacije"
 
-#: templates/Details/change.php:18 templates/Details/index.php:35
+#: templates/Details/change.php:18 templates/Details/index.php:40
 msgid "Another request"
 msgstr "Drugi zahtjev"
 
@@ -336,66 +337,66 @@ msgstr "Napišite nam što želite promijeniti. Zahtjev ćemo obraditi i javiti 
 msgid "Correct or complete your details and send them. They change once they have been checked."
 msgstr "Ispravite ili dopunite svoje podatke i pošaljite ih. Promijenit će se nakon što ih provjerimo."
 
-#: templates/Details/change.php:129 templates/Details/index.php:66
+#: templates/Details/change.php:131 templates/Details/index.php:72
 #: templates/Overview/index.php:193
 msgid "E-mail"
 msgstr "E-mail"
 
-#: templates/Details/change.php:130
+#: templates/Details/change.php:132
 msgid "Clear an e-mail to have it removed, and tick what each one is used for."
 msgstr "E-mail koji želite ukloniti izbrišite. Za svaki označite za što se koristi."
 
-#: templates/Details/change.php:141 templates/Details/change.php:145
+#: templates/Details/change.php:143 templates/Details/change.php:147
 msgid "Add an e-mail"
 msgstr "Dodaj e-mail"
 
-#: templates/Details/change.php:154 templates/Details/index.php:75
+#: templates/Details/change.php:156 templates/Details/index.php:81
 #: templates/Overview/index.php:189
 msgid "Phone"
 msgstr "Telefon"
 
-#: templates/Details/change.php:155
+#: templates/Details/change.php:157
 msgid "Clear a number to have it removed, and tick what each one is used for."
 msgstr "Broj koji želite ukloniti izbrišite. Za svaki označite za što se koristi."
 
-#: templates/Details/change.php:166 templates/Details/change.php:170
+#: templates/Details/change.php:168 templates/Details/change.php:172
 msgid "Add a phone number"
 msgstr "Dodaj broj telefona"
 
-#: templates/Details/change.php:182
+#: templates/Details/change.php:184
 msgid "Billing details"
 msgstr "Podaci o naplati"
 
-#: templates/Details/change.php:204 templates/Details/index.php:120
+#: templates/Details/change.php:206 templates/Details/index.php:129
 msgid "Contracts: {0}"
 msgstr "Ugovori: {0}"
 
-#: templates/Details/change.php:208
+#: templates/Details/change.php:210
 msgid "Remove this address"
 msgstr "Ukloni ovu adresu"
 
-#: templates/Details/change.php:212
+#: templates/Details/change.php:214
 msgid "Name on the address"
 msgstr "Ime na adresi"
 
-#: templates/Details/change.php:222
+#: templates/Details/change.php:224
 msgid "Add an address"
 msgstr "Dodaj adresu"
 
-#: templates/Details/change.php:226
+#: templates/Details/change.php:228
 msgid "Kind of address"
 msgstr "Vrsta adrese"
 
-#: templates/Details/change.php:237 templates/Details/confirm.php:24
-#: templates/email/text/change_request.php:23
+#: templates/Details/change.php:239 templates/Details/confirm.php:24
+#: templates/email/text/change_request.php:30
 msgid "Note"
 msgstr "Napomena"
 
-#: templates/Details/change.php:247
+#: templates/Details/change.php:249
 msgid "Check the request"
 msgstr "Provjeri zahtjev"
 
-#: templates/Details/change.php:248
+#: templates/Details/change.php:250
 msgid "Back to my details"
 msgstr "Natrag na moje podatke"
 
@@ -415,43 +416,48 @@ msgstr "Pošalji na obradu"
 msgid "Edit"
 msgstr "Uredi"
 
-#: templates/Details/index.php:27 templates/email/text/change_request.php:15
+#: templates/Details/index.php:32
 msgid "Customer"
 msgstr "Korisnik"
 
-#: templates/Details/index.php:30
+#: templates/email/text/change_request.php:19
+msgctxt "mail"
+msgid "Customer"
+msgstr "Korisnik"
+
+#: templates/Details/index.php:35
 msgid "Changes of your details are checked before they apply. Your consents are saved straight away."
 msgstr "Izmjene podataka provjeravamo prije nego što stupe na snagu. Privole se spremaju odmah."
 
-#: templates/Details/index.php:43
-msgid "Name"
-msgstr "Ime"
-
-#: templates/Details/index.php:50
+#: templates/Details/index.php:47
 msgid "Customer number"
 msgstr "Broj korisnika"
 
-#: templates/Details/index.php:106
+#: templates/Details/index.php:50
+msgid "Name"
+msgstr "Ime"
+
+#: templates/Details/index.php:112
 msgid "Without a billing address, invoices go to the installation address."
 msgstr "Bez adrese za račune, račune šaljemo na adresu instalacije."
 
-#: templates/Details/index.php:132
+#: templates/Details/index.php:141
 msgid "Consents and messages"
 msgstr "Privole i poruke"
 
-#: templates/Details/index.php:143
+#: templates/Details/index.php:152
 msgid "I want to receive correspondence about the monthly billing"
 msgstr "Želim primati korespondenciju povezanu s mjesečnim obračunom"
 
-#: templates/Details/index.php:150
+#: templates/Details/index.php:159
 msgid "I want to receive information about outages and faults"
 msgstr "Želim primati informacije o prekidima i kvarovima"
 
-#: templates/Details/index.php:157
+#: templates/Details/index.php:166
 msgid "I agree to receive commercial communications"
 msgstr "Pristajem na primanje poslovnih obavijesti"
 
-#: templates/Details/index.php:161
+#: templates/Details/index.php:170
 msgid "Save consents"
 msgstr "Spremi privole"
 
@@ -615,7 +621,7 @@ msgstr "Najmanje {0} znakova."
 msgid "Confirm password"
 msgstr "Potvrda lozinke"
 
-#: templates/SignIn/index.php:17 templates/email/text/change_request.php:16
+#: templates/SignIn/index.php:17 templates/email/text/change_request.php:20
 msgid "Login"
 msgstr "Korisničko ime"
 
@@ -627,11 +633,15 @@ msgstr "Lozinka"
 msgid "Forgot your password? Contact us: {0}"
 msgstr "Zaboravili ste lozinku? Javite nam se: {0}"
 
-#: templates/email/text/change_request.php:13
+#: templates/email/text/change_request.php:17
 msgid "A customer asks for a change of their details in the customer portal."
 msgstr "Korisnik u korisničkom portalu traži izmjenu svojih podataka."
 
-#: templates/email/text/change_request.php:25
+#: templates/email/text/change_request.php:23
+msgid "In the CRM: {0}"
+msgstr "U CRM-u: {0}"
+
+#: templates/email/text/change_request.php:32
 msgid "Sent {0} from {1}"
 msgstr "Poslano {0} s adrese {1}"
 

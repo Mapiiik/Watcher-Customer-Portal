@@ -142,7 +142,9 @@ class DetailsControllerTest extends PortalTestCase
         $this->assertMailContainsText('Last name: Novak → Novak-Smith');
         $this->assertMailContainsText('E-mail: jan@example.com (billing, outages) → jan@example.com (billing)');
         $this->assertMailContainsText('E-mail added: second@example.com (billing, outages)');
-        $this->assertMailContainsText('Installation address: Main street 299, 512 43 Springfield, Czech Republic → Main street 300, 512 43 Springfield, Czech Republic');
+        $this->assertMailContainsText('Installation address: Main street 299, 512 43 Springfield, Czech Republic → Main street 300, 512 43 Springfield, Czech Republic (House number: 299 → 300)');
+        $this->assertMailContainsText('Customer: 110009 Jan Novak');
+        $this->assertMailContainsText('In the CRM: https://crm.example.invalid/customers/view/c0ffee00-0000-4000-8000-000000110009');
         $this->assertMailContainsText('Please also send the invoices by post.');
         $this->assertMailContainsText('Login: jan.novak');
         $this->assertSessionNotHasKey('Portal.changeDraft');

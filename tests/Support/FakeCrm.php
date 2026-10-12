@@ -85,6 +85,7 @@ final class FakeCrm implements CustomerPortalApi
                 new Contract('T-110009-02', 'Television', '', null, ['Television M'], [], []),
             ],
             ['1' => 'Czech Republic', '2' => 'Croatia'],
+            'c0ffee00-0000-4000-8000-000000110009',
         );
         $this->invoices = [
             new Invoice(self::INVOICE_ID, '2026100231', '110009', '2026-10-01', '2026-10-15', '', 'Internet 10/2026', 1490.0, 1490.0),

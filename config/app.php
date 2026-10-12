@@ -166,6 +166,11 @@ return [
             'url' => rtrim($setting('CRM_API_URL'), '/'),
             'key' => $setting('CRM_API_KEY'),
             'verifyTls' => $flag('CRM_API_VERIFY_TLS', true),
+            // its pages, linked from the change request mail: the API's address without /api/...
+            'web' => rtrim($setting(
+                'CRM_WEB_URL',
+                (string)preg_replace('#/api(/.*)?$#', '', rtrim($setting('CRM_API_URL'), '/')),
+            ), '/'),
         ],
         'changeRequestsTo' => $list('CHANGE_REQUESTS_TO'),
         // the operator's look and texts: the profile the deployment mounts at /app/profile, with

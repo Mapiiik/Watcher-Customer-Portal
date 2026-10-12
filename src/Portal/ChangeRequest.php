@@ -123,8 +123,16 @@ final readonly class ChangeRequest
             $new = array_merge($old, array_intersect_key(self::addressValues($row), $row));
             if ($new !== $old) {
                 [$was, $now] = self::diff($old, $new);
+                // the whole address before and after, and what changes in it at the end
+                $fields = array_map(static fn(string $field): string => __(
+                    '{0}: {1} → {2}',
+                    Labels::field($field),
+                    self::addressValue($field, (string)$was[$field], $before),
+                    self::addressValue($field, (string)$now[$field], $before),
+                ), array_keys($now));
                 $changes[] = new Change(Change::ADDRESS, Change::UPDATE, $address->id, $was, $now, [
-                    __('{0}: {1} → {2}', $type, self::address($old, $before), self::address($new, $before)),
+                    __('{0}: {1} → {2}', $type, self::address($old, $before), self::address($new, $before))
+                        . ' (' . implode(', ', $fields) . ')',
                 ]);
             }
         }
@@ -279,6 +287,23 @@ final readonly class ChangeRequest
         }
 
         return $values;
+    }
+
+    /**
+     * A field of an address as people read it: the name of the country, a dash for nothing.
+     *
+     * @param string $field One of Address::FIELDS.
+     * @param string $value
+     * @param \App\Crm\CustomerDetails $customer Who knows the countries.
+     * @return string
+     */
+    private static function addressValue(string $field, string $value, CustomerDetails $customer): string
+    {
+        if ($field === 'country_id' && $value !== '') {
+            $value = $customer->country($value);
+        }
+
+        return $value === '' ? '–' : $value;
     }
 
     /**

@@ -41,6 +41,8 @@ services:
       CRM_API_URL: https://localhost:8443/api/customer-portal
       CRM_API_KEY: "${CRM_API_KEY:-none}"
       CRM_API_VERIFY_TLS: "false"
+      # the development CRM's pages as the browser reaches them, linked from the change mail
+      CRM_WEB_URL: "${CRM_WEB_URL:-https://localhost}"
       # the change requests end up in Mailpit, http://localhost:8025
       SMTP_HOST: mail-dev
       SMTP_PORT: 1025

@@ -76,7 +76,11 @@ class ChangeRequestTest extends TestCase
             ],
             'note' => 'Call me, please.',
         ], $request->toArray());
-        $this->assertSame('Installation address: Main street 299, 512 43 Springfield, Czech Republic → Main street 300, 512 43 Springfield, Czech Republic', $request->lines()[3]);
+        $this->assertSame(
+            'Installation address: Main street 299, 512 43 Springfield, Czech Republic'
+                . ' → Main street 300, 512 43 Springfield, Czech Republic (House number: 299 → 300)',
+            $request->lines()[3],
+        );
     }
 
     public function testWhatAPhoneIsUsedForChanges(): void

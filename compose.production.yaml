@@ -22,6 +22,7 @@ services:
       CRM_API_URL: ${CRM_API_URL:?set CRM_API_URL}
       CRM_API_KEY: ${CRM_API_KEY:?set CRM_API_KEY}
       CRM_API_VERIFY_TLS: ${CRM_API_VERIFY_TLS:-true}
+      CRM_WEB_URL: ${CRM_WEB_URL:-}
       SMTP_HOST: ${SMTP_HOST:?set SMTP_HOST}
       SMTP_PORT: ${SMTP_PORT:-587}
       SMTP_SECURE: ${SMTP_SECURE:-tls}

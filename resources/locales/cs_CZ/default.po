@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Watcher Customer Portal\n"
-"POT-Creation-Date: 2026-10-12 21:16+0200\n"
+"POT-Creation-Date: 2026-10-12 21:51+0200\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgstr "Faktura"
 
 #: src/Controller/DetailsController.php:40 templates/Details/change.php:19
 #: templates/Details/change.php:92 templates/Details/confirm.php:9
-#: templates/Details/index.php:28 templates/layout/default.php:16
+#: templates/Details/index.php:33 templates/layout/default.php:16
 msgid "My details"
 msgstr "Moje údaje"
 
@@ -56,7 +56,7 @@ msgid "Check your request"
 msgstr "Kontrola žádosti"
 
 #: src/Controller/DetailsController.php:106 templates/Details/change.php:93
-#: templates/Details/index.php:23
+#: templates/Details/index.php:28
 msgid "Request a change"
 msgstr "Požádat o změnu"
 
@@ -138,6 +138,7 @@ msgid "Your sign-in has expired, please sign in again."
 msgstr "Platnost přihlášení vypršela, přihlaste se prosím znovu."
 
 #: src/Portal/ChangeRequest.php:46 src/Portal/ChangeRequest.php:127
+#: src/Portal/ChangeRequest.php:134
 msgid "{0}: {1} → {2}"
 msgstr "{0}: {1} → {2}"
 
@@ -169,7 +170,7 @@ msgstr "Přidaný telefon: {0}"
 msgid "{0} removed: {1}"
 msgstr "{0} odebraná: {1}"
 
-#: src/Portal/ChangeRequest.php:135
+#: src/Portal/ChangeRequest.php:143
 msgid "{0} added: {1}"
 msgstr "{0} přidaná: {1}"
 
@@ -257,7 +258,7 @@ msgstr "Fakturační adresa"
 msgid "Permanent address"
 msgstr "Adresa trvalého bydliště"
 
-#: src/Portal/Labels.php:58 templates/Details/index.php:125
+#: src/Portal/Labels.php:58 templates/Details/index.php:134
 #: templates/Overview/index.php:155
 msgid "Installation address"
 msgstr "Adresa instalace"
@@ -308,23 +309,23 @@ msgid "Due"
 msgstr "K úhradě"
 
 #: templates/Details/change.php:14 templates/Details/change.php:106
-#: templates/Details/index.php:40
+#: templates/Details/index.php:45
 msgid "Customer details"
 msgstr "Údaje zákazníka"
 
-#: templates/Details/change.php:15 templates/Details/index.php:64
+#: templates/Details/change.php:15 templates/Details/index.php:70
 msgid "Contacts"
 msgstr "Kontakty"
 
-#: templates/Details/change.php:16 templates/Details/index.php:88
+#: templates/Details/change.php:16 templates/Details/index.php:94
 msgid "Billing and correspondence"
 msgstr "Fakturace a korespondence"
 
-#: templates/Details/change.php:17 templates/Details/index.php:112
+#: templates/Details/change.php:17 templates/Details/index.php:118
 msgid "Installation addresses"
 msgstr "Adresy instalace"
 
-#: templates/Details/change.php:18 templates/Details/index.php:35
+#: templates/Details/change.php:18 templates/Details/index.php:40
 msgid "Another request"
 msgstr "Jiný požadavek"
 
@@ -336,66 +337,66 @@ msgstr "Napište nám, co si přejete změnit. Žádost vyřídíme a budeme vá
 msgid "Correct or complete your details and send them. They change once they have been checked."
 msgstr "Opravte nebo doplňte své údaje a odešlete je ke zpracování. Změny se projeví po jejich kontrole."
 
-#: templates/Details/change.php:129 templates/Details/index.php:66
+#: templates/Details/change.php:131 templates/Details/index.php:72
 #: templates/Overview/index.php:193
 msgid "E-mail"
 msgstr "E-mail"
 
-#: templates/Details/change.php:130
+#: templates/Details/change.php:132
 msgid "Clear an e-mail to have it removed, and tick what each one is used for."
 msgstr "E-mail, který si přejete odebrat, vymažte. U každého e-mailu označte, k jakým účelům má být používán."
 
-#: templates/Details/change.php:141 templates/Details/change.php:145
+#: templates/Details/change.php:143 templates/Details/change.php:147
 msgid "Add an e-mail"
 msgstr "Přidat e-mail"
 
-#: templates/Details/change.php:154 templates/Details/index.php:75
+#: templates/Details/change.php:156 templates/Details/index.php:81
 #: templates/Overview/index.php:189
 msgid "Phone"
 msgstr "Telefon"
 
-#: templates/Details/change.php:155
+#: templates/Details/change.php:157
 msgid "Clear a number to have it removed, and tick what each one is used for."
 msgstr "Číslo, které si přejete odebrat, vymažte. U každého čísla označte, k jakým účelům má být používáno."
 
-#: templates/Details/change.php:166 templates/Details/change.php:170
+#: templates/Details/change.php:168 templates/Details/change.php:172
 msgid "Add a phone number"
 msgstr "Přidat telefon"
 
-#: templates/Details/change.php:182
+#: templates/Details/change.php:184
 msgid "Billing details"
 msgstr "Fakturační údaje"
 
-#: templates/Details/change.php:204 templates/Details/index.php:120
+#: templates/Details/change.php:206 templates/Details/index.php:129
 msgid "Contracts: {0}"
 msgstr "Smlouvy: {0}"
 
-#: templates/Details/change.php:208
+#: templates/Details/change.php:210
 msgid "Remove this address"
 msgstr "Odebrat tuto adresu"
 
-#: templates/Details/change.php:212
+#: templates/Details/change.php:214
 msgid "Name on the address"
 msgstr "Jméno na adrese"
 
-#: templates/Details/change.php:222
+#: templates/Details/change.php:224
 msgid "Add an address"
 msgstr "Přidat adresu"
 
-#: templates/Details/change.php:226
+#: templates/Details/change.php:228
 msgid "Kind of address"
 msgstr "Druh adresy"
 
-#: templates/Details/change.php:237 templates/Details/confirm.php:24
-#: templates/email/text/change_request.php:23
+#: templates/Details/change.php:239 templates/Details/confirm.php:24
+#: templates/email/text/change_request.php:30
 msgid "Note"
 msgstr "Poznámka"
 
-#: templates/Details/change.php:247
+#: templates/Details/change.php:249
 msgid "Check the request"
 msgstr "Zkontrolovat žádost"
 
-#: templates/Details/change.php:248
+#: templates/Details/change.php:250
 msgid "Back to my details"
 msgstr "Zpět na moje údaje"
 
@@ -415,43 +416,48 @@ msgstr "Odeslat ke zpracování"
 msgid "Edit"
 msgstr "Upravit"
 
-#: templates/Details/index.php:27 templates/email/text/change_request.php:15
+#: templates/Details/index.php:32
 msgid "Customer"
 msgstr "Uživatel"
 
-#: templates/Details/index.php:30
+#: templates/email/text/change_request.php:19
+msgctxt "mail"
+msgid "Customer"
+msgstr "Zákazník"
+
+#: templates/Details/index.php:35
 msgid "Changes of your details are checked before they apply. Your consents are saved straight away."
 msgstr "Změny údajů se před uložením kontrolují. Souhlasy se ukládají okamžitě."
 
-#: templates/Details/index.php:43
-msgid "Name"
-msgstr "Jméno"
-
-#: templates/Details/index.php:50
+#: templates/Details/index.php:47
 msgid "Customer number"
 msgstr "Zákaznické číslo"
 
-#: templates/Details/index.php:106
+#: templates/Details/index.php:50
+msgid "Name"
+msgstr "Jméno"
+
+#: templates/Details/index.php:112
 msgid "Without a billing address, invoices go to the installation address."
 msgstr "Bez fakturační adresy posíláme faktury na adresu instalace."
 
-#: templates/Details/index.php:132
+#: templates/Details/index.php:141
 msgid "Consents and messages"
 msgstr "Souhlasy a zprávy"
 
-#: templates/Details/index.php:143
+#: templates/Details/index.php:152
 msgid "I want to receive correspondence about the monthly billing"
 msgstr "Přeji si dostávat korespondenci spojenou s měsíčním vyúčtováním"
 
-#: templates/Details/index.php:150
+#: templates/Details/index.php:159
 msgid "I want to receive information about outages and faults"
 msgstr "Přeji si dostávat informace o odstávkách a poruchách"
 
-#: templates/Details/index.php:157
+#: templates/Details/index.php:166
 msgid "I agree to receive commercial communications"
 msgstr "Souhlasím se zasíláním obchodních sdělení"
 
-#: templates/Details/index.php:161
+#: templates/Details/index.php:170
 msgid "Save consents"
 msgstr "Uložit souhlasy"
 
@@ -615,7 +621,7 @@ msgstr "Nejméně {0} znaků."
 msgid "Confirm password"
 msgstr "Potvrzení hesla"
 
-#: templates/SignIn/index.php:17 templates/email/text/change_request.php:16
+#: templates/SignIn/index.php:17 templates/email/text/change_request.php:20
 msgid "Login"
 msgstr "Přihlašovací jméno"
 
@@ -627,11 +633,15 @@ msgstr "Heslo"
 msgid "Forgot your password? Contact us: {0}"
 msgstr "Zapomněli jste heslo? Kontaktujte nás: {0}"
 
-#: templates/email/text/change_request.php:13
+#: templates/email/text/change_request.php:17
 msgid "A customer asks for a change of their details in the customer portal."
 msgstr "Zákazník v uživatelském portálu žádá o změnu svých údajů."
 
-#: templates/email/text/change_request.php:25
+#: templates/email/text/change_request.php:23
+msgid "In the CRM: {0}"
+msgstr "V CRM: {0}"
+
+#: templates/email/text/change_request.php:32
 msgid "Sent {0} from {1}"
 msgstr "Odesláno {0} z adresy {1}"
 
