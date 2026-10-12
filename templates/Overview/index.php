@@ -16,8 +16,8 @@ $installation = $details->address(Address::INSTALLATION);
 $overdue = count(array_filter($unpaid, static fn($invoice): bool => $invoice->isOverdue($today)));
 // the code for changing the provider, where the operator's contracts have one
 $withCodes = array_filter(
-    $details->connections,
-    static fn($connection): bool => $connection->verificationCode !== '',
+    $details->contracts,
+    static fn($contract): bool => $contract->verificationCode !== '',
 ) !== [];
 ?>
 <div class="title">
@@ -40,6 +40,12 @@ $withCodes = array_filter(
     <?php endif; ?>
         </div>
         <div class="amount due"><?= h($this->Format->money($due)) ?></div>
+    <?php if ($operator->paymentAccount !== '') : ?>
+        <dl class="facts pay-to">
+            <dt><?= h(__('Pay to account')) ?></dt>
+            <dd><?= h($operator->paymentAccount) ?></dd>
+        </dl>
+    <?php endif; ?>
         <table>
             <thead>
                 <tr>
@@ -61,12 +67,6 @@ $withCodes = array_filter(
     <?php endforeach; ?>
             </tbody>
         </table>
-    <?php if ($operator->paymentAccount !== '') : ?>
-        <dl class="facts actions">
-            <dt><?= h(__('Pay to account')) ?></dt>
-            <dd><?= h($operator->paymentAccount) ?></dd>
-        </dl>
-    <?php endif; ?>
     <?php if ($codes !== []) : ?>
         <div class="pay-codes">
             <p class="muted">
@@ -125,13 +125,12 @@ $withCodes = array_filter(
 <?php endif; ?>
     </div>
 
-<?php if ($details->connections !== []) : ?>
-    <div class="card">
-        <h2><?= h(__('Connections')) ?></h2>
-        <table class="cards">
+<?php if ($details->contracts !== []) : ?>
+    <div class="card wide">
+        <h2><?= h(__('Contracts and services')) ?></h2>
+        <table class="contracts">
             <thead>
                 <tr>
-                    <th><?= h(__('IP address')) ?></th>
                     <th><?= h(__('Contract')) ?></th>
     <?php if ($withCodes) : ?>
                     <th><?= h(__('Subscriber verification code')) ?></th>
@@ -139,13 +138,37 @@ $withCodes = array_filter(
                 </tr>
             </thead>
             <tbody>
-    <?php foreach ($details->connections as $connection) : ?>
+    <?php foreach ($details->contracts as $contract) : ?>
+        <?php
+        $installed = $contract->installationAddress;
+        $place = $installed === null ? '' : implode(', ', array_filter([$installed->street(), $installed->town()]));
+        $addresses = [...$contract->ipAddresses, ...$contract->ipNetworks];
+        ?>
                 <tr>
-                    <td><?= h($connection->ipAddress) ?></td>
-                    <td data-label="<?= h(__('Contract')) ?>"><?= h($connection->contractNumber) ?></td>
+                    <td>
+                        <strong><?= h($contract->number) ?></strong>
+        <?php if ($contract->serviceType !== '') : ?>
+                        <span class="muted"> – <?= h($contract->serviceType) ?></span>
+        <?php endif; ?>
+        <?php if ($place !== '') : ?>
+                        <div class="small"><span class="muted"><?= h(__('Installation address')) ?>:</span> <?= h($place) ?></div>
+        <?php endif; ?>
+        <?php if ($contract->services !== []) : ?>
+                        <div class="small">
+                            <span class="muted"><?= h(__('Services')) ?>:</span>
+                            <?= h(implode(' · ', $contract->services)) ?>
+                        </div>
+        <?php endif; ?>
+        <?php if ($addresses !== []) : ?>
+                        <div class="small">
+                            <span class="muted"><?= h(__('IP addresses')) ?>:</span>
+                            <?= h(implode(' · ', $addresses)) ?>
+                        </div>
+        <?php endif; ?>
+                    </td>
         <?php if ($withCodes) : ?>
                     <td data-label="<?= h(__('Subscriber verification code')) ?>">
-                        <?= h($connection->verificationCode) ?>
+                        <?= h($contract->verificationCode !== '' ? $contract->verificationCode : '–') ?>
                     </td>
         <?php endif; ?>
                 </tr>

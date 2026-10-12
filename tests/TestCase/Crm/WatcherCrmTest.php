@@ -71,7 +71,13 @@ class WatcherCrmTest extends TestCase
                 'number' => '110009', 'name' => 'Jan Novak', 'agree_mailing_billing' => true,
                 'emails' => [['id' => 'e1', 'email' => 'jan@example.com', 'use_for_billing' => true]],
                 'addresses' => [['id' => 'a1', 'type' => 0, 'street' => 'Main street', 'number' => '299', 'country_id' => 1]],
-                'ip_addresses' => [['ip_address' => '192.0.2.37', 'contract_number' => 'S-1', 'subscriber_verification_code' => null]],
+                'contracts' => [[
+                    'number' => 'S-1', 'service_type' => 'Wireless internet', 'subscriber_verification_code' => null,
+                    'installation_address' => ['id' => 'a1', 'type' => 0, 'street' => 'Main street', 'number' => '299'],
+                    'services' => ['Internet Standard'], 'ip_addresses' => ['192.0.2.37'], 'ip_networks' => [],
+                ], [
+                    'number' => 'T-2', 'installation_address' => null, 'services' => [],
+                ]],
             ],
             'countries' => ['1' => 'Czech Republic'],
         ])), $token);
@@ -87,7 +93,11 @@ class WatcherCrmTest extends TestCase
         $this->assertSame('jan@example.com', $details->emails[0]->email);
         $this->assertSame('Main street 299', $details->addresses[0]->street());
         $this->assertSame('Czech Republic', $details->country('1'));
-        $this->assertSame('', $details->connections[0]->verificationCode);
+        $this->assertSame('', $details->contracts[0]->verificationCode);
+        $this->assertSame('Main street 299', $details->contracts[0]->installationAddress?->street());
+        $this->assertSame(['Internet Standard'], $details->contracts[0]->services);
+        $this->assertSame(['192.0.2.37'], $details->contracts[0]->ipAddresses);
+        $this->assertNull($details->contracts[1]->installationAddress);
         $this->assertSame(1490.0, $invoices[0]->total);
         $this->assertFalse($invoices[0]->isPaid());
     }

@@ -111,7 +111,13 @@ tfoot .due { color: var(--danger); }
 .badge.due { color: var(--warn); background: var(--warn-bg); }
 .badge.late { color: var(--danger); background: var(--danger-bg); }
 
+/* a contract, and under it in smaller print where it is installed, its services and addresses */
+table.contracts td { vertical-align: top; }
+table.contracts td > div { margin-top: .2rem; }
+table.contracts .small { font-size: .9rem; overflow-wrap: anywhere; }
+
 dl.facts { display: grid; grid-template-columns: minmax(130px, auto) 1fr; gap: .45rem 1.25rem; margin: 0; }
+dl.facts.pay-to { margin: .6rem 0 1.25rem; }
 dl.facts dt { color: var(--muted); }
 dl.facts dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
 
@@ -189,5 +195,9 @@ footer.site a { color: #fff; }
     table.cards td { border: 0; padding: 0; }
     table.cards td[data-label]::before { content: attr(data-label) ": "; color: var(--muted); }
     table.cards tfoot tr { border: 0; }
+    table.contracts thead { display: none; }
+    table.contracts tr { display: block; padding: .8rem 0; border-bottom: 1px solid var(--line); }
+    table.contracts td { display: block; border: 0; padding: .1rem 0; }
+    table.contracts td[data-label]::before { content: attr(data-label) ": "; color: var(--muted); }
     .signin { padding: 24px 0; }
 }

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2026-10-12 14:59+0200\n"
+"POT-Creation-Date: 2026-10-12 19:55+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -221,7 +221,7 @@ msgid "VAT number"
 msgstr ""
 
 #: ./src/Portal/Labels.php:33
-#: ./templates/Overview/index.php:171
+#: ./templates/Overview/index.php:194
 msgid "Website"
 msgstr ""
 
@@ -262,6 +262,7 @@ msgid "Country"
 msgstr ""
 
 #: ./src/Portal/Labels.php:53
+#: ./templates/Overview/index.php:154
 msgid "Installation address"
 msgstr ""
 
@@ -308,17 +309,17 @@ msgstr ""
 msgid "Invoice {0}"
 msgstr ""
 
-#: ./src/View/Helper/FormatHelper.php:60
+#: ./src/View/Helper/FormatHelper.php:63
 #: ./templates/Invoices/index.php:26
 #: ./templates/Invoices/index.php:43
 msgid "Paid"
 msgstr ""
 
-#: ./src/View/Helper/FormatHelper.php:61
+#: ./src/View/Helper/FormatHelper.php:64
 msgid "Overdue"
 msgstr ""
 
-#: ./src/View/Helper/FormatHelper.php:62
+#: ./src/View/Helper/FormatHelper.php:65
 msgid "Due"
 msgstr ""
 
@@ -335,7 +336,7 @@ msgstr ""
 
 #: ./templates/Details/change.php:72
 #: ./templates/Details/index.php:41
-#: ./templates/Overview/index.php:167
+#: ./templates/Overview/index.php:190
 msgid "E-mail"
 msgstr ""
 
@@ -349,7 +350,7 @@ msgstr ""
 
 #: ./templates/Details/change.php:93
 #: ./templates/Details/index.php:50
-#: ./templates/Overview/index.php:163
+#: ./templates/Overview/index.php:186
 msgid "Phone"
 msgstr ""
 
@@ -537,24 +538,27 @@ msgid "All invoices"
 msgstr ""
 
 #: ./templates/Overview/index.php:130
-msgid "Connections"
+msgid "Contracts and services"
 msgstr ""
 
 #: ./templates/Overview/index.php:134
-msgid "IP address"
-msgstr ""
-
-#: ./templates/Overview/index.php:135
-#: ./templates/Overview/index.php:145
 msgid "Contract"
 msgstr ""
 
-#: ./templates/Overview/index.php:137
-#: ./templates/Overview/index.php:147
+#: ./templates/Overview/index.php:136
+#: ./templates/Overview/index.php:170
 msgid "Subscriber verification code"
 msgstr ""
 
-#: ./templates/Overview/index.php:160
+#: ./templates/Overview/index.php:158
+msgid "Services"
+msgstr ""
+
+#: ./templates/Overview/index.php:164
+msgid "IP addresses"
+msgstr ""
+
+#: ./templates/Overview/index.php:183
 msgid "Need help?"
 msgstr ""
 

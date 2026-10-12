@@ -31,7 +31,7 @@ final readonly class CustomerDetails
      * @param list<\App\Crm\Email> $emails
      * @param list<\App\Crm\Phone> $phones
      * @param list<\App\Crm\Address> $addresses
-     * @param list<\App\Crm\Connection> $connections
+     * @param list<\App\Crm\Contract> $contracts With active services.
      * @param array<array-key, string> $countries Names by id.
      */
     public function __construct(
@@ -42,7 +42,7 @@ final readonly class CustomerDetails
         public array $emails,
         public array $phones,
         public array $addresses,
-        public array $connections,
+        public array $contracts,
         public array $countries,
     ) {
     }
@@ -70,7 +70,7 @@ final readonly class CustomerDetails
             array_map(Email::fromFields(...), $customer->list('emails')),
             array_map(Phone::fromFields(...), $customer->list('phones')),
             array_map(Address::fromFields(...), $customer->list('addresses')),
-            array_map(Connection::fromFields(...), $customer->list('ip_addresses')),
+            array_map(Contract::fromFields(...), $customer->list('contracts')),
             $answer->texts('countries'),
         );
     }

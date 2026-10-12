@@ -9,10 +9,15 @@ use App\Portal\PaymentCodes;
 
 /**
  * The first page after signing in: what is left to pay with the codes to pay it by, the latest
- * invoices, the connections and where to get help.
+ * invoices, the contracts with their services and where to get help.
  */
 class OverviewController extends AppController
 {
+    /**
+     * How many of the latest invoices the overview lists.
+     */
+    private const LATEST_INVOICES = 5;
+
     /**
      * @param \App\Crm\CustomerPortalApi $crm Watcher CRM.
      * @return void
@@ -38,7 +43,7 @@ class OverviewController extends AppController
             'unpaid' => $unpaid,
             'due' => $due,
             'codes' => $codes,
-            'latest' => array_slice($invoices, 0, 3),
+            'latest' => array_slice($invoices, 0, self::LATEST_INVOICES),
             'today' => date('Y-m-d'),
             'title' => __('Overview'),
         ]);

@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Test\Support;
 
 use App\Crm\Address;
-use App\Crm\Connection;
 use App\Crm\Consents;
+use App\Crm\Contract;
 use App\Crm\CrmUnavailable;
 use App\Crm\CustomerDetails;
 use App\Crm\CustomerPortalApi;
@@ -70,7 +70,20 @@ final class FakeCrm implements CustomerPortalApi
                 'company' => '', 'title' => '', 'first_name' => '', 'last_name' => '', 'suffix' => '',
                 'street' => 'Main street', 'number' => '299', 'city' => 'Springfield', 'zip' => '512 43', 'country_id' => '1',
             ])],
-            [new Connection('192.0.2.37', 'S-110009-01', 'NET7Q2K9')],
+            [
+                new Contract(
+                    'S-110009-01',
+                    'Wireless internet',
+                    'NET7Q2K9',
+                    new Address('a1', Address::INSTALLATION, [
+                        'street' => 'Main street', 'number' => '299', 'city' => 'Springfield', 'zip' => '512 43',
+                    ]),
+                    ['Internet Standard (30 / 8 Mbps)', 'Public IPv4 address'],
+                    ['192.0.2.37'],
+                    ['198.51.100.0/29'],
+                ),
+                new Contract('T-110009-02', 'Television', '', null, ['Television M'], [], []),
+            ],
             ['1' => 'Czech Republic', '2' => 'Croatia'],
         );
         $this->invoices = [

@@ -28,7 +28,7 @@ class PagesTest extends PortalTestCase
         parent::tearDown();
     }
 
-    public function testTheOverviewShowsWhatIsLeftToPayAndTheConnections(): void
+    public function testTheOverviewShowsWhatIsLeftToPayAndTheContracts(): void
     {
         $this->signedIn();
         $this->get('/');
@@ -37,8 +37,12 @@ class PagesTest extends PortalTestCase
         $this->assertResponseContains('Hello, Jan Novak');
         $this->assertResponseContains('€1,490.00');
         $this->assertResponseContains('2026100231');
-        $this->assertResponseContains('192.0.2.37');
+        $this->assertResponseContains('S-110009-01');
+        $this->assertResponseContains('Main street 299, 512 43 Springfield');
         $this->assertResponseContains('NET7Q2K9');
+        $this->assertResponseContains('Internet Standard (30 / 8 Mbps) · Public IPv4 address');
+        $this->assertResponseContains('192.0.2.37 · 198.51.100.0/29');
+        $this->assertResponseContains('T-110009-02');
         $this->assertResponseContains('aria-current="page">Overview');
         $this->assertResponseContains('Sign out');
         $this->assertHeader('Cache-Control', 'no-store');

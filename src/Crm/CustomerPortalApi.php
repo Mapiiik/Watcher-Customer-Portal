@@ -18,7 +18,7 @@ interface CustomerPortalApi
     public function signIn(string $login, string $password, string $ip): SignInAnswer;
 
     /**
-     * The customer's details, contacts, addresses and connections.
+     * The customer's details, contacts, addresses and contracts.
      *
      * @throws \App\Crm\CrmUnavailable
      * @throws \App\Crm\SignedOut

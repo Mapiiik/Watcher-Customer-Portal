@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Watcher Customer Portal\n"
-"POT-Creation-Date: 2026-10-12 14:59+0200\n"
+"POT-Creation-Date: 2026-10-12 19:55+0200\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -203,7 +203,7 @@ msgstr "IČ"
 msgid "VAT number"
 msgstr "DIČ"
 
-#: src/Portal/Labels.php:33 templates/Overview/index.php:171
+#: src/Portal/Labels.php:33 templates/Overview/index.php:194
 msgid "Website"
 msgstr "Webové stránky"
 
@@ -243,9 +243,9 @@ msgstr "PSČ"
 msgid "Country"
 msgstr "Země"
 
-#: src/Portal/Labels.php:53
+#: src/Portal/Labels.php:53 templates/Overview/index.php:154
 msgid "Installation address"
-msgstr "Místo instalace"
+msgstr "Adresa instalace"
 
 #: src/Portal/Labels.php:54
 msgid "Billing address"
@@ -287,16 +287,16 @@ msgstr "obchodní sdělení"
 msgid "Invoice {0}"
 msgstr "Faktura {0}"
 
-#: src/View/Helper/FormatHelper.php:60 templates/Invoices/index.php:26
+#: src/View/Helper/FormatHelper.php:63 templates/Invoices/index.php:26
 #: templates/Invoices/index.php:43
 msgid "Paid"
 msgstr "Uhrazeno"
 
-#: src/View/Helper/FormatHelper.php:61
+#: src/View/Helper/FormatHelper.php:64
 msgid "Overdue"
 msgstr "Po splatnosti"
 
-#: src/View/Helper/FormatHelper.php:62
+#: src/View/Helper/FormatHelper.php:65
 msgid "Due"
 msgstr "K úhradě"
 
@@ -310,7 +310,7 @@ msgid "Customer"
 msgstr "Uživatel"
 
 #: templates/Details/change.php:72 templates/Details/index.php:41
-#: templates/Overview/index.php:167
+#: templates/Overview/index.php:190
 msgid "E-mail"
 msgstr "E-mail"
 
@@ -323,7 +323,7 @@ msgid "Another e-mail address"
 msgstr "Další e-mailová adresa"
 
 #: templates/Details/change.php:93 templates/Details/index.php:50
-#: templates/Overview/index.php:163
+#: templates/Overview/index.php:186
 msgid "Phone"
 msgstr "Telefon"
 
@@ -505,22 +505,26 @@ msgid "All invoices"
 msgstr "Všechny faktury"
 
 #: templates/Overview/index.php:130
-msgid "Connections"
-msgstr "Připojení"
+msgid "Contracts and services"
+msgstr "Smlouvy a služby"
 
 #: templates/Overview/index.php:134
-msgid "IP address"
-msgstr "IP adresa"
-
-#: templates/Overview/index.php:135 templates/Overview/index.php:145
 msgid "Contract"
 msgstr "Smlouva"
 
-#: templates/Overview/index.php:137 templates/Overview/index.php:147
+#: templates/Overview/index.php:136 templates/Overview/index.php:170
 msgid "Subscriber verification code"
 msgstr "Ověřovací kód účastníka (OKU)"
 
-#: templates/Overview/index.php:160
+#: templates/Overview/index.php:158
+msgid "Services"
+msgstr "Služby"
+
+#: templates/Overview/index.php:164
+msgid "IP addresses"
+msgstr "IP adresy"
+
+#: templates/Overview/index.php:183
 msgid "Need help?"
 msgstr "Potřebujete pomoc?"
 

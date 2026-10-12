@@ -1,7 +1,7 @@
 # Watcher Customer Portal
 
 Customer portal of an internet service provider: a customer signs in and sees what is left to pay,
-their invoices with the PDFs, their details and connections, gives or withdraws their consents,
+their invoices with the PDFs, their details, contracts and services, gives or withdraws their consents,
 asks for a change of their details and changes their password. Everything comes from
 [Watcher CRM](https://github.com/Mapiiik/Watcher-CRM) over its customer portal API. The portal
 keeps no data of its own and needs no database.
