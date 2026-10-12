@@ -46,7 +46,9 @@
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; font: 17px/1.6 Jost, system-ui, sans-serif; color: var(--text); background: var(--bg); }
+/* the content takes what the window has left, so the footer of a short page is at its bottom
+   (dvh where the browser knows it, without the bars a phone shows and hides) */
+body { margin: 0; font: 17px/1.6 Jost, system-ui, sans-serif; color: var(--text); background: var(--bg); display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
 a { color: var(--brand-accent); text-decoration: none; font-weight: 500; }
 a:hover { color: var(--brand-hover); }
 h1, h2, h3 { font-weight: 700; line-height: 1.2; }
@@ -80,7 +82,8 @@ header.top .cta:hover { background: var(--brand-hover); }
 .title .muted { margin-top: .3rem; }
 .kicker { display: inline-flex; align-items: center; gap: .45rem; margin-bottom: .4rem; color: var(--brand-accent); font-weight: 700; }
 .kicker::after { content: "✓"; display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--brand-accent); color: #fff; font-size: .7rem; }
-main.wrap { padding-bottom: 64px; }
+/* as an item of the body's column, auto margins would shrink it to its content, hence the width */
+main.wrap { padding-bottom: 64px; flex: 1 0 auto; width: 100%; }
 
 .grid { display: grid; gap: 30px; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); }
 .card { background: var(--card); box-shadow: var(--shadow); padding: 30px; }
