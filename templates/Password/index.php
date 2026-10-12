@@ -26,10 +26,7 @@
         'minlength' => $minLength,
         'required' => true,
     ]) ?>
-    <p class="hint"><?= h(__(
-        'At least {0} characters. A few words are easier to remember than a short password with special characters.',
-        $minLength,
-    )) ?></p>
+    <p class="hint"><?= h(__('At least {0} characters.', $minLength)) ?></p>
     <?= $this->Form->control('new_password_again', [
         'type' => 'password',
         'label' => __('Confirm password'),

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Watcher Customer Portal\n"
-"POT-Creation-Date: 2026-10-12 08:39+0200\n"
+"POT-Creation-Date: 2026-10-12 14:59+0200\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,11 +14,11 @@ msgstr "Souhlas se zpracováním osobních údajů"
 
 #: profiles/default/consent.php:14
 msgid "By ticking below I choose which messages I want to receive from {0} (the \"Controller\") at my contact details. For commercial communications I also give the Controller my consent to sending them and to processing my contact details for this purpose."
-msgstr "Zaškrtnutím níže volím, které zprávy chci od {0} (dále jen „Správce“) dostávat na své kontaktní údaje. U obchodních sdělení tím Správci zároveň dávám souhlas s jejich zasíláním a se zpracováním svých kontaktních údajů pro tento účel."
+msgstr "Zaškrtnutím níže volím, které zprávy si přeji od {0} (dále jen „Správce“) dostávat na své kontaktní údaje. U obchodních sdělení tím Správci zároveň uděluji souhlas s jejich zasíláním a se zpracováním svých kontaktních údajů pro tento účel."
 
 #: profiles/default/consent.php:15
 msgid "I can change or withdraw my choice and consent at any time, here in the customer portal or through the contact details of the Controller. Withdrawing does not affect the lawfulness of the processing before it."
-msgstr "Volbu i souhlas mohu kdykoli změnit nebo odvolat, a to zde v Uživatelském portálu nebo prostřednictvím kontaktních údajů Správce. Odvolání nemá vliv na zákonnost zpracování před ním."
+msgstr "Volbu i souhlas mohu kdykoli změnit nebo odvolat, a to zde v Uživatelském portálu nebo prostřednictvím kontaktních údajů Správce. Odvoláním souhlasu není dotčena zákonnost zpracování provedeného před jeho odvoláním."
 
 #: profiles/default/consent.php:17
 msgid "How the Controller processes personal data is described in its {0}."
@@ -43,11 +43,11 @@ msgstr "Moje údaje"
 
 #: src/Controller/DetailsController.php:49
 msgid "Your consents have been saved."
-msgstr "Souhlasy jsou uložené."
+msgstr "Souhlasy byly uloženy."
 
 #: src/Controller/DetailsController.php:68
 msgid "Nothing has changed, there is nothing to send."
-msgstr "Nic se nezměnilo, není co odeslat."
+msgstr "Nebyly zadány žádné změny, žádost proto nebyla odeslána."
 
 #: src/Controller/DetailsController.php:77
 msgid "Change of customer details: {0}"
@@ -59,7 +59,7 @@ msgstr "Žádost se nepodařilo odeslat, zkuste to prosím později."
 
 #: src/Controller/DetailsController.php:100
 msgid "Your details have been sent for processing. They change once they have been checked."
-msgstr "Údaje jsme přijali ke zpracování. Změní se, až je zkontrolujeme."
+msgstr "Žádost o změnu údajů byla přijata ke zpracování. Změny se projeví po jejich kontrole."
 
 #: src/Controller/DetailsController.php:108 templates/Details/change.php:53
 #: templates/Details/index.php:26 templates/Details/index.php:62
@@ -73,7 +73,7 @@ msgstr "Faktury"
 
 #: src/Controller/InvoicesController.php:51
 msgid "No such invoice."
-msgstr "Taková faktura neexistuje."
+msgstr "Požadovaná faktura nebyla nalezena."
 
 #: src/Controller/OverviewController.php:43 templates/layout/default.php:14
 msgid "Overview"
@@ -86,23 +86,23 @@ msgstr "Nová hesla se neshodují."
 #: src/Controller/PasswordController.php:33
 #: src/Controller/PasswordController.php:49
 msgid "The new password has to be at least {0} characters long."
-msgstr "Nové heslo musí mít aspoň {0} znaků."
+msgstr "Nové heslo musí mít nejméně {0} znaků."
 
 #: src/Controller/PasswordController.php:39
 #: src/Controller/SignInController.php:45
 msgid "Too many failed attempts, please try again in a while"
-msgstr "Příliš mnoho neúspěšných pokusů, zkuste to prosím za chvíli"
+msgstr "Byl překročen povolený počet neúspěšných pokusů, zkuste to prosím později"
 
 #: src/Controller/PasswordController.php:40
 msgid "The current password is not right."
-msgstr "Současné heslo nesouhlasí."
+msgstr "Současné heslo není správné."
 
 #: src/Controller/PasswordController.php:45
 msgid "Your password has been changed."
-msgstr "Heslo je změněné."
+msgstr "Heslo bylo změněno."
 
 #: src/Controller/PasswordController.php:56 templates/Password/index.php:9
-#: templates/Password/index.php:41
+#: templates/Password/index.php:38
 msgid "Change password"
 msgstr "Změna hesla"
 
@@ -116,7 +116,7 @@ msgstr "Účet zablokován"
 
 #: src/Controller/SignInController.php:46
 msgid "The login or the password is not right."
-msgstr "Přihlašovací jméno nebo heslo nesouhlasí."
+msgstr "Přihlašovací jméno nebo heslo není správné."
 
 #: src/Controller/SignInController.php:52 templates/SignIn/index.php:13
 #: templates/SignIn/index.php:31
@@ -129,7 +129,7 @@ msgstr "Byli jste odhlášeni."
 
 #: src/Error/PortalExceptionRenderer.php:27
 msgid "Your sign-in has expired, please sign in again."
-msgstr "Přihlášení vypršelo, přihlaste se prosím znovu."
+msgstr "Platnost přihlášení vypršela, přihlaste se prosím znovu."
 
 #: src/Portal/ChangeRequest.php:40 src/Portal/ChangeRequest.php:95
 msgid "{0}: {1} → {2}"
@@ -173,7 +173,7 @@ msgstr "Společnost"
 
 #: src/Portal/Labels.php:25
 msgid "Title"
-msgstr "Titul"
+msgstr "Titul před jménem"
 
 #: src/Portal/Labels.php:26
 msgid "First name"
@@ -185,7 +185,7 @@ msgstr "Příjmení"
 
 #: src/Portal/Labels.php:28
 msgid "Suffix"
-msgstr "Přípona"
+msgstr "Titul za jménem"
 
 #: src/Portal/Labels.php:29
 msgid "Date of birth"
@@ -193,7 +193,7 @@ msgstr "Datum narození"
 
 #: src/Portal/Labels.php:30
 msgid "ID card number"
-msgstr "Číslo OP"
+msgstr "Číslo občanského průkazu"
 
 #: src/Portal/Labels.php:31
 msgid "Company ID"
@@ -205,7 +205,7 @@ msgstr "DIČ"
 
 #: src/Portal/Labels.php:33 templates/Overview/index.php:171
 msgid "Website"
-msgstr "WWW"
+msgstr "Webové stránky"
 
 #: src/Portal/Labels.php:34
 msgid "Bank"
@@ -213,7 +213,7 @@ msgstr "Banka"
 
 #: src/Portal/Labels.php:35
 msgid "Account number"
-msgstr "Účet"
+msgstr "Číslo účtu"
 
 #: src/Portal/Labels.php:36
 msgid "Bank code"
@@ -229,7 +229,7 @@ msgstr "Ulice"
 
 #: src/Portal/Labels.php:39
 msgid "House number"
-msgstr "č.p."
+msgstr "Číslo popisné"
 
 #: src/Portal/Labels.php:40
 msgid "City"
@@ -302,7 +302,7 @@ msgstr "K úhradě"
 
 #: templates/Details/change.php:54
 msgid "Correct or complete your details and send them. They change once they have been checked."
-msgstr "Opravte nebo doplňte své údaje a odešlete je. Změní se, až je zkontrolujeme."
+msgstr "Opravte nebo doplňte své údaje a odešlete je ke zpracování. Změny se projeví po jejich kontrole."
 
 #: templates/Details/change.php:62 templates/Details/index.php:15
 #: templates/Details/index.php:25 templates/email/text/change_request.php:15
@@ -316,7 +316,7 @@ msgstr "E-mail"
 
 #: templates/Details/change.php:73
 msgid "Clear an address to have it removed, and tick what each one is used for."
-msgstr "Adresu, kterou chcete odebrat, vymažte. U každé zaškrtněte, k čemu ji používat."
+msgstr "Adresu, kterou si přejete odebrat, vymažte. U každé adresy označte, k jakým účelům má být používána."
 
 #: templates/Details/change.php:85
 msgid "Another e-mail address"
@@ -361,7 +361,7 @@ msgstr "Zpět na moje údaje"
 
 #: templates/Details/index.php:17
 msgid "Changes of your details are checked before they apply. Your consents are saved straight away."
-msgstr "Změny údajů před uložením kontrolujeme. Souhlasy se ukládají hned."
+msgstr "Změny údajů se před uložením kontrolují. Souhlasy se ukládají okamžitě."
 
 #: templates/Details/index.php:29
 msgid "Name"
@@ -409,15 +409,15 @@ msgstr "Zpět do uživatelského portálu"
 
 #: templates/Error/error500.php:11
 msgid "The customer portal is not available right now."
-msgstr "Uživatelský portál teď není dostupný."
+msgstr "Uživatelský portál je momentálně nedostupný."
 
 #: templates/Error/error500.php:14
 msgid "Please try again in a while."
-msgstr "Zkuste to prosím za chvíli."
+msgstr "Zkuste to prosím později."
 
 #: templates/Error/error500.php:16
 msgid "If it does not help, contact us: {0}"
-msgstr "Pokud to nepomůže, ozvěte se nám: {0}"
+msgstr "Pokud potíže přetrvávají, kontaktujte nás: {0}"
 
 #: templates/Invoices/index.php:10
 msgid "Billing"
@@ -425,11 +425,11 @@ msgstr "Vyúčtování"
 
 #: templates/Invoices/index.php:12
 msgid "Download an invoice as a PDF with the button in its row."
-msgstr "Fakturu stáhnete jako PDF tlačítkem v jejím řádku."
+msgstr "Fakturu ve formátu PDF stáhnete tlačítkem v příslušném řádku."
 
 #: templates/Invoices/index.php:17 templates/Overview/index.php:105
 msgid "No invoices yet."
-msgstr "Zatím žádné faktury."
+msgstr "Zatím nebyly vystaveny žádné faktury."
 
 #: templates/Invoices/index.php:22
 msgid "Invoice number"
@@ -474,7 +474,7 @@ msgstr "K úhradě"
 
 #: templates/Overview/index.php:48
 msgid "Debt"
-msgstr "Dluh"
+msgstr "Dlužná částka"
 
 #: templates/Overview/index.php:56
 msgid "due {0}"
@@ -486,7 +486,7 @@ msgstr "Číslo účtu pro platbu"
 
 #: templates/Overview/index.php:73
 msgid "Scan the code of an invoice in your bank's app and the payment fills itself in."
-msgstr "Kód faktury naskenujte v aplikaci své banky a platba se vyplní sama."
+msgstr "Po naskenování kódu v aplikaci banky se platební údaje vyplní automaticky."
 
 #: templates/Overview/index.php:82
 msgid "Payment code for invoice {0}"
@@ -494,7 +494,7 @@ msgstr "Platební kód faktury {0}"
 
 #: templates/Overview/index.php:95
 msgid "All your invoices are paid. Thank you."
-msgstr "Všechny vaše faktury jsou zaplacené. Děkujeme."
+msgstr "Všechny vaše faktury jsou uhrazeny. Děkujeme."
 
 #: templates/Overview/index.php:101
 msgid "Latest invoices"
@@ -544,10 +544,10 @@ msgid "New password"
 msgstr "Nové heslo"
 
 #: templates/Password/index.php:29
-msgid "At least {0} characters. A few words are easier to remember than a short password with special characters."
-msgstr "Aspoň {0} znaků. Několik slov se pamatuje snáz než krátké heslo se zvláštními znaky."
+msgid "At least {0} characters."
+msgstr "Nejméně {0} znaků."
 
-#: templates/Password/index.php:35
+#: templates/Password/index.php:32
 msgid "Confirm password"
 msgstr "Potvrzení hesla"
 
@@ -561,7 +561,7 @@ msgstr "Heslo"
 
 #: templates/SignIn/index.php:35
 msgid "Forgot your password? Contact us: {0}"
-msgstr "Zapomněli jste heslo? Ozvěte se nám: {0}"
+msgstr "Zapomněli jste heslo? Kontaktujte nás: {0}"
 
 #: templates/email/text/change_request.php:13
 msgid "A customer asks for a change of their details in the customer portal."
@@ -577,8 +577,8 @@ msgstr "Zpět na {0}"
 
 #: templates/layout/default.php:75
 msgid "Sign out"
-msgstr "Odhlásit"
+msgstr "Odhlásit se"
 
 #: templates/layout/default.php:91
 msgid "Privacy policy"
-msgstr "Zásady ochrany osobních údajů"
+msgstr "Zásady zpracování osobních údajů"

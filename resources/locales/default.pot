@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2026-10-12 08:39+0200\n"
+"POT-Creation-Date: 2026-10-12 14:59+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -117,7 +117,7 @@ msgstr ""
 
 #: ./src/Controller/PasswordController.php:56
 #: ./templates/Password/index.php:9
-#: ./templates/Password/index.php:41
+#: ./templates/Password/index.php:38
 msgid "Change password"
 msgstr ""
 
@@ -577,10 +577,10 @@ msgid "New password"
 msgstr ""
 
 #: ./templates/Password/index.php:29
-msgid "At least {0} characters. A few words are easier to remember than a short password with special characters."
+msgid "At least {0} characters."
 msgstr ""
 
-#: ./templates/Password/index.php:35
+#: ./templates/Password/index.php:32
 msgid "Confirm password"
 msgstr ""
 
