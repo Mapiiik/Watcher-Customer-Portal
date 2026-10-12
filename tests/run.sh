@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Runs the production image of the portal against the development Watcher CRM, once with the
 # default profile and once with every profile in data/*/profile: signing in and out, attacks on
-# the forms, every page with all errors shown, the consents, a change request (caught by Mailpit),
-# the password and the old addresses. Everything it creates is removed again.
+# the forms, every page with all errors shown, the consents, a change request checked and sent
+# (caught by Mailpit), the password and the old addresses. Everything it creates is removed again.
 #
 # Usage: tests/run.sh
 # Needs the Watcher CRM development containers (web server, database and their network) running.
@@ -155,13 +155,17 @@ for PROFILE in $PROFILES; do
   psql -d "$DEV_DB" -c "UPDATE customers SET agree_gdpr = '$G', agree_mailing_billing = '$B1', agree_mailing_outages = '$O', agree_mailing_commercial = '$C', modified_by = NULLIF('$M', '')::uuid WHERE id = $CUSTOMER" >/dev/null || FAILED=1
   [ "$LABELLED" = 0 ] && psql -d "$DEV_DB" -c "DELETE FROM customer_labels WHERE customer_id = $CUSTOMER AND note = 'form' AND label_id IN (SELECT id FROM labels WHERE name = 'GDPR')" >/dev/null
   dk exec $MAIL wget -q -O - --method=DELETE http://localhost:8025/api/v1/messages >/dev/null 2>&1
-  page /details/change >/dev/null
-  code=$(c -o /dev/null -w '%{http_code}' --data-urlencode "_csrfToken=$(token)" --data-urlencode company="Nested Change Ltd" \
-    --data-urlencode note="A test of the portal." "$B/details/change")
+  page "/details/change?part=customer" >/dev/null
+  code=$(c -o "$TMP/body" -w '%{http_code}' --data-urlencode "_csrfToken=$(token)" --data-urlencode part=customer \
+    --data-urlencode company="Nested Change Ltd" --data-urlencode note="A test of the portal." "$B/details/change")
+  [ "$code" = 200 ] && grep -q 'Nested Change Ltd' "$TMP/body" && grep -q 'action="/details/change/send"' "$TMP/body" \
+    && ok "/details/change ($code)" "shown to be checked" || fail "/details/change" "$code, not shown to be checked"
+  code=$(c -o /dev/null -w '%{http_code}' --data-urlencode "_csrfToken=$(token)" "$B/details/change/send")
   sleep 1
-  dk exec $MAIL wget -q -O - http://localhost:8025/api/v1/messages > "$TMP/mail.json" 2>/dev/null
+  # the whole of the latest mail: the list of messages holds only the beginning of each
+  dk exec $MAIL wget -q -O - http://localhost:8025/api/v1/message/latest > "$TMP/mail.json" 2>/dev/null
   grep -q 'contracts@example.invalid' "$TMP/mail.json" && grep -q 'Nested Change Ltd' "$TMP/mail.json" \
-    && ok "/details/change ($code)" "mailed with the change" || fail "/details/change" "$code, no mail with the change"
+    && ok "/details/change/send ($code)" "mailed with the change" || fail "/details/change/send" "$code, no mail with the change"
 
   echo "-- the password"
   page /password >/dev/null
