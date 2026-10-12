@@ -92,8 +92,19 @@ The layout is that of a CakePHP application: `src/` (controllers, the CRM client
 portal's own classes in `src/Portal`), `templates/`, `config/`, `webroot/` with the portal's
 stylesheet in `css/` and the font in `vendor/jost/`, nothing loaded from elsewhere.
 
+As in Watcher CRM, the development container is `compose.dev-frankenphp.yaml` copied to
+`compose.yaml`, which stays out of git and is adjusted as needed (ports, the CRM's address, the
+language). It serves the working tree on https://localhost with the Caddy configuration of the
+production image, sends mail to
+Mailpit on http://localhost:8025, and reaches the development CRM through the port it publishes
+on the host, `CRM_DEV_ADDRESS`. Signing in needs `CRM_API_KEY` in `.env`, the key of a CRM user
+with the **customer-portal** role. The translations are cached in `tmp/`: after changing a
+catalogue, `bin/cake cache clear_all` or a restart.
+
 ```bash
-composer check        # PHPUnit, PHPCS and PHPStan, as CI runs them
+docker compose up -d
+docker compose exec -T webserver-dev composer check   # PHPUnit, PHPCS and PHPStan, as CI runs them
+docker compose exec -T webserver-dev composer texts   # default.pot from the texts in the code
 tests/run.sh          # the production image against the development Watcher CRM
 ```
 

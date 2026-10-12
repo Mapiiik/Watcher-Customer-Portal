@@ -6,8 +6,21 @@ use Cake\Log\Log;
 
 /*
  * The tests run with the settings the portal cannot do without, pointing nowhere: the CRM is a
- * fake and mail goes to the test transport.
+ * fake and mail goes to the test transport. Every other setting is cleared, so that the
+ * environment of a development container (its language, its payment codes) is not what the
+ * tests run with; a test that needs a setting writes it to Configure.
  */
+foreach (
+    [
+    'CRM_API_VERIFY_TLS', 'MAIL_FROM_NAME', 'OPERATOR_ADDRESS', 'OPERATOR_WEBSITE', 'PAYMENT_ACCOUNT',
+    'PAYMENT_CODE', 'PAYMENT_IBAN', 'PORTAL_DEBUG', 'PRIVACY_POLICY_URL', 'SECURITY_SALT',
+    'SESSION_IDLE_MINUTES', 'SMTP_PASSWORD', 'SMTP_PORT', 'SMTP_SECURE', 'SMTP_USERNAME',
+    'SUPPORT_EMAIL', 'SUPPORT_PHONE', 'TIMEZONE',
+    ] as $name
+) {
+    unset($_SERVER[$name], $_ENV[$name]);
+    putenv($name);
+}
 foreach (
     [
     'OPERATOR_NAME' => 'Test Operator, s.r.o.',
@@ -20,9 +33,9 @@ foreach (
     'CURRENCY' => 'EUR',
     ] as $name => $value
 ) {
-    if (getenv($name) === false) {
-        putenv($name . '=' . $value);
-    }
+    // env() reads $_SERVER before getenv(), so both are set
+    $_SERVER[$name] = $_ENV[$name] = $value;
+    putenv($name . '=' . $value);
 }
 
 require dirname(__DIR__) . '/vendor/autoload.php';

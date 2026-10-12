@@ -1,0 +1,59 @@
+services:
+  webserver-dev:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev-frankenphp
+      args:
+        - buildno
+        - gitcommithash
+    depends_on:
+      - mail-dev
+    tmpfs:
+      - /app/logs:uid=1000,gid=1000
+      - /app/tmp:uid=1000,gid=1000
+      - /app/vendor:uid=1000,gid=1000,exec
+    volumes:
+      - ./:/app
+      # an operator's profile, e.g. ./data/netair/profile; without it profiles/default
+      #- ./data/netair/profile:/app/profile:ro
+    working_dir: /app/
+    # the development CRM, reached through the port it publishes on the host
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      PORTAL_DEBUG: "true"
+      SERVER_NAME: localhost
+      OPERATOR_NAME: "${OPERATOR_NAME:-Example ISP, s.r.o.}"
+      OPERATOR_WEBSITE: "${OPERATOR_WEBSITE:-https://www.example.net}"
+      PRIVACY_POLICY_URL: "${PRIVACY_POLICY_URL:-https://www.example.net/privacy}"
+      SUPPORT_EMAIL: "${SUPPORT_EMAIL:-support@example.net}"
+      SUPPORT_PHONE: "${SUPPORT_PHONE:-+420 000 000 000}"
+      PAYMENT_ACCOUNT: "${PAYMENT_ACCOUNT:-123456789/0100}"
+      PAYMENT_CODE: "${PAYMENT_CODE:-spayd}"
+      PAYMENT_IBAN: "${PAYMENT_IBAN:-CZ6508000000192000145399}"
+      APP_DEFAULT_LOCALE: "${APP_DEFAULT_LOCALE:-}"
+      CURRENCY: "${CURRENCY:-}"
+      # the address of the development CRM's web server as seen from here, carried to
+      # localhost:8443 by the entrypoint; the API key is that of a CRM user with the
+      # customer-portal role, from .env (without one the pages and bin/cake still run, but the
+      # CRM refuses to sign anyone in)
+      CRM_DEV_ADDRESS: "${CRM_DEV_ADDRESS:-host.docker.internal:443}"
+      CRM_API_URL: https://localhost:8443/api/customer-portal
+      CRM_API_KEY: "${CRM_API_KEY:-none}"
+      CRM_API_VERIFY_TLS: "false"
+      # the change requests end up in Mailpit, http://localhost:8025
+      SMTP_HOST: mail-dev
+      SMTP_PORT: 1025
+      SMTP_SECURE: none
+      MAIL_FROM: portal@example.net
+      CHANGE_REQUESTS_TO: contracts@example.invalid
+    ports:
+      - 80:80/tcp # HTTP
+      - 443:443/tcp # HTTPS
+      - 443:443/udp # HTTP/3
+    tty: true
+
+  mail-dev:
+    image: axllent/mailpit:v1.27
+    ports:
+      - 8025:8025/tcp # web interface
