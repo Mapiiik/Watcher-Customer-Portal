@@ -97,6 +97,12 @@ main.wrap { padding-bottom: 64px; flex: 1 0 auto; width: 100%; }
 .card.settled { border-top: 4px solid var(--ok); }
 .card .head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 1rem; }
 .card .head h2 { margin: 0; }
+/* under the head of a card, as the operator's website has it: a thin line across, and on it
+   a short thick one in the operator's colour; drawn as backgrounds, since a head with a
+   button is a flex box, where a pseudo-element would be one more item */
+.card > h2, .card > .head { padding-bottom: .85rem; margin-bottom: 1.2rem;
+    background: linear-gradient(var(--brand-accent), var(--brand-accent)) left bottom / 40px 3px no-repeat,
+        linear-gradient(var(--line), var(--line)) left bottom 1px / 100% 1px no-repeat; }
 .stack > * + * { margin-top: 30px; }
 
 .amount { font-size: 2.6rem; font-weight: 700; line-height: 1.1; white-space: nowrap; }
@@ -141,9 +147,9 @@ dl.facts dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
 .button.wide { width: 100%; justify-content: center; }
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem; margin-top: 1.5rem; }
 
-form .field { margin: 1.1rem 0 0; }
-label { display: block; font-weight: 600; margin-bottom: .35rem; }
-input[type=text], input[type=password], input[type=email], input[type=tel], input[type=date], select, textarea { width: 100%; font: inherit; padding: .75rem .9rem; border: 1px solid #d3dbe6; background: #fff; color: var(--text); }
+form .field { margin: .9rem 0 0; }
+label { display: block; font-weight: 600; margin-bottom: .25rem; }
+input[type=text], input[type=password], input[type=email], input[type=tel], input[type=date], select, textarea { width: 100%; font: inherit; padding: .45rem .7rem; border: 1px solid #d3dbe6; background: #fff; color: var(--text); }
 textarea { min-height: 7rem; }
 input:focus, select:focus, textarea:focus, .button:focus-visible, .cta:focus-visible { outline: 2px solid var(--brand-accent); outline-offset: 1px; }
 .field.checkbox label, label.check { display: flex; gap: .7rem; align-items: flex-start; font-weight: 500; }

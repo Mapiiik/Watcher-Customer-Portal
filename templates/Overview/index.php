@@ -151,7 +151,10 @@ $withCodes = array_filter(
                         <span class="muted"> – <?= h($contract->serviceType) ?></span>
         <?php endif; ?>
         <?php if ($place !== '') : ?>
-                        <div class="small"><span class="muted"><?= h(__('Installation address')) ?>:</span> <?= h($place) ?></div>
+                        <div class="small">
+                            <span class="muted"><?= h(__('Installation address')) ?>:</span>
+                            <?= h($place) ?>
+                        </div>
         <?php endif; ?>
         <?php if ($contract->services !== []) : ?>
                         <div class="small">
