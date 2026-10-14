@@ -74,7 +74,7 @@ $head = static fn(string $title, string $part): string => '<div class="head"><h2
 <?php foreach ($details->emails as $email) : ?>
                 <?= h($email->email) ?>
     <?php $uses = Labels::uses($email->billing, $email->outages, $email->commercial); ?>
-                <?= $uses !== '' ? '<span class="muted">(' . h($uses) . ')</span>' : '' ?><br>
+                <?= $uses !== '' ? '<br><span class="muted">(' . h($uses) . ')</span>' : '' ?><br>
 <?php endforeach; ?>
                 <?= $details->emails === [] ? '–' : '' ?>
             </dd>
@@ -83,7 +83,7 @@ $head = static fn(string $title, string $part): string => '<div class="head"><h2
 <?php foreach ($details->phones as $phone) : ?>
                 <?= h($phone->phone) ?>
     <?php $uses = Labels::uses($phone->billing, $phone->outages, $phone->commercial); ?>
-                <?= $uses !== '' ? '<span class="muted">(' . h($uses) . ')</span>' : '' ?><br>
+                <?= $uses !== '' ? '<br><span class="muted">(' . h($uses) . ')</span>' : '' ?><br>
 <?php endforeach; ?>
                 <?= $details->phones === [] ? '–' : '' ?>
             </dd>
