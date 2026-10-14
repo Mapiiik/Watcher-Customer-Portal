@@ -72,18 +72,22 @@ $head = static fn(string $title, string $part): string => '<div class="head"><h2
             <dt><?= h(__('E-mail')) ?></dt>
             <dd>
 <?php foreach ($details->emails as $email) : ?>
-                <?= h($email->email) ?>
     <?php $uses = Labels::uses($email->billing, $email->outages, $email->commercial); ?>
-                <?= $uses !== '' ? '<br><span class="muted">(' . h($uses) . ')</span>' : '' ?><br>
+                <div>
+                    <?= h($email->email) ?>
+                    <?= $uses !== '' ? '<div class="muted small">(' . h($uses) . ')</div>' : '' ?>
+                </div>
 <?php endforeach; ?>
                 <?= $details->emails === [] ? '–' : '' ?>
             </dd>
             <dt><?= h(__('Phone')) ?></dt>
             <dd>
 <?php foreach ($details->phones as $phone) : ?>
-                <?= h($phone->phone) ?>
     <?php $uses = Labels::uses($phone->billing, $phone->outages, $phone->commercial); ?>
-                <?= $uses !== '' ? '<br><span class="muted">(' . h($uses) . ')</span>' : '' ?><br>
+                <div>
+                    <?= h($phone->phone) ?>
+                    <?= $uses !== '' ? '<div class="muted small">(' . h($uses) . ')</div>' : '' ?>
+                </div>
 <?php endforeach; ?>
                 <?= $details->phones === [] ? '–' : '' ?>
             </dd>

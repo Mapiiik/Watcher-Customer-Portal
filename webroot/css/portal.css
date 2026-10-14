@@ -138,6 +138,8 @@ dl.facts.pay-to { margin: .6rem 0 1.25rem; }
 dl.facts > .apart { margin-top: .4rem; padding-top: .85rem; border-top: 1px solid var(--line); }
 dl.facts dt { color: var(--muted); }
 dl.facts dd { margin: 0; padding-left: 1.25rem; font-weight: 500; overflow-wrap: anywhere; }
+/* several things under one heading, such as the e-mails, each with its note under it */
+dl.facts dd > div + div { margin-top: .4rem; }
 
 /* the codes are drawn at twice their size, and their modules have to stay sharp */
 .pay-codes { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.5rem 2rem; margin-top: 1.5rem; }
