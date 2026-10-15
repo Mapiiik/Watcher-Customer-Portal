@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2026-10-15 12:55+0200\n"
+"POT-Creation-Date: 2026-10-15 15:26+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -382,8 +382,7 @@ msgid "Type your customer number and an e-mail you have given us. We send a link
 msgstr ""
 
 #: ./templates/Access/index.php:20
-#: ./templates/Details/index.php:47
-msgid "Customer number"
+msgid "Customer number or contract number"
 msgstr ""
 
 #: ./templates/Access/index.php:29
@@ -560,6 +559,10 @@ msgstr ""
 
 #: ./templates/Details/index.php:35
 msgid "Changes of your details are checked before they apply. Your consents are saved straight away."
+msgstr ""
+
+#: ./templates/Details/index.php:47
+msgid "Customer number"
 msgstr ""
 
 #: ./templates/Details/index.php:50

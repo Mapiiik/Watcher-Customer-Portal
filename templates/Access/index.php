@@ -17,7 +17,7 @@
         )) ?></p>
         <?= $this->Form->create(null, ['url' => ['controller' => 'Access', 'action' => 'index']]) ?>
         <?= $this->Form->control('customer_number', [
-            'label' => __('Customer number'),
+            'label' => __('Customer number or contract number'),
             'value' => $number,
             'inputmode' => 'numeric',
             'autocomplete' => 'off',
