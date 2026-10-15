@@ -141,6 +141,18 @@ class WatcherCrmTest extends TestCase
         $this->crm->invoices('customer-token');
     }
 
+    public function testAKeyRefusedWithAStatusIsReportedAsSuchAndSignsNobodyOut(): void
+    {
+        $this->mockClientGet(
+            self::API . '/customer',
+            $this->newClientResponse(401, ['WWW-Authenticate: Bearer'], '{"message":"Unauthorized"}'),
+        );
+
+        $this->expectException(CrmUnavailable::class);
+        $this->expectExceptionMessage('HTTP 401, check CRM_API_KEY and its role');
+        $this->crm->customer('customer-token');
+    }
+
     public function testNoAnswerIsTheCrmBeingUnavailable(): void
     {
         $crm = new WatcherCrm(new Client(['timeout' => 1]), 'https://127.0.0.1:1/api', 'portal-key');

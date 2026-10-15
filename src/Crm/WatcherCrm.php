@@ -184,15 +184,17 @@ final readonly class WatcherCrm implements CustomerPortalApi
     private function accept(Response $response): void
     {
         $status = $response->getStatusCode();
-        if ($status === 401) {
+        // a refused key asks for another one with WWW-Authenticate, a refused customer token does not
+        $keyRefused = $status === 401 && $response->hasHeader('WWW-Authenticate');
+        if ($status === 401 && !$keyRefused) {
             throw new SignedOut('Watcher CRM no longer takes the customer token.');
         }
         if ($status !== 200) {
-            // a refused key or role is answered with a redirect to the sign-in page
+            // a refused key or role: 401 or 403, from Watcher CRM 4.x a redirect to the sign-in page
             throw new CrmUnavailable(sprintf(
                 'Watcher CRM answered with HTTP %d%s.',
                 $status,
-                in_array($status, [302, 403], true) ? ', check CRM_API_KEY and its role' : '',
+                in_array($status, [302, 401, 403], true) ? ', check CRM_API_KEY and its role' : '',
             ));
         }
     }
