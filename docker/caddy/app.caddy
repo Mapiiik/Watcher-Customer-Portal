@@ -1,0 +1,17 @@
+# What belongs to this application, imported by the Caddyfile, which is the same in every image.
+
+# FrankenPHP's own defaults: classic mode, threads by the number of CPUs
+(app_frankenphp) {
+}
+
+# The portal loads nothing from elsewhere, runs no inline scripts or styles and is framed by nobody
+(app_site) {
+	header ?Content-Security-Policy "default-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"
+	header ?X-Frame-Options "DENY"
+	header ?Referrer-Policy "same-origin"
+	header ?Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+}
+
+# php_server as it comes
+(app_php_server) {
+}
