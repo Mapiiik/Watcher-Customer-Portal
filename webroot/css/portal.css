@@ -60,16 +60,17 @@ p { margin: 0 0 1rem; }
 .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .wrap { max-width: 1320px; margin: 0 auto; padding: 0 16px; }
 
-/* the header of the operator's website: a bar with the contacts, the logo in a block, the menu,
-   and a block in the accent */
+/* the header of the operator's website, of its sizes: a bar with the contacts, the logo in a block,
+   the menu, and a block in the accent */
 header.top { background: var(--brand-dark); color: #fff; display: grid; grid-template-columns: auto 1fr auto auto; }
-header.top .logo { grid-row: 1 / 3; display: flex; align-items: center; padding: 0 40px; border-right: 1px solid rgba(255, 255, 255, .12); }
-header.top .logo img { height: 100px; max-width: 220px; object-fit: contain; display: block; }
+header.top .logo { grid-row: 1 / 3; display: flex; align-items: center; padding: 0 50px; border-right: 1px solid rgba(255, 255, 255, .12); }
+/* as tall as the logo on the operator's website, which the profile's colors.css says */
+header.top .logo img { height: var(--logo-height, 94px); object-fit: contain; display: block; }
 header.top .logo span { font-weight: 700; font-size: 1.3rem; color: #fff; }
-header.top .bar { grid-column: 2 / 5; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 0 24px; min-height: 46px; font-size: .95rem; background: var(--brand-topbar); border-bottom: 1px solid rgba(255, 255, 255, .12); }
+header.top .bar { grid-column: 2 / 5; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 0 24px; min-height: 47px; font-size: .95rem; background: var(--brand-topbar); border-bottom: 1px solid rgba(255, 255, 255, .12); }
 header.top .bar .contacts { display: flex; gap: 1.2rem; flex-wrap: wrap; }
 header.top .bar a, header.top .bar span { color: #fff; font-weight: 400; }
-header.top nav { display: flex; align-items: center; gap: 2rem; padding: 0 28px; min-height: 78px; overflow-x: auto; }
+header.top nav { display: flex; align-items: center; gap: 2rem; padding: 0 28px; min-height: 101px; overflow-x: auto; }
 header.top nav a, header.top nav span { color: #fff; font-weight: 600; font-size: 1.05rem; white-space: nowrap; padding: 1.6rem 0; }
 header.top nav a:hover, header.top nav [aria-current] { color: var(--brand-accent); }
 /* who is signed in, beside signing out */

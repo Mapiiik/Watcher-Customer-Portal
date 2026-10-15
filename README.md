@@ -51,7 +51,8 @@ neutral and takes the operator's name from `OPERATOR_NAME`.
 | `assets/` | the logo, icons and `colors.css` the profile names, served at `/branding/<file>` |
 
 The pages look like the operator's website: its header with the contacts above the menu, square
-buttons and the Jost font. `colors.css` sets the colours:
+buttons and the Jost font, of the same sizes. `colors.css` sets the colours, and how tall the logo
+is, which is best as tall as the website's, with a logo cut to its drawing:
 
 ```css
 :root {
@@ -59,6 +60,7 @@ buttons and the Jost font. `colors.css` sets the colours:
   --brand-accent: #46b130;  /* links, buttons, the active item of the menu */
   --brand-topbar: #000b23;  /* the bar with the contacts, the header's colour when left out */
   --brand-hover: #46b130;   /* links and buttons under the pointer */
+  --logo-height: 94px;      /* the logo in the header, 94px when left out */
 }
 ```
 
