@@ -23,6 +23,12 @@ Actions.
   anywhere: it goes by mail (`CHANGE_REQUESTS_TO`) to be checked and entered.
 - Changing the password asks for the current one, which the CRM checks like a sign-in, and the
   new one has to be as long as the CRM's settings ask.
+- A customer who forgot their password, or has no login yet, types their customer number and an
+  e-mail of theirs. Where the two belong together, the portal mails a link that works an hour and
+  once, to set the password of a login or to get one made; where every login is locked, the mail
+  says to contact the operator. The page says the same either way. The link is built on
+  `APP_FULL_BASE_URL`, without which the portal does not run outside `PORTAL_DEBUG`, as a request
+  can name any site in its `Host` header.
 - A form is taken only from the portal's own pages (the session's CSRF token and the browser's
   `Origin` and `Sec-Fetch-Site`), the session cookie is `__Host-portal`, a customer is signed out
   after `SESSION_IDLE_MINUTES` without a request, and the pages carry a content security policy

@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace App\Test\Support;
 
+use App\Crm\AccessOffer;
+use App\Crm\AccessRequestAnswer;
+use App\Crm\AccessRequestStatus;
+use App\Crm\AccessSet;
 use App\Crm\Address;
 use App\Crm\Consents;
 use App\Crm\Contract;
@@ -46,6 +50,31 @@ final class FakeCrm implements CustomerPortalApi
     public ?string $savedPassword = null;
 
     public CustomerDetails $details;
+
+    public const LINK_TOKEN = 'link-token';
+
+    public AccessRequestStatus $accessRequestStatus = AccessRequestStatus::Found;
+
+    /**
+     * @var list<array{0: string, 1: string, 2: string}>
+     */
+    public array $accessRequests = [];
+
+    /**
+     * The logins a link offers, by their ids; none offers a new one.
+     *
+     * @var array<string, string>
+     */
+    public array $offeredLogins = ['login-1' => 'jan.novak'];
+
+    public bool $linkSpent = false;
+
+    /**
+     * The login, the password and the address a link set.
+     *
+     * @var array{0: string, 1: string, 2: string}|null
+     */
+    public ?array $accessSet = null;
 
     /**
      * @var list<\App\Crm\Invoice>
@@ -139,6 +168,50 @@ final class FakeCrm implements CustomerPortalApi
         $this->check($token);
 
         return $id === self::INVOICE_ID ? '%PDF-1.4 test' : null;
+    }
+
+    public function requestAccess(string $customerNumber, string $email, string $ip): AccessRequestAnswer
+    {
+        $this->accessRequests[] = [$customerNumber, $email, $ip];
+        $status = $this->accessRequestStatus;
+        if (!in_array($status, [AccessRequestStatus::Found, AccessRequestStatus::Locked], true)) {
+            return AccessRequestAnswer::nothing($status);
+        }
+
+        return new AccessRequestAnswer($status, self::LINK_TOKEN, $email, $customerNumber, 'Jan Novak');
+    }
+
+    public function access(string $linkToken): ?AccessOffer
+    {
+        if ($linkToken !== self::LINK_TOKEN || $this->linkSpent) {
+            return null;
+        }
+
+        $newLogin = $this->offeredLogins === [] ? 'novak.jan' : '';
+
+        return new AccessOffer('jan@example.com', '110009', 'Jan Novak', $this->offeredLogins, $newLogin, 8);
+    }
+
+    public function setAccess(string $linkToken, string $loginId, string $password, string $ip): AccessSet
+    {
+        if ($this->access($linkToken) === null) {
+            return AccessSet::invalid();
+        }
+        if (mb_strlen($password) < 8) {
+            return AccessSet::tooShort(8);
+        }
+        $login = match (true) {
+            $this->offeredLogins === [] => 'novak.jan',
+            $loginId === '' && count($this->offeredLogins) === 1 => (string)reset($this->offeredLogins),
+            default => $this->offeredLogins[$loginId] ?? null,
+        };
+        if ($login === null) {
+            return AccessSet::invalid();
+        }
+        $this->linkSpent = true;
+        $this->accessSet = [$login, $password, $ip];
+
+        return AccessSet::saved($login);
     }
 
     private function check(string $token): void

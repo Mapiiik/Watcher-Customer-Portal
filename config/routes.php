@@ -11,6 +11,8 @@ return function (RouteBuilder $routes): void {
         $builder->connect('/', ['controller' => 'Overview', 'action' => 'index']);
         $builder->connect('/sign-in', ['controller' => 'SignIn', 'action' => 'index']);
         $builder->connect('/sign-out', ['controller' => 'SignIn', 'action' => 'signOut']);
+        $builder->connect('/access', ['controller' => 'Access', 'action' => 'index']);
+        $builder->connect('/access/set', ['controller' => 'Access', 'action' => 'setPassword']);
         $builder->connect('/invoices', ['controller' => 'Invoices', 'action' => 'index']);
         $builder->connect('/invoices/{id}', ['controller' => 'Invoices', 'action' => 'download'])
             ->setPass(['id'])

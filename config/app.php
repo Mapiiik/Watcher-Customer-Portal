@@ -41,7 +41,9 @@ return [
         'dir' => 'src',
         'webroot' => 'webroot',
         'wwwRoot' => WWW_ROOT,
-        'fullBaseUrl' => false,
+        // the base of absolute links, such as the ones sent by e-mail; required outside debug, as a
+        // request can name any site in its Host header (see config/bootstrap.php)
+        'fullBaseUrl' => rtrim($setting('APP_FULL_BASE_URL'), '/') ?: false,
         'imageBaseUrl' => 'img/',
         'cssBaseUrl' => 'css/',
         'jsBaseUrl' => 'js/',

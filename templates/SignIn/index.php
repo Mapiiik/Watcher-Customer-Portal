@@ -5,7 +5,16 @@
  * @var \App\Portal\Profile $profile
  * @var string $login
  */
-$contacts = array_filter([$operator->supportPhone, $operator->supportEmail]);
+$contacts = array_filter([
+    $operator->supportPhone !== ''
+        ? $this->Html->link($operator->supportPhone, 'tel:' . $operator->phoneLink())
+        : '',
+    $operator->supportEmail !== ''
+        ? $this->Html->link($operator->supportEmail, 'mailto:' . $operator->supportEmail)
+        : '',
+]);
+// the sentence is escaped, the links go in after
+$help = str_replace('{0}', implode(', ', $contacts), h(__('Need help? Contact us: {0}', '{0}')));
 ?>
 <div class="signin">
     <div class="card">
@@ -31,8 +40,12 @@ $contacts = array_filter([$operator->supportPhone, $operator->supportEmail]);
             <?= $this->Form->button(__('Sign in'), ['class' => 'button wide']) ?>
         </div>
         <?= $this->Form->end() ?>
+        <p class="actions"><?= $this->Html->link(
+            __('Forgotten password or new access'),
+            ['controller' => 'Access', 'action' => 'index'],
+        ) ?></p>
 <?php if ($contacts !== []) : ?>
-        <p class="hint actions"><?= h(__('Forgot your password? Contact us: {0}', implode(', ', $contacts))) ?></p>
+        <p class="hint"><?= $help ?></p>
 <?php endif; ?>
     </div>
 </div>

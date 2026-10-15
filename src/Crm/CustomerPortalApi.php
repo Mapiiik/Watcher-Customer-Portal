@@ -56,4 +56,27 @@ interface CustomerPortalApi
      * @throws \App\Crm\SignedOut
      */
     public function invoicePdf(string $token, string $id): ?string;
+
+    /**
+     * Asks for a link to set a password, by the customer number and an e-mail the customer typed.
+     *
+     * @param string $ip The customer's address, which the CRM counts requests by.
+     * @throws \App\Crm\CrmUnavailable
+     */
+    public function requestAccess(string $customerNumber, string $email, string $ip): AccessRequestAnswer;
+
+    /**
+     * What a link to set a password lets the customer do, or null when it no longer works.
+     *
+     * @throws \App\Crm\CrmUnavailable
+     */
+    public function access(string $linkToken): ?AccessOffer;
+
+    /**
+     * Sets a password with a link: of the login chosen, or of a new one where there is none.
+     *
+     * @param string $loginId The login chosen, empty where there is one or none.
+     * @throws \App\Crm\CrmUnavailable
+     */
+    public function setAccess(string $linkToken, string $loginId, string $password, string $ip): AccessSet;
 }

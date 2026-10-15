@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2026-10-12 21:51+0200\n"
+"POT-Creation-Date: 2026-10-15 12:55+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -42,6 +42,60 @@ msgstr ""
 #: ./profiles/default/profile.php:24
 #: ./templates/Overview/index.php:52
 msgid "Invoice"
+msgstr ""
+
+#: ./src/Controller/AccessController.php:47
+msgid "Fill in your customer number and e-mail."
+msgstr ""
+
+#: ./src/Controller/AccessController.php:51
+msgid "Too many requests, please try again in an hour."
+msgstr ""
+
+#: ./src/Controller/AccessController.php:56
+#: ./src/Controller/AccessController.php:113
+#: ./src/Controller/AccessController.php:176
+msgid "Your access to the customer portal"
+msgstr ""
+
+#: ./src/Controller/AccessController.php:60
+msgid "If the customer number and the e-mail belong together, we have sent a link to the e-mail. It works for an hour."
+msgstr ""
+
+#: ./src/Controller/AccessController.php:71
+#: ./templates/Access/index.php:12
+#: ./templates/SignIn/index.php:44
+msgid "Forgotten password or new access"
+msgstr ""
+
+#: ./src/Controller/AccessController.php:87
+#: ./src/Controller/AccessController.php:109
+msgid "The link no longer works. Ask for a new one."
+msgstr ""
+
+#: ./src/Controller/AccessController.php:96
+#: ./src/Controller/PasswordController.php:30
+msgid "The new passwords do not match."
+msgstr ""
+
+#: ./src/Controller/AccessController.php:99
+#: ./src/Controller/AccessController.php:106
+#: ./src/Controller/PasswordController.php:33
+#: ./src/Controller/PasswordController.php:49
+msgid "The new password has to be at least {0} characters long."
+msgstr ""
+
+#: ./src/Controller/AccessController.php:126
+#: ./templates/Access/set_password.php:12
+msgid "Set a password"
+msgstr ""
+
+#: ./src/Controller/AccessController.php:144
+msgid "Your password has been set. Sign in with the login {0}."
+msgstr ""
+
+#: ./src/Controller/AccessController.php:150
+msgid "Your password has been set and you are signed in. Your login is {0}."
 msgstr ""
 
 #: ./src/Controller/DetailsController.php:40
@@ -100,15 +154,6 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: ./src/Controller/PasswordController.php:30
-msgid "The new passwords do not match."
-msgstr ""
-
-#: ./src/Controller/PasswordController.php:33
-#: ./src/Controller/PasswordController.php:49
-msgid "The new password has to be at least {0} characters long."
-msgstr ""
-
 #: ./src/Controller/PasswordController.php:39
 #: ./src/Controller/SignInController.php:45
 msgid "Too many failed attempts, please try again in a while"
@@ -141,8 +186,8 @@ msgid "The login or the password is not right."
 msgstr ""
 
 #: ./src/Controller/SignInController.php:52
-#: ./templates/SignIn/index.php:13
-#: ./templates/SignIn/index.php:31
+#: ./templates/SignIn/index.php:22
+#: ./templates/SignIn/index.php:40
 msgid "Sign in"
 msgstr ""
 
@@ -278,7 +323,7 @@ msgid "Permanent address"
 msgstr ""
 
 #: ./src/Portal/Labels.php:58
-#: ./templates/Details/index.php:134
+#: ./templates/Details/index.php:138
 #: ./templates/Overview/index.php:155
 msgid "Installation address"
 msgstr ""
@@ -332,6 +377,74 @@ msgstr ""
 msgid "Due"
 msgstr ""
 
+#: ./templates/Access/index.php:14
+msgid "Type your customer number and an e-mail you have given us. We send a link to set a password to it, and where you have no login yet, one is made for you."
+msgstr ""
+
+#: ./templates/Access/index.php:20
+#: ./templates/Details/index.php:47
+msgid "Customer number"
+msgstr ""
+
+#: ./templates/Access/index.php:29
+#: ./templates/Details/change.php:131
+#: ./templates/Details/index.php:72
+#: ./templates/Overview/index.php:193
+msgid "E-mail"
+msgstr ""
+
+#: ./templates/Access/index.php:35
+msgid "Send link"
+msgstr ""
+
+#: ./templates/Access/index.php:39
+msgid "Back to signing in"
+msgstr ""
+
+#: ./templates/Access/set_password.php:23
+#: ./templates/Access/set_password.php:28
+#: ./templates/SignIn/index.php:26
+#: ./templates/email/text/access_set.php:21
+#: ./templates/email/text/change_request.php:20
+msgid "Login"
+msgstr ""
+
+#: ./templates/Access/set_password.php:30
+msgid "You have no login yet. It will be {0}."
+msgstr ""
+
+#: ./templates/Access/set_password.php:34
+#: ./templates/Password/index.php:23
+msgid "New password"
+msgstr ""
+
+#: ./templates/Access/set_password.php:40
+#: ./templates/Password/index.php:29
+msgid "At least {0} characters."
+msgstr ""
+
+#: ./templates/Access/set_password.php:43
+#: ./templates/Password/index.php:32
+msgid "Confirm password"
+msgstr ""
+
+#: ./templates/Access/set_password.php:49
+msgid "Set password and sign in"
+msgstr ""
+
+#: ./templates/Access/set_password.php:15
+#: ./templates/email/text/access_link.php:14
+#: ./templates/email/text/access_locked.php:14
+#: ./templates/email/text/access_set.php:20
+#: ./templates/email/text/change_request.php:19
+msgctxt "mail"
+msgid "Customer"
+msgstr ""
+
+#: ./templates/Details/index.php:32
+msgid "Customer"
+msgstr ""
+
 #: ./templates/Details/change.php:14
 #: ./templates/Details/change.php:106
 #: ./templates/Details/index.php:45
@@ -344,12 +457,12 @@ msgid "Contacts"
 msgstr ""
 
 #: ./templates/Details/change.php:16
-#: ./templates/Details/index.php:94
+#: ./templates/Details/index.php:98
 msgid "Billing and correspondence"
 msgstr ""
 
 #: ./templates/Details/change.php:17
-#: ./templates/Details/index.php:118
+#: ./templates/Details/index.php:122
 msgid "Installation addresses"
 msgstr ""
 
@@ -366,12 +479,6 @@ msgstr ""
 msgid "Correct or complete your details and send them. They change once they have been checked."
 msgstr ""
 
-#: ./templates/Details/change.php:131
-#: ./templates/Details/index.php:72
-#: ./templates/Overview/index.php:193
-msgid "E-mail"
-msgstr ""
-
 #: ./templates/Details/change.php:132
 msgid "Clear an e-mail to have it removed, and tick what each one is used for."
 msgstr ""
@@ -382,7 +489,7 @@ msgid "Add an e-mail"
 msgstr ""
 
 #: ./templates/Details/change.php:156
-#: ./templates/Details/index.php:81
+#: ./templates/Details/index.php:83
 #: ./templates/Overview/index.php:189
 msgid "Phone"
 msgstr ""
@@ -401,7 +508,7 @@ msgid "Billing details"
 msgstr ""
 
 #: ./templates/Details/change.php:206
-#: ./templates/Details/index.php:129
+#: ./templates/Details/index.php:133
 msgid "Contracts: {0}"
 msgstr ""
 
@@ -451,48 +558,35 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ./templates/Details/index.php:32
-msgid "Customer"
-msgstr ""
-
-#: ./templates/email/text/change_request.php:19
-msgctxt "mail"
-msgid "Customer"
-msgstr ""
-
 #: ./templates/Details/index.php:35
 msgid "Changes of your details are checked before they apply. Your consents are saved straight away."
-msgstr ""
-
-#: ./templates/Details/index.php:47
-msgid "Customer number"
 msgstr ""
 
 #: ./templates/Details/index.php:50
 msgid "Name"
 msgstr ""
 
-#: ./templates/Details/index.php:112
+#: ./templates/Details/index.php:116
 msgid "Without a billing address, invoices go to the installation address."
 msgstr ""
 
-#: ./templates/Details/index.php:141
+#: ./templates/Details/index.php:145
 msgid "Consents and messages"
 msgstr ""
 
-#: ./templates/Details/index.php:152
+#: ./templates/Details/index.php:156
 msgid "I want to receive correspondence about the monthly billing"
 msgstr ""
 
-#: ./templates/Details/index.php:159
+#: ./templates/Details/index.php:163
 msgid "I want to receive information about outages and faults"
 msgstr ""
 
-#: ./templates/Details/index.php:166
+#: ./templates/Details/index.php:170
 msgid "I agree to receive commercial communications"
 msgstr ""
 
-#: ./templates/Details/index.php:170
+#: ./templates/Details/index.php:174
 msgid "Save consents"
 msgstr ""
 
@@ -650,30 +744,62 @@ msgstr ""
 msgid "Current password"
 msgstr ""
 
-#: ./templates/Password/index.php:23
-msgid "New password"
-msgstr ""
-
-#: ./templates/Password/index.php:29
-msgid "At least {0} characters."
-msgstr ""
-
-#: ./templates/Password/index.php:32
-msgid "Confirm password"
-msgstr ""
-
 #: ./templates/SignIn/index.php:17
-#: ./templates/email/text/change_request.php:20
-msgid "Login"
+msgid "Need help? Contact us: {0}"
 msgstr ""
 
-#: ./templates/SignIn/index.php:25
+#: ./templates/SignIn/index.php:34
 #: ./templates/layout/default.php:17
 msgid "Password"
 msgstr ""
 
-#: ./templates/SignIn/index.php:35
-msgid "Forgot your password? Contact us: {0}"
+#: ./templates/email/text/access_link.php:13
+#: ./templates/email/text/access_locked.php:13
+msgid "You have asked for a new password, or for access, to the customer portal of {0}."
+msgstr ""
+
+#: ./templates/email/text/access_link.php:16
+msgid "Set your password here. The link works for an hour and only once:"
+msgstr ""
+
+#: ./templates/email/text/access_link.php:19
+msgid "If you did not ask for it, you need not do anything. Your password stays as it is."
+msgstr ""
+
+#: ./templates/email/text/access_locked.php:16
+msgid "Your access to the customer portal has been locked on purpose, so no new password can be set."
+msgstr ""
+
+#: ./templates/email/text/access_locked.php:18
+msgid "Please contact us: {0}"
+msgstr ""
+
+#: ./templates/email/text/access_locked.php:19
+msgid "Please contact us."
+msgstr ""
+
+#: ./templates/email/text/access_locked.php:21
+msgid "If you did not ask for it, you need not do anything."
+msgstr ""
+
+#: ./templates/email/text/access_set.php:18
+msgid "A login to the customer portal of {0} has been made for you."
+msgstr ""
+
+#: ./templates/email/text/access_set.php:19
+msgid "The password of your login to the customer portal of {0} has been changed."
+msgstr ""
+
+#: ./templates/email/text/access_set.php:22
+msgid "At {0}, from the address {1}"
+msgstr ""
+
+#: ./templates/email/text/access_set.php:25
+msgid "If it was not you, contact us at once: {0}"
+msgstr ""
+
+#: ./templates/email/text/access_set.php:26
+msgid "If it was not you, contact us at once."
 msgstr ""
 
 #: ./templates/email/text/change_request.php:17

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Crm;
 
+use App\Crm\AccessRequestStatus;
 use App\Crm\Consents;
 use App\Crm\CrmUnavailable;
 use App\Crm\SignedOut;
@@ -54,6 +55,73 @@ class WatcherCrmTest extends TestCase
         $this->assertSame('customer-token', $answer->token);
         $this->assertSame('110009', $answer->customerNumber);
         $this->assertSame(10, $answer->passwordMinLength);
+    }
+
+    public function testAnAccessRequestSendsWhatWasTypedAndKeepsTheLink(): void
+    {
+        $this->mockClientPost(self::API . '/access-request', $this->newClientResponse(200, [], (string)json_encode([
+            'status' => 'found',
+            'token' => 'link-token',
+            'email' => 'jan@example.com',
+            'customer' => ['id' => 'c1', 'number' => '110009', 'name' => 'Jan Novak'],
+        ])), [
+            'match' => static function (Request $request): bool {
+                parse_str((string)$request->getBody(), $form);
+
+                return $form === ['customer_number' => '110009', 'email' => 'jan@example.com', 'ip' => '192.0.2.10'];
+            },
+        ]);
+
+        $answer = $this->crm->requestAccess('110009', 'jan@example.com', '192.0.2.10');
+
+        $this->assertSame(AccessRequestStatus::Found, $answer->status);
+        $this->assertSame('link-token', $answer->token);
+        $this->assertSame('jan@example.com', $answer->email);
+        $this->assertSame('110009', $answer->customerNumber);
+    }
+
+    public function testALinkOffersTheLoginsOrNothingOnceSpent(): void
+    {
+        $this->mockClientGet(self::API . '/access?token=link-token', $this->newClientResponse(200, [], (string)json_encode([
+            'status' => 'valid',
+            'email' => 'jan@example.com',
+            'customer' => ['id' => 'c1', 'number' => '110009', 'name' => 'Jan Novak'],
+            'logins' => [['id' => 'login-1', 'login' => 'jan.novak']],
+            'new_login' => null,
+            'password_min_length' => 10,
+        ])));
+        $this->mockClientGet(self::API . '/access?token=spent', $this->newClientResponse(200, [], '{"status":"invalid"}'));
+
+        $offer = $this->crm->access('link-token');
+
+        $this->assertNotNull($offer);
+        $this->assertSame(['login-1' => 'jan.novak'], $offer->logins);
+        $this->assertSame('', $offer->newLogin);
+        $this->assertSame(10, $offer->passwordMinLength);
+        $this->assertNull($this->crm->access('spent'));
+    }
+
+    public function testSettingAPasswordWithALinkSaysHowItWent(): void
+    {
+        $this->mockClientPost(
+            self::API . '/access',
+            $this->newClientResponse(200, [], '{"status":"saved","login":"jan.novak"}'),
+            ['match' => static fn(Request $request): bool => str_contains((string)$request->getBody(), 'password=good')],
+        );
+        $this->mockClientPost(
+            self::API . '/access',
+            $this->newClientResponse(422, [], '{"status":"too_short","min_length":10}'),
+            ['match' => static fn(Request $request): bool => str_contains((string)$request->getBody(), 'password=short')],
+        );
+        $this->mockClientPost(
+            self::API . '/access',
+            $this->newClientResponse(404, [], '{"status":"invalid"}'),
+            ['match' => static fn(Request $request): bool => str_contains((string)$request->getBody(), 'password=spent')],
+        );
+
+        $this->assertSame('jan.novak', $this->crm->setAccess('link-token', '', 'good', '192.0.2.10')->login);
+        $this->assertSame(10, $this->crm->setAccess('link-token', '', 'short', '192.0.2.10')->minLength);
+        $this->assertFalse($this->crm->setAccess('link-token', '', 'spent', '192.0.2.10')->isSaved());
     }
 
     public function testARefusalSaysWhy(): void

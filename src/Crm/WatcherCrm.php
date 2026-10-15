@@ -127,6 +127,73 @@ final readonly class WatcherCrm implements CustomerPortalApi
     }
 
     /**
+     * @inheritDoc
+     */
+    public function requestAccess(string $customerNumber, string $email, string $ip): AccessRequestAnswer
+    {
+        $form = ['customer_number' => $customerNumber, 'email' => $email, 'ip' => $ip];
+        $answer = $this->json($this->send('post', '/access-request', null, $form));
+        $status = AccessRequestStatus::tryFrom($answer->text('status'))
+            ?? throw new CrmUnavailable('Watcher CRM answered an access request with an unknown status.');
+        if ($status !== AccessRequestStatus::Found && $status !== AccessRequestStatus::Locked) {
+            return AccessRequestAnswer::nothing($status);
+        }
+
+        $customer = $answer->object('customer');
+
+        return new AccessRequestAnswer(
+            $status,
+            $answer->text('token'),
+            $answer->text('email'),
+            $customer->text('number'),
+            $customer->text('name'),
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function access(string $linkToken): ?AccessOffer
+    {
+        $answer = $this->json($this->send('get', '/access?' . http_build_query(['token' => $linkToken]), null));
+        if ($answer->text('status') !== 'valid') {
+            return null;
+        }
+
+        $logins = [];
+        foreach ($answer->list('logins') as $login) {
+            $logins[$login->text('id')] = $login->text('login');
+        }
+        $customer = $answer->object('customer');
+
+        return new AccessOffer(
+            $answer->text('email'),
+            $customer->text('number'),
+            $customer->text('name'),
+            $logins,
+            $answer->text('new_login'),
+            $answer->int('password_min_length') > 0 ? $answer->int('password_min_length') : 8,
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setAccess(string $linkToken, string $loginId, string $password, string $ip): AccessSet
+    {
+        $form = ['token' => $linkToken, 'login_id' => $loginId, 'password' => $password, 'ip' => $ip];
+        $response = $this->send('post', '/access', null, $form);
+        if ($response->getStatusCode() === 422) {
+            return AccessSet::tooShort((new Fields((array)$response->getJson()))->int('min_length'));
+        }
+        if ($response->getStatusCode() === 404) {
+            return AccessSet::invalid();
+        }
+
+        return AccessSet::saved($this->json($response)->text('login'));
+    }
+
+    /**
      * @param string $method get or post.
      * @param string $path Under the API.
      * @param string|null $token The customer's token.

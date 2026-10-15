@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Watcher Customer Portal\n"
-"POT-Creation-Date: 2026-10-12 21:51+0200\n"
+"POT-Creation-Date: 2026-10-15 12:55+0200\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,6 +35,58 @@ msgstr "Uživatelský portál"
 #: profiles/default/profile.php:24 templates/Overview/index.php:52
 msgid "Invoice"
 msgstr "Faktura"
+
+#: src/Controller/AccessController.php:47
+msgid "Fill in your customer number and e-mail."
+msgstr "Vyplňte zákaznické číslo a e-mail."
+
+#: src/Controller/AccessController.php:51
+msgid "Too many requests, please try again in an hour."
+msgstr "Příliš mnoho žádostí, zkuste to prosím znovu za hodinu."
+
+#: src/Controller/AccessController.php:56
+#: src/Controller/AccessController.php:113
+#: src/Controller/AccessController.php:176
+msgid "Your access to the customer portal"
+msgstr "Váš přístup do uživatelského portálu"
+
+#: src/Controller/AccessController.php:60
+msgid "If the customer number and the e-mail belong together, we have sent a link to the e-mail. It works for an hour."
+msgstr "Pokud zákaznické číslo a e-mail patří k sobě, poslali jsme na e-mail odkaz. Platí hodinu."
+
+#: src/Controller/AccessController.php:71 templates/Access/index.php:12
+#: templates/SignIn/index.php:44
+msgid "Forgotten password or new access"
+msgstr "Zapomenuté heslo nebo nový přístup"
+
+#: src/Controller/AccessController.php:87
+#: src/Controller/AccessController.php:109
+msgid "The link no longer works. Ask for a new one."
+msgstr "Odkaz už neplatí. Vyžádejte si nový."
+
+#: src/Controller/AccessController.php:96
+#: src/Controller/PasswordController.php:30
+msgid "The new passwords do not match."
+msgstr "Nová hesla se neshodují."
+
+#: src/Controller/AccessController.php:99
+#: src/Controller/AccessController.php:106
+#: src/Controller/PasswordController.php:33
+#: src/Controller/PasswordController.php:49
+msgid "The new password has to be at least {0} characters long."
+msgstr "Nové heslo musí mít nejméně {0} znaků."
+
+#: src/Controller/AccessController.php:126 templates/Access/set_password.php:12
+msgid "Set a password"
+msgstr "Nastavení hesla"
+
+#: src/Controller/AccessController.php:144
+msgid "Your password has been set. Sign in with the login {0}."
+msgstr "Heslo bylo nastaveno. Přihlaste se přihlašovacím jménem {0}."
+
+#: src/Controller/AccessController.php:150
+msgid "Your password has been set and you are signed in. Your login is {0}."
+msgstr "Heslo bylo nastaveno a jste přihlášeni. Vaše přihlašovací jméno je {0}."
 
 #: src/Controller/DetailsController.php:40 templates/Details/change.php:19
 #: templates/Details/change.php:92 templates/Details/confirm.php:9
@@ -85,15 +137,6 @@ msgstr "Požadovaná faktura nebyla nalezena."
 msgid "Overview"
 msgstr "Přehled"
 
-#: src/Controller/PasswordController.php:30
-msgid "The new passwords do not match."
-msgstr "Nová hesla se neshodují."
-
-#: src/Controller/PasswordController.php:33
-#: src/Controller/PasswordController.php:49
-msgid "The new password has to be at least {0} characters long."
-msgstr "Nové heslo musí mít nejméně {0} znaků."
-
 #: src/Controller/PasswordController.php:39
 #: src/Controller/SignInController.php:45
 msgid "Too many failed attempts, please try again in a while"
@@ -124,8 +167,8 @@ msgstr "Účet zablokován"
 msgid "The login or the password is not right."
 msgstr "Přihlašovací jméno nebo heslo není správné."
 
-#: src/Controller/SignInController.php:52 templates/SignIn/index.php:13
-#: templates/SignIn/index.php:31
+#: src/Controller/SignInController.php:52 templates/SignIn/index.php:22
+#: templates/SignIn/index.php:40
 msgid "Sign in"
 msgstr "Přihlásit se"
 
@@ -258,7 +301,7 @@ msgstr "Fakturační adresa"
 msgid "Permanent address"
 msgstr "Adresa trvalého bydliště"
 
-#: src/Portal/Labels.php:58 templates/Details/index.php:134
+#: src/Portal/Labels.php:58 templates/Details/index.php:138
 #: templates/Overview/index.php:155
 msgid "Installation address"
 msgstr "Adresa instalace"
@@ -308,6 +351,65 @@ msgstr "Po splatnosti"
 msgid "Due"
 msgstr "K úhradě"
 
+#: templates/Access/index.php:14
+msgid "Type your customer number and an e-mail you have given us. We send a link to set a password to it, and where you have no login yet, one is made for you."
+msgstr "Zadejte své zákaznické číslo a e-mail, který u nás máte. Pošleme na něj odkaz pro nastavení hesla, a pokud ještě přihlašovací jméno nemáte, založíme vám ho."
+
+#: templates/Access/index.php:20 templates/Details/index.php:47
+msgid "Customer number"
+msgstr "Zákaznické číslo"
+
+#: templates/Access/index.php:29 templates/Details/change.php:131
+#: templates/Details/index.php:72 templates/Overview/index.php:193
+msgid "E-mail"
+msgstr "E-mail"
+
+#: templates/Access/index.php:35
+msgid "Send link"
+msgstr "Poslat odkaz"
+
+#: templates/Access/index.php:39
+msgid "Back to signing in"
+msgstr "Zpět na přihlášení"
+
+#: templates/Access/set_password.php:23 templates/Access/set_password.php:28
+#: templates/SignIn/index.php:26 templates/email/text/access_set.php:21
+#: templates/email/text/change_request.php:20
+msgid "Login"
+msgstr "Přihlašovací jméno"
+
+#: templates/Access/set_password.php:30
+msgid "You have no login yet. It will be {0}."
+msgstr "Přihlašovací jméno zatím nemáte. Bude {0}."
+
+#: templates/Access/set_password.php:34 templates/Password/index.php:23
+msgid "New password"
+msgstr "Nové heslo"
+
+#: templates/Access/set_password.php:40 templates/Password/index.php:29
+msgid "At least {0} characters."
+msgstr "Nejméně {0} znaků."
+
+#: templates/Access/set_password.php:43 templates/Password/index.php:32
+msgid "Confirm password"
+msgstr "Potvrzení hesla"
+
+#: templates/Access/set_password.php:49
+msgid "Set password and sign in"
+msgstr "Nastavit heslo a přihlásit se"
+
+#: templates/Access/set_password.php:15 templates/email/text/access_link.php:14
+#: templates/email/text/access_locked.php:14
+#: templates/email/text/access_set.php:20
+#: templates/email/text/change_request.php:19
+msgctxt "mail"
+msgid "Customer"
+msgstr "Zákazník"
+
+#: templates/Details/index.php:32
+msgid "Customer"
+msgstr "Uživatel"
+
 #: templates/Details/change.php:14 templates/Details/change.php:106
 #: templates/Details/index.php:45
 msgid "Customer details"
@@ -317,11 +419,11 @@ msgstr "Údaje zákazníka"
 msgid "Contacts"
 msgstr "Kontakty"
 
-#: templates/Details/change.php:16 templates/Details/index.php:94
+#: templates/Details/change.php:16 templates/Details/index.php:98
 msgid "Billing and correspondence"
 msgstr "Fakturace a korespondence"
 
-#: templates/Details/change.php:17 templates/Details/index.php:118
+#: templates/Details/change.php:17 templates/Details/index.php:122
 msgid "Installation addresses"
 msgstr "Adresy instalace"
 
@@ -337,11 +439,6 @@ msgstr "Napište nám, co si přejete změnit. Žádost vyřídíme a budeme vá
 msgid "Correct or complete your details and send them. They change once they have been checked."
 msgstr "Opravte nebo doplňte své údaje a odešlete je ke zpracování. Změny se projeví po jejich kontrole."
 
-#: templates/Details/change.php:131 templates/Details/index.php:72
-#: templates/Overview/index.php:193
-msgid "E-mail"
-msgstr "E-mail"
-
 #: templates/Details/change.php:132
 msgid "Clear an e-mail to have it removed, and tick what each one is used for."
 msgstr "E-mail, který si přejete odebrat, vymažte. U každého e-mailu označte, k jakým účelům má být používán."
@@ -350,7 +447,7 @@ msgstr "E-mail, který si přejete odebrat, vymažte. U každého e-mailu označ
 msgid "Add an e-mail"
 msgstr "Přidat e-mail"
 
-#: templates/Details/change.php:156 templates/Details/index.php:81
+#: templates/Details/change.php:156 templates/Details/index.php:83
 #: templates/Overview/index.php:189
 msgid "Phone"
 msgstr "Telefon"
@@ -367,7 +464,7 @@ msgstr "Přidat telefon"
 msgid "Billing details"
 msgstr "Fakturační údaje"
 
-#: templates/Details/change.php:206 templates/Details/index.php:129
+#: templates/Details/change.php:206 templates/Details/index.php:133
 msgid "Contracts: {0}"
 msgstr "Smlouvy: {0}"
 
@@ -416,48 +513,35 @@ msgstr "Odeslat ke zpracování"
 msgid "Edit"
 msgstr "Upravit"
 
-#: templates/Details/index.php:32
-msgid "Customer"
-msgstr "Uživatel"
-
-#: templates/email/text/change_request.php:19
-msgctxt "mail"
-msgid "Customer"
-msgstr "Zákazník"
-
 #: templates/Details/index.php:35
 msgid "Changes of your details are checked before they apply. Your consents are saved straight away."
 msgstr "Změny údajů se před uložením kontrolují. Souhlasy se ukládají okamžitě."
-
-#: templates/Details/index.php:47
-msgid "Customer number"
-msgstr "Zákaznické číslo"
 
 #: templates/Details/index.php:50
 msgid "Name"
 msgstr "Jméno"
 
-#: templates/Details/index.php:112
+#: templates/Details/index.php:116
 msgid "Without a billing address, invoices go to the installation address."
 msgstr "Bez fakturační adresy posíláme faktury na adresu instalace."
 
-#: templates/Details/index.php:141
+#: templates/Details/index.php:145
 msgid "Consents and messages"
 msgstr "Souhlasy a zprávy"
 
-#: templates/Details/index.php:152
+#: templates/Details/index.php:156
 msgid "I want to receive correspondence about the monthly billing"
 msgstr "Přeji si dostávat korespondenci spojenou s měsíčním vyúčtováním"
 
-#: templates/Details/index.php:159
+#: templates/Details/index.php:163
 msgid "I want to receive information about outages and faults"
 msgstr "Přeji si dostávat informace o odstávkách a poruchách"
 
-#: templates/Details/index.php:166
+#: templates/Details/index.php:170
 msgid "I agree to receive commercial communications"
 msgstr "Souhlasím se zasíláním obchodních sdělení"
 
-#: templates/Details/index.php:170
+#: templates/Details/index.php:174
 msgid "Save consents"
 msgstr "Uložit souhlasy"
 
@@ -609,29 +693,62 @@ msgstr "Přihlášení"
 msgid "Current password"
 msgstr "Současné heslo"
 
-#: templates/Password/index.php:23
-msgid "New password"
-msgstr "Nové heslo"
+#: templates/SignIn/index.php:17
+msgid "Need help? Contact us: {0}"
+msgstr "Potřebujete poradit? Kontaktujte nás: {0}"
 
-#: templates/Password/index.php:29
-msgid "At least {0} characters."
-msgstr "Nejméně {0} znaků."
-
-#: templates/Password/index.php:32
-msgid "Confirm password"
-msgstr "Potvrzení hesla"
-
-#: templates/SignIn/index.php:17 templates/email/text/change_request.php:20
-msgid "Login"
-msgstr "Přihlašovací jméno"
-
-#: templates/SignIn/index.php:25 templates/layout/default.php:17
+#: templates/SignIn/index.php:34 templates/layout/default.php:17
 msgid "Password"
 msgstr "Heslo"
 
-#: templates/SignIn/index.php:35
-msgid "Forgot your password? Contact us: {0}"
-msgstr "Zapomněli jste heslo? Kontaktujte nás: {0}"
+#: templates/email/text/access_link.php:13
+#: templates/email/text/access_locked.php:13
+msgid "You have asked for a new password, or for access, to the customer portal of {0}."
+msgstr "Požádali jste o nové heslo nebo o přístup do uživatelského portálu {0}."
+
+#: templates/email/text/access_link.php:16
+msgid "Set your password here. The link works for an hour and only once:"
+msgstr "Heslo si nastavte zde. Odkaz platí hodinu a jen jednou:"
+
+#: templates/email/text/access_link.php:19
+msgid "If you did not ask for it, you need not do anything. Your password stays as it is."
+msgstr "Pokud jste o nic nežádali, nemusíte nic dělat. Heslo zůstává beze změny."
+
+#: templates/email/text/access_locked.php:16
+msgid "Your access to the customer portal has been locked on purpose, so no new password can be set."
+msgstr "Váš přístup do uživatelského portálu byl záměrně uzamčen, nové heslo proto nastavit nelze."
+
+#: templates/email/text/access_locked.php:18
+msgid "Please contact us: {0}"
+msgstr "Kontaktujte nás prosím: {0}"
+
+#: templates/email/text/access_locked.php:19
+msgid "Please contact us."
+msgstr "Kontaktujte nás prosím."
+
+#: templates/email/text/access_locked.php:21
+msgid "If you did not ask for it, you need not do anything."
+msgstr "Pokud jste o nic nežádali, nemusíte nic dělat."
+
+#: templates/email/text/access_set.php:18
+msgid "A login to the customer portal of {0} has been made for you."
+msgstr "Do uživatelského portálu {0} vám byl založen přístup."
+
+#: templates/email/text/access_set.php:19
+msgid "The password of your login to the customer portal of {0} has been changed."
+msgstr "Heslo k vašemu přístupu do uživatelského portálu {0} bylo změněno."
+
+#: templates/email/text/access_set.php:22
+msgid "At {0}, from the address {1}"
+msgstr "Provedeno {0} z adresy {1}"
+
+#: templates/email/text/access_set.php:25
+msgid "If it was not you, contact us at once: {0}"
+msgstr "Pokud jste to nebyli vy, ihned nás kontaktujte: {0}"
+
+#: templates/email/text/access_set.php:26
+msgid "If it was not you, contact us at once."
+msgstr "Pokud jste to nebyli vy, ihned nás kontaktujte."
 
 #: templates/email/text/change_request.php:17
 msgid "A customer asks for a change of their details in the customer portal."

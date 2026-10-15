@@ -4,6 +4,7 @@ services:
     restart: unless-stopped
     environment:
       SERVER_NAME: ${SERVER_NAME:-localhost}
+      APP_FULL_BASE_URL: ${APP_FULL_BASE_URL:?set APP_FULL_BASE_URL}
       LISTENER_MODE: ${LISTENER_MODE:-direct}
       PROXY_ALLOW: ${PROXY_ALLOW:-127.0.0.1/32 ::1/128}
       OPERATOR_NAME: ${OPERATOR_NAME:?set OPERATOR_NAME}
