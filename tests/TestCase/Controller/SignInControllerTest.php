@@ -7,6 +7,7 @@ use App\Controller\SignInController;
 use App\Crm\SignInStatus;
 use App\Test\Support\FakeCrm;
 use App\Test\Support\PortalTestCase;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\Attributes\UsesClass;
 
 #[UsesClass(SignInController::class)]
@@ -107,6 +108,16 @@ class SignInControllerTest extends PortalTestCase
         $this->post('/access/set?token=' . FakeCrm::LINK_TOKEN, ['password' => 'a password']);
 
         $this->assertRedirect('/access/set?token=' . FakeCrm::LINK_TOKEN);
+    }
+
+    #[TestWith(['/details/consents'])]
+    #[TestWith(['/details/change/send'])]
+    public function testAFormToAnAddressThatTakesOnlyFormsGoesBackToItsPage(string $address): void
+    {
+        $this->_csrfToken = false;
+        $this->post($address);
+
+        $this->assertRedirect('/details');
     }
 
     public function testSigningOutOfAnExpiredSessionEndsOnTheSignIn(): void

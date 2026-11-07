@@ -16,6 +16,17 @@ use Cake\Http\Response;
 class PortalExceptionRenderer extends WebExceptionRenderer
 {
     /**
+     * Where a form goes back to from an address that takes nothing but a form.
+     *
+     * @var array<string, string>
+     */
+    private const SENT_FROM = [
+        '/sign-out' => '/sign-in',
+        '/details/consents' => '/details',
+        '/details/change/send' => '/details',
+    ];
+
+    /**
      * The customer's sign-in expired, or their login was locked meanwhile: they sign in again.
      *
      * @param \App\Crm\SignedOut $exception The exception.
@@ -44,7 +55,9 @@ class PortalExceptionRenderer extends WebExceptionRenderer
         if ($this->request !== null) {
             $this->request->getFlash()->error(__('The page was open for too long, please send the form again.'));
             $target = $this->request->getRequestTarget();
-            if ($this->request->getPath() !== '/sign-out' && preg_match('#^/(?![/\\\\])#', $target) === 1) {
+            if (isset(self::SENT_FROM[$this->request->getPath()])) {
+                $page = self::SENT_FROM[$this->request->getPath()];
+            } elseif (preg_match('#^/(?![/\\\\])#', $target) === 1) {
                 $page = $target;
             }
         }
