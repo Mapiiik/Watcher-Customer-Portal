@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Error\PortalErrorLogger;
 use App\Error\PortalExceptionRenderer;
 use Cake\Cache\Engine\FileEngine;
 use Cake\Log\Engine\ConsoleLog;
@@ -78,6 +79,7 @@ return [
     'Error' => [
         'errorLevel' => E_ALL,
         'exceptionRenderer' => PortalExceptionRenderer::class,
+        'logger' => PortalErrorLogger::class,
         'skipLog' => [],
         'log' => true,
         'trace' => false,

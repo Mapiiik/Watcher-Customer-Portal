@@ -229,4 +229,17 @@ class WatcherCrmTest extends TestCase
         $this->expectExceptionMessage('Watcher CRM did not answer GET /invoices');
         $crm->invoices('customer-token');
     }
+
+    public function testATokenOfALinkStaysOutOfWhatIsLogged(): void
+    {
+        $crm = new WatcherCrm(new Client(['timeout' => 1]), 'https://127.0.0.1:1/api', 'portal-key');
+
+        try {
+            $crm->access('the-token-of-a-link');
+            $this->fail('The CRM answered.');
+        } catch (CrmUnavailable $error) {
+            $this->assertStringContainsString('did not answer GET /access:', $error->getMessage());
+            $this->assertStringNotContainsString('the-token-of-a-link', $error->getMessage());
+        }
+    }
 }

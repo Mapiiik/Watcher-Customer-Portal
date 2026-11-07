@@ -217,11 +217,12 @@ final readonly class WatcherCrm implements CustomerPortalApi
                 ? $this->http->post($this->url . $path, $data ?? [], ['headers' => $headers])
                 : $this->http->get($this->url . $path, [], ['headers' => $headers]);
         } catch (ClientExceptionInterface $error) {
+            // the query may carry the token of a link, which works for an hour more
             throw new CrmUnavailable(sprintf(
                 'Watcher CRM did not answer %s %s: %s',
                 strtoupper($method),
-                $path,
-                $error->getMessage(),
+                explode('?', $path)[0],
+                preg_replace('/\?\S*/', '', $error->getMessage()),
             ), $error);
         }
     }
