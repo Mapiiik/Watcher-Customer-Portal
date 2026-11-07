@@ -19,7 +19,6 @@
         <?= $this->Form->control('customer_number', [
             'label' => __('Customer number or contract number'),
             'value' => $number,
-            'inputmode' => 'numeric',
             'autocomplete' => 'off',
             'autofocus' => true,
             'required' => true,
