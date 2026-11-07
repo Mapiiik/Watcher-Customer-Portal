@@ -1,24 +1,40 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Watcher Customer Portal\n"
-"POT-Creation-Date: 2026-10-15 15:26+0200\n"
+"POT-Creation-Date: 2026-11-07 15:04+0100\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: profiles/default/consent.php:12
 msgid "Consent to the processing of personal data"
 msgstr "Privola za obradu osobnih podataka"
 
 #: profiles/default/consent.php:14
-msgid "By ticking below I choose which messages I want to receive from {0} (the \"Controller\") at my contact details. For commercial communications I also give the Controller my consent to sending them and to processing my contact details for this purpose."
-msgstr "Označavanjem u nastavku biram koje poruke želim primati od {0} (u daljnjem tekstu „Voditelj obrade“) na svoje kontaktne podatke. Za poslovne obavijesti time Voditelju obrade ujedno dajem privolu za njihovo slanje i za obradu svojih kontaktnih podataka u tu svrhu."
+msgid ""
+"By ticking below I choose which messages I want to receive from {0} (the "
+"\"Controller\") at my contact details. For commercial communications I also "
+"give the Controller my consent to sending them and to processing my contact "
+"details for this purpose."
+msgstr ""
+"Označavanjem u nastavku biram koje poruke želim primati od {0} (u daljnjem "
+"tekstu „Voditelj obrade“) na svoje kontaktne podatke. Za poslovne obavijesti "
+"time Voditelju obrade ujedno dajem privolu za njihovo slanje i za obradu "
+"svojih kontaktnih podataka u tu svrhu."
 
 #: profiles/default/consent.php:15
-msgid "I can change or withdraw my choice and consent at any time, here in the customer portal or through the contact details of the Controller. Withdrawing does not affect the lawfulness of the processing before it."
-msgstr "Izbor i privolu mogu u bilo kojem trenutku promijeniti ili povući, ovdje na Korisničkom portalu ili putem kontaktnih podataka Voditelja obrade. Povlačenje privole ne utječe na zakonitost obrade na temelju privole prije njezina povlačenja."
+msgid ""
+"I can change or withdraw my choice and consent at any time, here in the "
+"customer portal or through the contact details of the Controller. "
+"Withdrawing does not affect the lawfulness of the processing before it."
+msgstr ""
+"Izbor i privolu mogu u bilo kojem trenutku promijeniti ili povući, ovdje na "
+"Korisničkom portalu ili putem kontaktnih podataka Voditelja obrade. "
+"Povlačenje privole ne utječe na zakonitost obrade na temelju privole prije "
+"njezina povlačenja."
 
 #: profiles/default/consent.php:17
 msgid "How the Controller processes personal data is described in its {0}."
@@ -36,55 +52,59 @@ msgstr "Korisnički portal"
 msgid "Invoice"
 msgstr "Račun"
 
-#: src/Controller/AccessController.php:47
+#: src/Controller/AccessController.php:49
 msgid "Fill in your customer number and e-mail."
 msgstr "Upišite broj korisnika i e-mail."
 
-#: src/Controller/AccessController.php:51
+#: src/Controller/AccessController.php:53
 msgid "Too many requests, please try again in an hour."
 msgstr "Previše zahtjeva, pokušajte ponovno za sat vremena."
 
-#: src/Controller/AccessController.php:56
-#: src/Controller/AccessController.php:113
-#: src/Controller/AccessController.php:176
+#: src/Controller/AccessController.php:61
+#: src/Controller/AccessController.php:118
+#: src/Controller/AccessController.php:204
 msgid "Your access to the customer portal"
 msgstr "Vaš pristup korisničkom portalu"
 
-#: src/Controller/AccessController.php:60
-msgid "If the customer number and the e-mail belong together, we have sent a link to the e-mail. It works for an hour."
-msgstr "Ako broj korisnika i e-mail pripadaju istom korisniku, poslali smo poveznicu na taj e-mail. Vrijedi sat vremena."
+#: src/Controller/AccessController.php:65
+msgid ""
+"If the customer number and the e-mail belong together, we have sent a link "
+"to the e-mail. It works for an hour."
+msgstr ""
+"Ako broj korisnika i e-mail pripadaju istom korisniku, poslali smo poveznicu "
+"na taj e-mail. Vrijedi sat vremena."
 
-#: src/Controller/AccessController.php:71 templates/Access/index.php:12
+#: src/Controller/AccessController.php:76 templates/Access/index.php:12
 #: templates/SignIn/index.php:44
 msgid "Forgotten password or new access"
 msgstr "Zaboravljena lozinka ili novi pristup"
 
-#: src/Controller/AccessController.php:87
-#: src/Controller/AccessController.php:109
+#: src/Controller/AccessController.php:92
+#: src/Controller/AccessController.php:114
 msgid "The link no longer works. Ask for a new one."
 msgstr "Poveznica više ne vrijedi. Zatražite novu."
 
-#: src/Controller/AccessController.php:96
+#: src/Controller/AccessController.php:101
 #: src/Controller/PasswordController.php:30
 msgid "The new passwords do not match."
 msgstr "Nove lozinke se ne podudaraju."
 
-#: src/Controller/AccessController.php:99
-#: src/Controller/AccessController.php:106
+#: src/Controller/AccessController.php:104
+#: src/Controller/AccessController.php:111
 #: src/Controller/PasswordController.php:33
 #: src/Controller/PasswordController.php:49
 msgid "The new password has to be at least {0} characters long."
 msgstr "Nova lozinka mora imati najmanje {0} znakova."
 
-#: src/Controller/AccessController.php:126 templates/Access/set_password.php:12
+#: src/Controller/AccessController.php:131 templates/Access/set_password.php:12
 msgid "Set a password"
 msgstr "Postavljanje lozinke"
 
-#: src/Controller/AccessController.php:144
+#: src/Controller/AccessController.php:149
 msgid "Your password has been set. Sign in with the login {0}."
 msgstr "Lozinka je postavljena. Prijavite se korisničkim imenom {0}."
 
-#: src/Controller/AccessController.php:150
+#: src/Controller/AccessController.php:155
 msgid "Your password has been set and you are signed in. Your login is {0}."
 msgstr "Lozinka je postavljena i prijavljeni ste. Vaše korisničko ime je {0}."
 
@@ -121,8 +141,11 @@ msgid "Your request could not be sent, please try again later."
 msgstr "Zahtjev nije bilo moguće poslati, molimo pokušajte kasnije."
 
 #: src/Controller/DetailsController.php:168
-msgid "Your details have been sent for processing. They change once they have been checked."
-msgstr "Vaši podaci poslani su na obradu. Promijenit će se nakon što ih provjerimo."
+msgid ""
+"Your details have been sent for processing. They change once they have been "
+"checked."
+msgstr ""
+"Vaši podaci poslani su na obradu. Promijenit će se nakon što ih provjerimo."
 
 #: src/Controller/InvoicesController.php:29 templates/Invoices/index.php:11
 #: templates/layout/default.php:15
@@ -176,9 +199,13 @@ msgstr "Prijava"
 msgid "You have signed out."
 msgstr "Odjavljeni ste."
 
-#: src/Error/PortalExceptionRenderer.php:27
+#: src/Error/PortalExceptionRenderer.php:28
 msgid "Your sign-in has expired, please sign in again."
 msgstr "Prijava je istekla, molimo prijavite se ponovno."
+
+#: src/Error/PortalExceptionRenderer.php:45
+msgid "The page was open for too long, please send the form again."
+msgstr "Stranica je predugo bila otvorena, molimo pošaljite obrazac ponovno."
 
 #: src/Portal/ChangeRequest.php:46 src/Portal/ChangeRequest.php:127
 #: src/Portal/ChangeRequest.php:134
@@ -352,23 +379,28 @@ msgid "Due"
 msgstr "Za plaćanje"
 
 #: templates/Access/index.php:14
-msgid "Type your customer number and an e-mail you have given us. We send a link to set a password to it, and where you have no login yet, one is made for you."
-msgstr "Upišite svoj broj korisnika i e-mail koji ste nam dali. Na njega ćemo poslati poveznicu za postavljanje lozinke, a ako još nemate korisničko ime, izradit ćemo vam ga."
+msgid ""
+"Type your customer number and an e-mail you have given us. We send a link to "
+"set a password to it, and where you have no login yet, one is made for you."
+msgstr ""
+"Upišite svoj broj korisnika i e-mail koji ste nam dali. Na njega ćemo "
+"poslati poveznicu za postavljanje lozinke, a ako još nemate korisničko ime, "
+"izradit ćemo vam ga."
 
 #: templates/Access/index.php:20
 msgid "Customer number or contract number"
 msgstr "Broj korisnika ili broj ugovora"
 
-#: templates/Access/index.php:29 templates/Details/change.php:131
+#: templates/Access/index.php:28 templates/Details/change.php:131
 #: templates/Details/index.php:72 templates/Overview/index.php:193
 msgid "E-mail"
 msgstr "E-mail"
 
-#: templates/Access/index.php:35
+#: templates/Access/index.php:34
 msgid "Send link"
 msgstr "Pošalji poveznicu"
 
-#: templates/Access/index.php:39
+#: templates/Access/index.php:38
 msgid "Back to signing in"
 msgstr "Natrag na prijavu"
 
@@ -432,16 +464,24 @@ msgid "Another request"
 msgstr "Drugi zahtjev"
 
 #: templates/Details/change.php:95
-msgid "Write to us what you would like to change. We will deal with it and let you know."
-msgstr "Napišite nam što želite promijeniti. Zahtjev ćemo obraditi i javiti vam se."
+msgid ""
+"Write to us what you would like to change. We will deal with it and let you "
+"know."
+msgstr ""
+"Napišite nam što želite promijeniti. Zahtjev ćemo obraditi i javiti vam se."
 
 #: templates/Details/change.php:96
-msgid "Correct or complete your details and send them. They change once they have been checked."
-msgstr "Ispravite ili dopunite svoje podatke i pošaljite ih. Promijenit će se nakon što ih provjerimo."
+msgid ""
+"Correct or complete your details and send them. They change once they have "
+"been checked."
+msgstr ""
+"Ispravite ili dopunite svoje podatke i pošaljite ih. Promijenit će se nakon "
+"što ih provjerimo."
 
 #: templates/Details/change.php:132
 msgid "Clear an e-mail to have it removed, and tick what each one is used for."
-msgstr "E-mail koji želite ukloniti izbrišite. Za svaki označite za što se koristi."
+msgstr ""
+"E-mail koji želite ukloniti izbrišite. Za svaki označite za što se koristi."
 
 #: templates/Details/change.php:143 templates/Details/change.php:147
 msgid "Add an e-mail"
@@ -454,7 +494,8 @@ msgstr "Telefon"
 
 #: templates/Details/change.php:157
 msgid "Clear a number to have it removed, and tick what each one is used for."
-msgstr "Broj koji želite ukloniti izbrišite. Za svaki označite za što se koristi."
+msgstr ""
+"Broj koji želite ukloniti izbrišite. Za svaki označite za što se koristi."
 
 #: templates/Details/change.php:168 templates/Details/change.php:172
 msgid "Add a phone number"
@@ -498,8 +539,11 @@ msgid "Back to my details"
 msgstr "Natrag na moje podatke"
 
 #: templates/Details/confirm.php:11
-msgid "This is what we will receive. Your details change once we have checked it."
-msgstr "Ovako ćemo primiti vaš zahtjev. Promjene stupaju na snagu nakon njegove provjere."
+msgid ""
+"This is what we will receive. Your details change once we have checked it."
+msgstr ""
+"Ovako ćemo primiti vaš zahtjev. Promjene stupaju na snagu nakon njegove "
+"provjere."
 
 #: templates/Details/confirm.php:16
 msgid "Changes"
@@ -514,8 +558,12 @@ msgid "Edit"
 msgstr "Uredi"
 
 #: templates/Details/index.php:35
-msgid "Changes of your details are checked before they apply. Your consents are saved straight away."
-msgstr "Izmjene podataka provjeravamo prije nego što stupe na snagu. Privole se spremaju odmah."
+msgid ""
+"Changes of your details are checked before they apply. Your consents are "
+"saved straight away."
+msgstr ""
+"Izmjene podataka provjeravamo prije nego što stupe na snagu. Privole se "
+"spremaju odmah."
 
 #: templates/Details/index.php:47
 msgid "Customer number"
@@ -639,8 +687,12 @@ msgid "due {0}"
 msgstr "dospijeće {0}"
 
 #: templates/Overview/index.php:73
-msgid "Scan the code of an invoice in your bank's app and the payment fills itself in."
-msgstr "Skenirajte kod računa u aplikaciji svoje banke i nalog za plaćanje ispunit će se sam."
+msgid ""
+"Scan the code of an invoice in your bank's app and the payment fills itself "
+"in."
+msgstr ""
+"Skenirajte kod računa u aplikaciji svoje banke i nalog za plaćanje ispunit "
+"će se sam."
 
 #: templates/Overview/index.php:82
 msgid "Payment code for invoice {0}"
@@ -707,7 +759,9 @@ msgstr "Lozinka"
 
 #: templates/email/text/access_link.php:13
 #: templates/email/text/access_locked.php:13
-msgid "You have asked for a new password, or for access, to the customer portal of {0}."
+msgid ""
+"You have asked for a new password, or for access, to the customer portal of "
+"{0}."
 msgstr "Zatražili ste novu lozinku ili pristup korisničkom portalu {0}."
 
 #: templates/email/text/access_link.php:16
@@ -715,12 +769,20 @@ msgid "Set your password here. The link works for an hour and only once:"
 msgstr "Lozinku postavite ovdje. Poveznica vrijedi sat vremena i samo jednom:"
 
 #: templates/email/text/access_link.php:19
-msgid "If you did not ask for it, you need not do anything. Your password stays as it is."
-msgstr "Ako to niste zatražili vi, ne morate ništa poduzimati. Lozinka ostaje nepromijenjena."
+msgid ""
+"If you did not ask for it, you need not do anything. Your password stays as "
+"it is."
+msgstr ""
+"Ako to niste zatražili vi, ne morate ništa poduzimati. Lozinka ostaje "
+"nepromijenjena."
 
 #: templates/email/text/access_locked.php:16
-msgid "Your access to the customer portal has been locked on purpose, so no new password can be set."
-msgstr "Vaš pristup korisničkom portalu namjerno je blokiran pa nije moguće postaviti novu lozinku."
+msgid ""
+"Your access to the customer portal has been locked on purpose, so no new "
+"password can be set."
+msgstr ""
+"Vaš pristup korisničkom portalu namjerno je blokiran pa nije moguće "
+"postaviti novu lozinku."
 
 #: templates/email/text/access_locked.php:18
 msgid "Please contact us: {0}"
@@ -739,7 +801,8 @@ msgid "A login to the customer portal of {0} has been made for you."
 msgstr "Za vas je izrađen pristup korisničkom portalu {0}."
 
 #: templates/email/text/access_set.php:19
-msgid "The password of your login to the customer portal of {0} has been changed."
+msgid ""
+"The password of your login to the customer portal of {0} has been changed."
 msgstr "Lozinka vašeg pristupa korisničkom portalu {0} je promijenjena."
 
 #: templates/email/text/access_set.php:22

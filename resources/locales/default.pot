@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2026-10-15 15:26+0200\n"
+"POT-Creation-Date: 2026-11-07 15:04+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -44,57 +44,57 @@ msgstr ""
 msgid "Invoice"
 msgstr ""
 
-#: ./src/Controller/AccessController.php:47
+#: ./src/Controller/AccessController.php:49
 msgid "Fill in your customer number and e-mail."
 msgstr ""
 
-#: ./src/Controller/AccessController.php:51
+#: ./src/Controller/AccessController.php:53
 msgid "Too many requests, please try again in an hour."
 msgstr ""
 
-#: ./src/Controller/AccessController.php:56
-#: ./src/Controller/AccessController.php:113
-#: ./src/Controller/AccessController.php:176
+#: ./src/Controller/AccessController.php:61
+#: ./src/Controller/AccessController.php:118
+#: ./src/Controller/AccessController.php:204
 msgid "Your access to the customer portal"
 msgstr ""
 
-#: ./src/Controller/AccessController.php:60
+#: ./src/Controller/AccessController.php:65
 msgid "If the customer number and the e-mail belong together, we have sent a link to the e-mail. It works for an hour."
 msgstr ""
 
-#: ./src/Controller/AccessController.php:71
+#: ./src/Controller/AccessController.php:76
 #: ./templates/Access/index.php:12
 #: ./templates/SignIn/index.php:44
 msgid "Forgotten password or new access"
 msgstr ""
 
-#: ./src/Controller/AccessController.php:87
-#: ./src/Controller/AccessController.php:109
+#: ./src/Controller/AccessController.php:92
+#: ./src/Controller/AccessController.php:114
 msgid "The link no longer works. Ask for a new one."
 msgstr ""
 
-#: ./src/Controller/AccessController.php:96
+#: ./src/Controller/AccessController.php:101
 #: ./src/Controller/PasswordController.php:30
 msgid "The new passwords do not match."
 msgstr ""
 
-#: ./src/Controller/AccessController.php:99
-#: ./src/Controller/AccessController.php:106
+#: ./src/Controller/AccessController.php:104
+#: ./src/Controller/AccessController.php:111
 #: ./src/Controller/PasswordController.php:33
 #: ./src/Controller/PasswordController.php:49
 msgid "The new password has to be at least {0} characters long."
 msgstr ""
 
-#: ./src/Controller/AccessController.php:126
+#: ./src/Controller/AccessController.php:131
 #: ./templates/Access/set_password.php:12
 msgid "Set a password"
 msgstr ""
 
-#: ./src/Controller/AccessController.php:144
+#: ./src/Controller/AccessController.php:149
 msgid "Your password has been set. Sign in with the login {0}."
 msgstr ""
 
-#: ./src/Controller/AccessController.php:150
+#: ./src/Controller/AccessController.php:155
 msgid "Your password has been set and you are signed in. Your login is {0}."
 msgstr ""
 
@@ -195,8 +195,12 @@ msgstr ""
 msgid "You have signed out."
 msgstr ""
 
-#: ./src/Error/PortalExceptionRenderer.php:27
+#: ./src/Error/PortalExceptionRenderer.php:28
 msgid "Your sign-in has expired, please sign in again."
+msgstr ""
+
+#: ./src/Error/PortalExceptionRenderer.php:45
+msgid "The page was open for too long, please send the form again."
 msgstr ""
 
 #: ./src/Portal/ChangeRequest.php:46
@@ -385,18 +389,18 @@ msgstr ""
 msgid "Customer number or contract number"
 msgstr ""
 
-#: ./templates/Access/index.php:29
+#: ./templates/Access/index.php:28
 #: ./templates/Details/change.php:131
 #: ./templates/Details/index.php:72
 #: ./templates/Overview/index.php:193
 msgid "E-mail"
 msgstr ""
 
-#: ./templates/Access/index.php:35
+#: ./templates/Access/index.php:34
 msgid "Send link"
 msgstr ""
 
-#: ./templates/Access/index.php:39
+#: ./templates/Access/index.php:38
 msgid "Back to signing in"
 msgstr ""
 
