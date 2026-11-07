@@ -60,7 +60,7 @@ class SignInController extends AppController
     public function signOut(): ?Response
     {
         $this->getRequest()->allowMethod(['post']);
-        SignedIn::forget($this->getRequest()->getSession());
+        SignedIn::signOut($this->getRequest()->getSession());
         $this->Flash->success(__('You have signed out.'));
 
         return $this->redirect(['action' => 'index']);

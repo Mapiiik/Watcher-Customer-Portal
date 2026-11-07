@@ -73,6 +73,15 @@ class SignInControllerTest extends PortalTestCase
         $this->assertSessionNotHasKey('Portal.customer');
     }
 
+    public function testSigningOutTakesAlongWhatWasLeftHalfDone(): void
+    {
+        $this->signedIn();
+        $this->session(['Portal.changeDraft' => ['part' => 'contact']]);
+        $this->post('/sign-out');
+
+        $this->assertSessionNotHasKey('Portal.changeDraft');
+    }
+
     public function testAFormFromAnotherSiteIsRefused(): void
     {
         $this->configRequest(['headers' => ['Origin' => 'https://attacker.example']]);
@@ -82,13 +91,30 @@ class SignInControllerTest extends PortalTestCase
         $this->assertSame([], $this->crm->signIns);
     }
 
-    public function testAFormWithoutTheTokenOfTheSessionIsRefused(): void
+    public function testAFormWithoutTheTokenOfTheSessionIsNotTaken(): void
     {
         $this->_csrfToken = false;
         $this->post('/sign-in', ['login' => 'jan.novak', 'password' => FakeCrm::PASSWORD]);
 
-        $this->assertResponseCode(403);
+        $this->assertRedirect('/sign-in');
+        $this->assertFlashMessageContains('The page was open for too long');
         $this->assertSame([], $this->crm->signIns);
+    }
+
+    public function testAFormLeftOpenPastTheSessionGoesBackToItsPage(): void
+    {
+        $this->_csrfToken = false;
+        $this->post('/access/set?token=' . FakeCrm::LINK_TOKEN, ['password' => 'a password']);
+
+        $this->assertRedirect('/access/set?token=' . FakeCrm::LINK_TOKEN);
+    }
+
+    public function testSigningOutOfAnExpiredSessionEndsOnTheSignIn(): void
+    {
+        $this->_csrfToken = false;
+        $this->post('/sign-out');
+
+        $this->assertRedirect('/sign-in');
     }
 
     public function testAnotherIpv4AddressIsNoLongerSignedIn(): void

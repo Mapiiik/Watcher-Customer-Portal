@@ -14,6 +14,8 @@ final readonly class SignedIn
 {
     private const SESSION_KEY = 'Portal.customer';
 
+    private const SESSION_ROOT = 'Portal';
+
     /**
      * @param string $token The CRM's token for the customer.
      * @param string $loginId
@@ -110,7 +112,8 @@ final readonly class SignedIn
     }
 
     /**
-     * Signs the customer out of the session.
+     * Takes the customer out of the session when their sign-in has expired. What they left half
+     * done waits for them to sign in again.
      *
      * @param \Cake\Http\Session $session The session.
      * @return void
@@ -118,6 +121,19 @@ final readonly class SignedIn
     public static function forget(Session $session): void
     {
         $session->delete(self::SESSION_KEY);
+        $session->renew();
+    }
+
+    /**
+     * Signs the customer out at their own wish. What they left half done goes with them, as whoever
+     * uses the computer next may be somebody else.
+     *
+     * @param \Cake\Http\Session $session The session.
+     * @return void
+     */
+    public static function signOut(Session $session): void
+    {
+        $session->delete(self::SESSION_ROOT);
         $session->renew();
     }
 
