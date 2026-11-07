@@ -8,10 +8,12 @@ use App\Crm\CustomerPortalApi;
 use App\Portal\Operator;
 use App\Portal\SignedIn;
 use Cake\Core\Configure;
+use Cake\Event\EventManager;
 use Cake\Http\Response;
 use Cake\Log\Log;
 use Cake\Mailer\Mailer;
 use Cake\Routing\Router;
+use Closure;
 use Throwable;
 
 /**
@@ -53,9 +55,12 @@ class AccessController extends AppController
                     if ($answer->status === AccessRequestStatus::Found) {
                         $this->sendLink($answer->email, $answer->customerNumber, $answer->token);
                     } elseif ($answer->status === AccessRequestStatus::Locked) {
-                        $this->mail('access_locked', $answer->email, __('Your access to the customer portal'), [
-                            'customerNumber' => $answer->customerNumber,
-                        ]);
+                        $this->afterAnswering(fn() => $this->mail(
+                            'access_locked',
+                            $answer->email,
+                            __('Your access to the customer portal'),
+                            ['customerNumber' => $answer->customerNumber],
+                        ));
                     }
                     $this->Flash->success(__(
                         'If the customer number and the e-mail belong together, we have sent a link to the '
@@ -153,6 +158,23 @@ class AccessController extends AppController
     }
 
     /**
+     * Leaves work for after the answer has gone. Sending a mail takes a while, and a page taking
+     * longer would tell that the number and the e-mail belong together. The session is closed
+     * first, or the next page would wait for the mail after all.
+     *
+     * @param \Closure $work The work.
+     * @return void
+     */
+    private function afterAnswering(Closure $work): void
+    {
+        $session = $this->getRequest()->getSession();
+        EventManager::instance()->on('Server.terminate', static function () use ($session, $work): void {
+            $session->close();
+            $work();
+        });
+    }
+
+    /**
      * Sends the link to set a password, built on the portal's own address.
      *
      * @param string $to The e-mail typed.
@@ -173,12 +195,15 @@ class AccessController extends AppController
             return;
         }
 
-        $this->mail('access_link', $to, __('Your access to the customer portal'), [
-            'customerNumber' => $customerNumber,
-            'link' => rtrim($base, '/') . Router::url(
-                ['controller' => 'Access', 'action' => 'setPassword', '?' => ['token' => $token]],
-            ),
-        ]);
+        $link = rtrim($base, '/') . Router::url(
+            ['controller' => 'Access', 'action' => 'setPassword', '?' => ['token' => $token]],
+        );
+        $this->afterAnswering(fn() => $this->mail(
+            'access_link',
+            $to,
+            __('Your access to the customer portal'),
+            ['customerNumber' => $customerNumber, 'link' => $link],
+        ));
     }
 
     /**

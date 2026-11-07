@@ -8,6 +8,7 @@ use App\Crm\AccessRequestStatus;
 use App\Test\Support\FakeCrm;
 use App\Test\Support\PortalTestCase;
 use Cake\Core\Configure;
+use Cake\Event\EventManager;
 use Cake\TestSuite\EmailTrait;
 use Cake\TestSuite\TestEmailTransport;
 use Override;
@@ -48,6 +49,11 @@ class AccessControllerTest extends PortalTestCase
         $this->assertRedirect('/sign-in');
         $this->assertFlashMessageContains(self::SAME_MESSAGE);
         $this->assertSame([['110009', 'jan@example.com', self::IP]], $this->crm->accessRequests);
+        $this->assertNoMailSent();
+
+        $this->theAnswerHasGone();
+
+        $this->assertFalse($this->_requestSession?->started(), 'The next page would wait for the mail.');
         $this->assertMailCount(1);
         $this->assertMailSentTo('jan@example.com');
         $this->assertMailContainsText('https://portal.example.net/access/set?token=' . FakeCrm::LINK_TOKEN);
@@ -58,6 +64,7 @@ class AccessControllerTest extends PortalTestCase
     {
         Configure::write('App.fullBaseUrl', false);
         $this->post('/access', ['customer_number' => '110009', 'email' => 'jan@example.com']);
+        $this->theAnswerHasGone();
 
         $this->assertFlashMessageContains(self::SAME_MESSAGE);
         $this->assertNoMailSent();
@@ -67,6 +74,7 @@ class AccessControllerTest extends PortalTestCase
     {
         $this->crm->accessRequestStatus = AccessRequestStatus::Unknown;
         $this->post('/access', ['customer_number' => '110009', 'email' => 'someone@example.com']);
+        $this->theAnswerHasGone();
 
         $this->assertRedirect('/sign-in');
         $this->assertFlashMessageContains(self::SAME_MESSAGE);
@@ -78,6 +86,9 @@ class AccessControllerTest extends PortalTestCase
         $this->crm->accessRequestStatus = AccessRequestStatus::Locked;
         Configure::write('Portal.operator.supportPhone', '+420 123 456 789');
         $this->post('/access', ['customer_number' => '110009', 'email' => 'jan@example.com']);
+        $this->assertNoMailSent();
+
+        $this->theAnswerHasGone();
 
         $this->assertFlashMessageContains(self::SAME_MESSAGE);
         $this->assertMailSentTo('jan@example.com');
@@ -165,6 +176,14 @@ class AccessControllerTest extends PortalTestCase
 
         $this->assertRedirect('/access');
         $this->assertFlashMessageContains('The link no longer works.');
+    }
+
+    /**
+     * What was left for after the answer, which a test does not send out on its own.
+     */
+    private function theAnswerHasGone(): void
+    {
+        EventManager::instance()->dispatch('Server.terminate');
     }
 
     /**
