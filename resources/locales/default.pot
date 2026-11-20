@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2026-11-07 15:04+0100\n"
+"POT-Creation-Date: 2026-11-20 15:16+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -195,11 +195,11 @@ msgstr ""
 msgid "You have signed out."
 msgstr ""
 
-#: ./src/Error/PortalExceptionRenderer.php:28
+#: ./src/Error/PortalExceptionRenderer.php:39
 msgid "Your sign-in has expired, please sign in again."
 msgstr ""
 
-#: ./src/Error/PortalExceptionRenderer.php:45
+#: ./src/Error/PortalExceptionRenderer.php:56
 msgid "The page was open for too long, please send the form again."
 msgstr ""
 
@@ -829,7 +829,11 @@ msgstr ""
 msgid "Sign out"
 msgstr ""
 
-#: ./templates/layout/default.php:95
+#: ./templates/layout/default.php:96
 msgid "Privacy policy"
+msgstr ""
+
+#: ./templates/layout/default.php:100
+msgid "Source code"
 msgstr ""
 
