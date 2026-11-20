@@ -45,6 +45,7 @@ class PagesTest extends PortalTestCase
         $this->assertResponseContains('T-110009-02');
         $this->assertResponseContains('aria-current="page">Overview');
         $this->assertResponseContains('Sign out');
+        $this->assertResponseContains('href="https://github.com/Mapiiik/Watcher-Customer-Portal"');
         $this->assertHeader('Cache-Control', 'no-store');
     }
 

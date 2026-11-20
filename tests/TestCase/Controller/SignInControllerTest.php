@@ -22,6 +22,8 @@ class SignInControllerTest extends PortalTestCase
         $this->assertResponseContains('autocomplete="current-password"');
         $this->assertResponseContains('Test Operator, s.r.o.');
         $this->assertResponseNotContains('Sign out');
+        // the footer of every page, before signing in too
+        $this->assertResponseContains('href="https://github.com/Mapiiik/Watcher-Customer-Portal"');
     }
 
     public function testAPageAsksForSigningInAndComesBackAfterIt(): void

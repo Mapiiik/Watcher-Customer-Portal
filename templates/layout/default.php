@@ -90,11 +90,16 @@ $branding = fn(string $file): string => $this->Url->build('/branding/' . rawurle
             © <?= date('Y') ?> <?= h($operator->name) ?>
             <?= $operator->address !== '' ? ' · ' . h($operator->address) : '' ?>
         </span>
+        <span>
 <?php if ($operator->privacyPolicyUrl !== '') : ?>
-        <a href="<?= h($operator->privacyPolicyUrl) ?>" target="_blank" rel="noopener">
-            <?= h(__('Privacy policy')) ?>
-        </a>
+            <a href="<?= h($operator->privacyPolicyUrl) ?>" target="_blank" rel="noopener">
+                <?= h(__('Privacy policy')) ?>
+            </a> ·
 <?php endif; ?>
+            <a href="https://github.com/Mapiiik/Watcher-Customer-Portal" target="_blank" rel="noopener">
+                <?= h(__('Source code')) ?>
+            </a>
+        </span>
     </div>
 </footer>
 </body>
