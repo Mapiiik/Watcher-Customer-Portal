@@ -1,6 +1,6 @@
 services:
   customer-portal:
-    image: ghcr.io/mapiiik/watcher-customer-portal:1
+    image: ghcr.io/mapiiik/watcher-customer-portal:latest
     restart: unless-stopped
     environment:
       SERVER_NAME: ${SERVER_NAME:-localhost}
