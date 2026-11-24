@@ -86,6 +86,9 @@ Poedit, or `msgmerge`, and translate what is new. A new language is a new
 docker compose up -d
 ```
 
+The image `1` is the newest release of 1.x, as are `latest` and the release's own version; `main`
+is built from the branch.
+
 Behind HAProxy (TLS passed through by SNI, `send-proxy-v2`), set `LISTENER_MODE=behind-proxy` and
 `PROXY_ALLOW` to the proxy's network. The CRM counts failed sign-ins by the customer's address,
 so the portal has to see the real one.
